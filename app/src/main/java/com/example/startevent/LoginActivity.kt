@@ -4,6 +4,7 @@ package com.example.startevent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
@@ -165,7 +166,26 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun forgotPassword(view : View){
-        startActivity(Intent(this,ForgotPasswordActivity::class.java))
+        //startActivity(Intent(this,ForgotPasswordActivity::class.java))
+        resetPassword()
+    }
+
+    /**
+     * Función para restablecer contraseña. No será necesario que el usuario vuelva a escribir su correo al que se le enviará la contraseña.
+     * Pues lo capturaremos y se lo enviaremos directamente, tratando así de hacer menos tedioso el proceso.
+     */
+    private fun resetPassword(){
+        var e = etEmail.text.toString()
+        //COMPROBAMOS QUE EL CAMPO EMAIL NO ESTÁ VACÍO PARA: Enviar un correo de reseteo de pass y comprobar si el correo existe.
+        if(!TextUtils.isEmpty(e)){
+            mAuth.sendPasswordResetEmail(e)
+                .addOnCompleteListener{
+                    //SI QUEREMOS HACER ESTO EN OTRA VENTANA, DEBEREMOS MANDARLE EN UN INTENT A LA PANTALLA DE LOGIN
+                    if(it.isSuccessful)Toast.makeText(this, "Email enviado a "+e,Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(this, "No se encontró usuario con el correo: "+e,Toast.LENGTH_SHORT).show()
+
+                }
+        }else Toast.makeText(this, "Indica un email.",Toast.LENGTH_SHORT).show()
     }
 
 
