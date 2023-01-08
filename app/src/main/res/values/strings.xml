@@ -23,5 +23,9 @@
     <string name="forgotPassword">¿Has olvidado tu contraseña?</string>
     <string name="google">GOOGLE</string>
     <string name="facebook">FACEBOOK</string>
+    <string name="title_terms">Términos y Dondiciones de Uso.</string>
+    <string name="term1">Término 1</string>
+    <string name="term2">Término 2</string>
+    <string name="term3">Término 3</string>
 
 </resources>

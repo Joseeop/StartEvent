@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TermsActivity">
+
+    <TextView
+        android:id="@+id/txtTermsAndCond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:background="@color/gray"
+        android:text="@string/title_terms" />
+    <TextView
+        android:id="@+id/term1"
+        android:layout_width="match_parent"
+        android:paddingTop="14dp"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="@string/term1" />
+    <TextView
+        android:id="@+id/term2"
+        android:layout_width="match_parent"
+        android:paddingTop="14dp"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="@string/term2" />
+    <TextView
+        android:id="@+id/term3"
+        android:paddingTop="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:text="@string/term3" />
+</LinearLayout>
