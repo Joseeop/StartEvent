@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">StartEvent</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+
+    <string name="inicio">La excelencia en eventos nos define.¿Estás preparado?</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="resetPassword">Enviar Contraseña</string>
+    <string name="acept">He leído y acepto los</string>
+    <string name="terms">términos y condiciones</string>
+    <string name="empty_email">Por favor, introduzca un email.</string>
+    <string name="invalid_email">¡Vaya, parece que el email no es correcto!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgotPassword">¿Has olvidado tu contraseña?</string>
+    <string name="google">GOOGLE</string>
+    <string name="facebook">FACEBOOK</string>
+
+</resources>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+    tools:context=".LoginActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/starteventp"/>
+
+    <TextView
+        android:id="@+id/txtInicio"
+        style="@style/viewCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/inicio"
+        android:textAlignment="center"
+        android:textColor="@color/blanco_azul" />
+
+    <EditText
+        style="@style/viewCustom"
+        android:id="@+id/etEmail"
+        android:hint="@string/email"
+        android:textColor="@color/blanco_azul"
+        android:inputType="textEmailAddress"
+        android:paddingTop="30dp"
+        android:textColorHint="@color/blanco_azul"
+        android:backgroundTint="@color/blanco_azul"
+       />
+
+    <EditText
+        style="@style/viewCustom"
+        android:id="@+id/etPass"
+        android:hint="@string/password"
+        android:textColor="@color/blanco_azul"
+        android:inputType="textPassword"
+        android:paddingTop="30dp"
+        android:textColorHint="@color/blanco_azul"
+        android:backgroundTint="@color/blanco_azul"
+        />
+
+    <TextView
+        android:id="@+id/btnLogin"
+        style="@style/viewCustom"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:onClick="login"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:text="@string/login"
+        android:textAlignment="center"
+        android:textColor="@color/blanco_azul"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        style="@style/viewCustom"
+        android:id="@+id/txtForgotPassword"
+        android:textColor="@color/gray"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/btnLogin"
+        android:onClick="forgotPassword"
+        android:textSize="12dp"
+        android:text="@string/forgotPassword" />
+
+    <LinearLayout
+        style="@style/viewCustom"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbAcept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="@string/acept"
+            android:textColor="@color/blanco_azul" />
+
+        <TextView
+            android:id="@+id/txtTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/rojo_claro"
+            android:textSize="10sp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/terms"
+            android:onClick="goTerms"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/google_icon"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        android:paddingLeft="30dp"
+        android:textColor="@color/black"
+        android:text="@string/google" />
+    <Button
+        android:id="@+id/btnFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/facebook_icon"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        android:paddingLeft="30dp"
+        android:textColor="@color/black"
+        android:text="@string/facebook" />
+
+
+</LinearLayout>
