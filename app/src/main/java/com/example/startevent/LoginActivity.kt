@@ -9,7 +9,10 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -47,6 +50,11 @@ class LoginActivity : AppCompatActivity() {
         //Aquí tenemos la instancia con la que podremos operar.
         mAuth=FirebaseAuth.getInstance()
 
+        //llamada a la función
+
+        manageButtonLogin()
+        etEmail.doOnTextChanged { text, start, before, count -> manageButtonLogin()  }
+        etPass.doOnTextChanged { text, start, before, count -> manageButtonLogin()  }
 
     }
 
@@ -76,6 +84,21 @@ class LoginActivity : AppCompatActivity() {
         startMain.addCategory(Intent.CATEGORY_HOME)
         startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(startMain)
+    }
+
+    private fun manageButtonLogin(){
+        var tvLogin = findViewById<TextView>(R.id.tvLogin)
+        email = etEmail.text.toString()
+        password = etPass.text.toString()
+
+        if(TextUtils.isEmpty(password) ||ValidateEmail.isEmail(email)==false){
+            tvLogin.setBackgroundColor(ContextCompat.getColor(this,R.color.gray))
+            tvLogin.isEnabled = false
+
+        }else{
+            tvLogin.setBackgroundColor(ContextCompat.getColor(this,R.color.green))
+            tvLogin.isEnabled = true
+        }
     }
     /**
      * Función pública login a la que llamaremos desde el botón "Iniciar sesión".
@@ -150,6 +173,9 @@ class LoginActivity : AppCompatActivity() {
                     //Lo mandamos a la pantalla de inicio.
                     goHome(email,"email")
                 }else{
+                    //Comprobamos exactamente el error de registro
+                    //Mi Login: 12345678
+                    Toast.makeText(this,it.exception?.message,Toast.LENGTH_SHORT).show()
                     Toast.makeText(this,"Error. Algo ha ido mal.",Toast.LENGTH_SHORT).show()
                 }
 

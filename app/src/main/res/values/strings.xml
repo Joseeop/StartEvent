@@ -13,6 +13,7 @@
 
     <string name="inicio">La excelencia en eventos nos define.¿Estás preparado?</string>
     <string name="login">Iniciar sesión</string>
+    <string name="logout">Cerrar sesión</string>
     <string name="resetPassword">Enviar Contraseña</string>
     <string name="acept">He leído y acepto los</string>
     <string name="terms">términos y condiciones</string>
