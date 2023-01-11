@@ -16,5 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         android:onClick="callLogout"
         app:layout_constraintTop_toTopOf="parent" />
+    <!--Incluimos el layout la barra del menú  -->
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        app:menu="@menu/activy_main_drawer"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

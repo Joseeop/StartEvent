@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/nav_item_main"
+            android:icon="@drawable/gps"
+            android:title="@string/menu_zona"
+        />
+        <item
+            android:id="@+id/nav_item_premium"
+            android:icon="@drawable/star_premium"
+            android:title="@string/menu_becamepremium"
+            />
+
+
+    </group>
+
+    <item android:title="@string/profile">
+        <menu>
+            <item
+                android:id="@+id/nav_item_datos"
+                android:icon="@drawable/profile"
+                android:title="@string/menu_datos"
+                />
+            <item
+                android:id="@+id/nav_item_signout"
+                android:icon="@drawable/exit"
+                android:title="@string/logout"
+                />
+
+        </menu>
+    </item>
+    <item android:title="@string/menu_anuncio">
+        <menu>
+            <item
+                android:id="@+id/nav_item_ad"
+                android:icon="@drawable/ads"
+                android:title="@string/menu_anuncio_prom"
+                />
+        </menu>
+    </item>
+
+</menu>

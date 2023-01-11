@@ -22,11 +22,23 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgotPassword">¿Has olvidado tu contraseña?</string>
-    <string name="google">GOOGLE</string>
-    <string name="facebook">FACEBOOK</string>
+    <string name="google">ENTRAR CON GOOGLE</string>
+    <string name="facebook">ENTRAR CON FACEBOOK</string>
     <string name="title_terms">Términos y Dondiciones de Uso.</string>
     <string name="term1">Término 1</string>
     <string name="term2">Término 2</string>
     <string name="term3">Término 3</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="menu_zona">Elige tu ciudad</string>
+    <string name="menu_becamepremium">Hazte Premium</string>
+    <string name="menu_empresas">Zona empresas</string>
+    <string name="menu_anuncio_prom">"Promociónate aquí</string>
+    <string name="menu_anuncio">"Anuncio</string>
+
+    <string name="menu_datos">Zona personal</string>
+    <string name="menu_about_us">Sobre Nosotros</string>
+    <string name="profile">Cuenta</string>
+
+
 
 </resources>

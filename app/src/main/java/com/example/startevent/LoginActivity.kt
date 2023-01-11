@@ -1,11 +1,14 @@
 package com.example.startevent
 
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -13,7 +16,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,20 +41,29 @@ class LoginActivity : AppCompatActivity() {
     private var password by Delegates.notNull<String>()
     private lateinit var etEmail :EditText
     private lateinit var etPass : EditText
+    private lateinit var btnGoogle : Button
     //Este linear layout al principio estará oculto.
     private lateinit var lyTerms: LinearLayout
 
     private lateinit var mAuth : FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
+    //Código para comprobar que todo ha ido bien en el inicio de sesión
+    private var RESULT_CODE_GOOGLE_SIGN_IN =50
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+
+
+
+
         //Ponemos layaout por defecto en invisible.
         lyTerms=findViewById(R.id.lyTerms)
         lyTerms.visibility = android.view.View.INVISIBLE
-
+        btnGoogle=findViewById(R.id.btnGoogle)
         etEmail=findViewById(R.id.etEmail)
         etPass=findViewById(R.id.etPass)
         //Aquí tenemos la instancia con la que podremos operar.
@@ -56,6 +75,8 @@ class LoginActivity : AppCompatActivity() {
         etEmail.doOnTextChanged { text, start, before, count -> manageButtonLogin()  }
         etPass.doOnTextChanged { text, start, before, count -> manageButtonLogin()  }
 
+
+
     }
 
 
@@ -63,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
      * Sobrescribimos la función onStart para manipular su flujo.
      * 1.Si el usuario ya está logueado lo mandamos directamente a la pantalla home.
      */
-    /*public override fun onStart(){
+    public override fun onStart(){
         super.onStart()
 
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -71,8 +92,11 @@ class LoginActivity : AppCompatActivity() {
         //Comprobamos si el usuario no es null, en caso que no lo sea le mandamos a la pantalla de inicio
         //Con su email y proveedor
         if (currentUser != null) goHome(currentUser.email.toString(),currentUser.providerId)
+       // updateUI(currentUser)
 
-    }*/
+    }
+
+
 
     /**
      * Sobrescribimos la función onBackPressed. Para cuando el usuario pulse el botón
@@ -213,6 +237,66 @@ class LoginActivity : AppCompatActivity() {
                 }
         }else Toast.makeText(this, "Indica un email.",Toast.LENGTH_SHORT).show()
     }
+
+
+
+     /** LOGIN CON GOOGLE.
+      * Antes de nada, debemos irnos a Firebase para ingresar nuestra huella digital de la app. Posteriormente:
+      * View->Tools Windows->Gradle->signingReport, de ahí cogemos el código SHA1 para pegar en nuestra app en Firebase.
+      * También debemos estar logueados en la cuenta de google en el dispositivo
+      * sincroniza las dependencias que ofrece la documentación de google en gradle module
+      */
+
+    fun callSignInGoogle (view:View){
+        signInGoogle()
+    }
+    private fun signInGoogle(){
+        // Configure Google Sign In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        var googleSignInClient = GoogleSignIn.getClient(this, gso)
+        //Cerramos sesión por si hubiese alguna ya logueada.
+        googleSignInClient.signOut()
+
+        startActivityForResult(googleSignInClient.signInIntent, RESULT_CODE_GOOGLE_SIGN_IN)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RESULT_CODE_GOOGLE_SIGN_IN) {
+
+            try {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)!!
+                //Si la cuenta no es nula marcamos el email
+                //guardamos las credenciales con el token que hemos redibido
+                //y hacemos el signin con nuestros credenciales del firebase
+                //Si es exitoso el login lo mandamos a la pantalla home.
+                if (account != null){
+                    email = account.email!!
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    mAuth.signInWithCredential(credential).addOnCompleteListener{
+                        if (it.isSuccessful) goHome(email, "Google")
+                        else Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT)
+
+                    }
+                }
+
+
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT)
+            }
+        }
+
+    }
+    //FINAL DEL LOGIN CON GOOGLE.
 
 
 }
