@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         app:menu="@menu/activy_main_drawer"
-        />
+        tools:ignore="MissingConstraints" />
 
 
 
