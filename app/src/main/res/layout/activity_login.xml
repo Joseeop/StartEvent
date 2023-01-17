@@ -112,25 +112,25 @@
         android:layout_marginRight="10dp"
         android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/google_icon"
-        android:textAlignment="textStart"
-        android:textSize="20sp"
-        android:paddingLeft="30dp"
-        android:textColor="@color/black"
         android:onClick="callSignInGoogle"
-        android:text="@string/google" />
-    <Button
-        android:id="@+id/btnFacebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/facebook_icon"
-        android:textAlignment="textStart"
-        android:textSize="20sp"
         android:paddingLeft="30dp"
+        android:text="@string/google"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:text="@string/facebook" />
-
+        android:textSize="20sp" />
+    <!-- <Button
+         android:id="@+id/btnFacebook"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+         android:backgroundTint="@color/white"
+         android:drawableLeft="@drawable/facebook_icon"
+         android:textAlignment="textStart"
+         android:textSize="20sp"
+         android:paddingLeft="30dp"
+         android:textColor="@color/black"
+         android:text="@string/facebook" />
+ -->
 
 </LinearLayout>

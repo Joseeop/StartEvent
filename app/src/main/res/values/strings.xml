@@ -32,12 +32,20 @@
     <string name="menu_zona">Elige tu ciudad</string>
     <string name="menu_becamepremium">Hazte Premium</string>
     <string name="menu_empresas">Zona empresas</string>
-    <string name="menu_anuncio_prom">"Promociónate aquí</string>
-    <string name="menu_anuncio">"Anuncio</string>
+    <string name="menu_anuncio_prom">Promociónate aquí</string>
+    <string name="menu_anuncio">Anuncio</string>
 
     <string name="menu_datos">Zona personal</string>
     <string name="menu_about_us">Sobre Nosotros</string>
     <string name="profile">Cuenta</string>
+    <string name="user">Bienvenido, José</string>
+    <string name="job">Busca trabajo </string>
+    <string name="create">Crea un evento </string>
+    <string name="promote">Promoción evento </string>
+
+    <string name="close">Cerrar </string>
+    <string name="menu">Menú </string>
+
 
 
 
