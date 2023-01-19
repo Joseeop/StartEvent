@@ -3,16 +3,19 @@ package com.example.startevent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
     /**
@@ -30,7 +33,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
         initToolBar()
         initNavigationView()
-
+        val tvUser: TextView =findViewById(R.id.tvUser)
+        tvUser.text= "Bienvenid@, "+usermail
 
     //Toast de bienvenida con el mail del usuario
         //Toast.makeText(this,"Hola "+usermail,Toast.LENGTH_SHORT).show()
@@ -73,6 +77,51 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
 
     }
+
+    /**
+     * En esta función asignaremos las acciones a los botones del menú
+     */
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        /**
+         * Hacemos un when para saber qué opción se está requiriendo del menú.
+         */
+        when(item.itemId){
+            R.id.nav_item_datos -> callProfileActivity()
+            R.id.nav_item_signout -> logout()
+            R.id.nav_item_job -> searchJobsActivity()
+        }
+        /**
+         * Una vez seleccionamos una opción cerramos el menú, para ello los gestionamos con el drawer, y le ponemos de posición del inicio, de donde salió. Se ocultará en el inicio.
+         */
+        drawer.closeDrawer(GravityCompat.START)
+
+        return true
+    }
+
+
+    //TODO IMPLEMENTAR LLAMADAS DE CREAR EVENTO Y CREAR EVENTO VIRTUAL
+    fun callSearchJobsActivity (v:View){
+        searchJobsActivity()
+    }
+    /**
+     * Función que nos lleva a la pantalla "Zona personal"
+     */
+    private fun callProfileActivity(){
+        val intent = Intent (this,ProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+
+
+    /**
+     * Función que nos lleva a la pantalla "Busca trabajo"
+     */
+    private fun searchJobsActivity(){
+        val intent = Intent (this,SearchJobsActivity::class.java)
+        startActivity(intent)
+    }
+
     fun callLogout(view : View){
         logout()
     }
@@ -85,12 +134,5 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         usermail= ""
         FirebaseAuth.getInstance().signOut()
         startActivity(Intent(this,LoginActivity::class.java))
-    }
-
-    /**
-     * En esta función asignaremos las acciones a los botones del menú
-     */
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
     }
 }
