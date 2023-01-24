@@ -9,6 +9,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="vacio">" "</string>
 
 
     <string name="inicio">La excelencia en eventos nos define.¿Estás preparado?</string>
@@ -41,7 +42,7 @@
     <string name="user">Bienvenido, José</string>
     <string name="job">Busca trabajo </string>
     <string name="create">Crea un evento </string>
-    <string name="crea_virtual">!Crea un evento virtual </string>
+    <string name="crea_virtual">Crea un evento virtual </string>
 
     <string name="close">Cerrar </string>
     <string name="menu">Menú </string>
@@ -55,8 +56,21 @@
     <string name="tipo_empleo">Tipo de empleo </string>
     <string name="mensaje_premium">Hazte premium y pon aquí tu mensaje temporal </string>
 
+    <!-- Strings para la actividad crear evento -->
 
+    <string name="ubicacion">Ubicación </string>
+    <string name="vacantes">Número de vacantes </string>
+    <string name="descripcion">Descripción de la oferta </string>
+    <string name="requisitos">Requisitos</string>
+    <string name="fecha">Fecha del evento</string>
+    <string name="crear_evento">Crear evento</string>
+    <string name="empty">--</string>
+
+    <!--String para la Zona Personal-->
+
+    <string name="nombre">nombre></string>
     <!--
+
     <string name="switch_exp">Sin experiencia </string>
 
     <string name="switch_vehicle">Vehículo propio </string>

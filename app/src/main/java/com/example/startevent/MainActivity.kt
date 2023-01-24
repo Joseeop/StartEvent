@@ -104,6 +104,12 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     fun callSearchJobsActivity (v:View){
         searchJobsActivity()
     }
+    fun callCreateEventActivity (v:View){
+        createEventActivity()
+    }
+    fun callCreateVirtualActivity (v:View){
+        createVirtualActivity()
+    }
     /**
      * Función que nos lleva a la pantalla "Zona personal"
      */
@@ -114,6 +120,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
 
 
+
     /**
      * Función que nos lleva a la pantalla "Busca trabajo"
      */
@@ -121,6 +128,20 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         val intent = Intent (this,SearchJobsActivity::class.java)
         startActivity(intent)
     }
+
+    /**
+     * Función que nos lleva a la pantalla "Crear Evento"
+     */
+    private fun createEventActivity(){
+        val intent = Intent (this,CreateEventActivity::class.java)
+        startActivity(intent)
+    }
+    private fun createVirtualActivity(){
+        val intent = Intent (this,CreateVirtualActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
     fun callLogout(view : View){
         logout()

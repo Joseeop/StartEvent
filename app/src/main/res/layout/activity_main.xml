@@ -134,6 +134,7 @@
                         android:layout_height="76dp"
                         android:layout_marginTop="15dp"
                         android:background="@color/gray_dark"
+                        android:onClick="callCreateEventActivity"
                         android:src="@drawable/talent_search" />
                     <!--
                     <androidx.cardview.widget.CardView
@@ -206,6 +207,7 @@
                         android:layout_height="75dp"
                         android:layout_marginTop="15dp"
                         android:background="@color/gray_dark"
+                        android:onClick="callCreateVirtualActivity"
                         android:src="@drawable/video_conferencia" />
                     <!--
                     <androidx.cardview.widget.CardView
@@ -233,6 +235,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="85dp"
                         android:paddingTop="4dp"
+
                         android:text="Próximo evento: Hoy 12:30" />
                 </RelativeLayout>
 

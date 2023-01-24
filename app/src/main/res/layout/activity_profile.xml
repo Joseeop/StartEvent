@@ -1,29 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ProfileActivity">
 
- <com.google.android.material.appbar.AppBarLayout
-     android:layout_width="match_parent"
-     android:layout_height="50dp"
-     android:fitsSystemWindows="true"
-     android:transformPivotY="0dp">
-     <androidx.appcompat.widget.Toolbar
-         android:id="@+id/toolbar_profile"
-         android:layout_width="match_parent"
-         android:layout_height="?attr/actionBarSize"
-         android:background="@color/blue_dark"
-         app:titleTextColor="@color/blanco_azul"
-         app:title="@string/menu_datos"
-         app:layout_scrollFlags="scroll|enterAlways"
-         >
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
 
-     </androidx.appcompat.widget.Toolbar>
 
- </com.google.android.material.appbar.AppBarLayout>
+       <!--FONDO DE PORTADA -->
+       <androidx.appcompat.widget.AppCompatImageView
+           android:layout_width="match_parent"
+           android:layout_height="200dp"
+           android:background="@color/blue"
+           android:scaleType="center">
 
-</LinearLayout>
+       </androidx.appcompat.widget.AppCompatImageView>
+
+       <!--DATOS -->
+       <androidx.appcompat.widget.LinearLayoutCompat
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:padding="10dp"
+           android:layout_marginTop="80dp">
+
+           <androidx.appcompat.widget.AppCompatImageView
+               android:id="@+id/foto_perfil"
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:layout_marginTop="50dp"
+               android:layout_marginStart="20dp"
+               android:padding="3dp"
+               android:src="@drawable/fotocv"/>
+
+           <!-- RESTO DE DATOS-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <!--CORREO-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty">
+
+                </TextView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <!--NOMBRE-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/tvNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty">
+
+                </TextView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!--CIUDAD-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/tvCiudad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty">
+
+                </TextView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+       </androidx.appcompat.widget.LinearLayoutCompat>
+   </RelativeLayout>
+
+
+
+
+
+
+
+</androidx.core.widget.NestedScrollView>
