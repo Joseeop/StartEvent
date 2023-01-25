@@ -7,10 +7,12 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.isGone
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.android.material.navigation.NavigationView
@@ -23,13 +25,15 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
      * Lo necesitamos ya que el activity main está dentro de una etiqueta drawerlayout
      */
     private lateinit var drawer: DrawerLayout
-
+    lateinit var ivCreateEvent: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
+      //  ivCreateEvent=findViewById(R.id.ivCreateEvent)
+       // ivCreateEvent.visibility=View.GONE
 
         initToolBar()
         initNavigationView()
@@ -130,7 +134,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     }
 
     /**
-     * Función que nos lleva a la pantalla "Crear Evento"
+     * Función que nos lleva a la pantalla "Crear clases.Evento"
      */
     private fun createEventActivity(){
         val intent = Intent (this,CreateEventActivity::class.java)

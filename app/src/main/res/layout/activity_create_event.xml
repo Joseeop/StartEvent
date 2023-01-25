@@ -20,6 +20,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/title_edit_text"
+            style="@style/viewCustom_createEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/title_event"
+            android:inputType="text" />
+        <EditText
             android:id="@+id/location_edit_text"
             style="@style/viewCustom_createEvent"
             android:layout_width="match_parent"

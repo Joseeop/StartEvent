@@ -15,12 +15,12 @@
        <androidx.appcompat.widget.AppCompatImageView
            android:layout_width="match_parent"
            android:layout_height="200dp"
-           android:background="@color/blue"
+           android:background="@color/blue_dark"
            android:scaleType="center">
 
        </androidx.appcompat.widget.AppCompatImageView>
 
-       <!--DATOS -->
+
        <androidx.appcompat.widget.LinearLayoutCompat
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -37,54 +37,86 @@
                android:padding="3dp"
                android:src="@drawable/fotocv"/>
 
-           <!-- RESTO DE DATOS-->
+           <!-- MÁS DATOS-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="10dp">
 
-            <!--CORREO-->
+            <!--NOMBRE-->
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tvUserPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/nombre">
+
+                </TextView>
                 <TextView
                     android:id="@+id/tvUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/black"
                     android:text="@string/empty">
 
                 </TextView>
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
             <!--NOMBRE-->
+            <!--CORREO-->
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/tvNombre"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:id="@+id/tvEmailPerfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/correo">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/black"
                     android:text="@string/empty">
 
                 </TextView>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-
+            <!--CORREO-->
             <!--CIUDAD-->
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/tvCiudad"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:id="@+id/tvCiudadPerfil"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/ciudad">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tvCiudad"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="@string/empty">
 
                 </TextView>
@@ -92,8 +124,169 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+           <!--CIUDAD-->
 
+           <!--MENU DE OPCIONES-->
+
+
+
+           <!-- Opciones 1 y 2 -->
+           <androidx.appcompat.widget.LinearLayoutCompat
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginTop="5dp"
+               android:weightSum="2">
+                    <!--DATOS PERSONALES-->
+               <androidx.appcompat.widget.LinearLayoutCompat
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:layout_weight="1">
+
+                   <androidx.appcompat.widget.AppCompatImageView
+                       android:layout_width="80dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/profile"
+                       android:layout_gravity="center"/>
+                   <Button
+                       android:id="@+id/btnDatosPersonales"
+                       android:text="@string/datos_personales"
+                       style="@style/boton_personalizado"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"/>
+               </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+               <!--DATOS CONTACTO -->
+               <androidx.appcompat.widget.LinearLayoutCompat
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:layout_weight="1">
+
+                   <androidx.appcompat.widget.AppCompatImageView
+                       android:layout_width="80dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/datos_contacto"
+                       android:layout_gravity="center"/>
+                   <Button
+                       android:id="@+id/btnDatosContacto"
+                       style="@style/boton_personalizado"
+                       android:layout_marginStart="5dp"
+                       android:layout_width="match_parent"
+                       android:text="@string/datos_contacto"
+                       android:layout_height="wrap_content"/>
+               </androidx.appcompat.widget.LinearLayoutCompat>
+
+           </androidx.appcompat.widget.LinearLayoutCompat>
+           <!-- Opciones 3 y 4 -->
+           <androidx.appcompat.widget.LinearLayoutCompat
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginTop="10dp"
+               android:weightSum="2">
+
+
+               <!--FORMACION-->
+               <androidx.appcompat.widget.LinearLayoutCompat
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:layout_weight="1">
+
+                   <androidx.appcompat.widget.AppCompatImageView
+                       android:layout_width="80dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/formacion"
+                       android:layout_gravity="center"/>
+
+                       <Button
+                           android:id="@+id/btnFormacion"
+                           style="@style/boton_personalizado"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/blue_dark"
+                           android:text="@string/formacion"/>
+
+               </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+               <!--EXPERIENCIA LABORAL -->
+               <androidx.appcompat.widget.LinearLayoutCompat
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:layout_weight="1">
+                   <androidx.appcompat.widget.AppCompatImageView
+                       android:layout_width="80dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/experiencia_profesional"
+                       android:layout_gravity="center"/>
+                   <Button
+                       android:id="@+id/btnExperienciaLab"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="@string/experiencia"
+                       android:layout_marginStart="5dp"
+                       style="@style/boton_personalizado"/>
+
+               </androidx.appcompat.widget.LinearLayoutCompat>
+               <!-- Opciones 5 y 6 -->
+           </androidx.appcompat.widget.LinearLayoutCompat>
+           <androidx.appcompat.widget.LinearLayoutCompat
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginTop="10dp"
+               android:weightSum="2">
+                <!--IDIOMAS -->
+               <androidx.appcompat.widget.LinearLayoutCompat
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:layout_weight="1">
+
+                   <androidx.appcompat.widget.AppCompatImageView
+                       android:layout_width="80dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/idiomas"
+                       android:layout_gravity="center"/>
+                   <Button
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       style="@style/boton_personalizado"
+                       android:text="@string/idiomas"/>
+
+               </androidx.appcompat.widget.LinearLayoutCompat>
+
+               <!-- CERRAR SESIÓN-->
+               <androidx.appcompat.widget.LinearLayoutCompat
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:orientation="vertical">
+
+                   <androidx.appcompat.widget.AppCompatImageView
+                       android:layout_width="80dp"
+                       android:layout_height="100dp"
+                       android:src="@drawable/puerta"
+                       android:layout_gravity="center"/>
+
+                   <Button
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       style="@style/boton_personalizado"
+                       android:layout_marginStart="5dp"
+                       android:text="@string/salir"/>
+               </androidx.appcompat.widget.LinearLayoutCompat>
+           </androidx.appcompat.widget.LinearLayoutCompat>
        </androidx.appcompat.widget.LinearLayoutCompat>
+
+       <!--MENÚ DE OPCIONES-->
+
+
    </RelativeLayout>
 
 

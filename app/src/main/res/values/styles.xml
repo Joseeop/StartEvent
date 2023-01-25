@@ -11,4 +11,10 @@
         <item name="android:paddingTop">15dp</item>
         <item name="android:layout_margin">8dp</item>
     </style>
+    <style name="boton_personalizado" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/blue_pastel</item>
+        <item name="android:textColor">@color/blue_dark</item>
+        <item name="android:textSize">12sp</item>
+        <item name="font">@font/amaranth_bold</item>
+    </style>
 </resources>

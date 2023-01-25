@@ -64,11 +64,20 @@
     <string name="requisitos">Requisitos</string>
     <string name="fecha">Fecha del evento</string>
     <string name="crear_evento">Crear evento</string>
+    <string name="title_event">Tipo de evento</string>
     <string name="empty">--</string>
 
     <!--String para la Zona Personal-->
 
-    <string name="nombre">nombre></string>
+    <string name="nombre">Nombre</string>
+    <string name="correo">Correo</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="datos_personales">Datos personales</string>
+    <string name="formacion">Formación</string>
+    <string name="datos_contacto">Datos contacto</string>
+    <string name="experiencia">Experiencia laboral</string>
+    <string name="idiomas">Idiomas</string>
+    <string name="salir">Cerrar sesión</string>
     <!--
 
     <string name="switch_exp">Sin experiencia </string>
@@ -76,7 +85,7 @@
     <string name="switch_vehicle">Vehículo propio </string>
 
      Check box de idiomas
-    <string name="idiomas">Idiomas</string>
+
     <string name="idiomaES">Español </string>
     <string name="idiomaEN">Inglés </string>
     <string name="idiomaGER">Alemán </string>
