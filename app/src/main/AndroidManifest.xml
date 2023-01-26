@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- PERMISO CAMARA -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- PERMISO PARA AUDIO, QUE DARÍA LUGAR A VIDEO. NO SE IMPLEMENTARÁ -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- PERMISO PARA TODAS LAS CÁMARAS(FRONTAL Y TRASERA) -->
+    <uses-feature android:name="android.hardware.camera.any" /> <!-- PERMISOS DE ESCRITURA Y LECTURA PARA LAS IMAGENES -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- PERMISO DEL USUARIO -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StartEvent"
         tools:targetApi="31">
+        <activity
+            android:name=".CameraActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".CreateVirtualActivity"
             android:exported="false">

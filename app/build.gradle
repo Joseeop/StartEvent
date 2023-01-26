@@ -6,8 +6,18 @@ plugins {
 }
 
 android {
+
+
     namespace 'com.example.startevent'
     compileSdk 33
+
+    buildFeatures{
+        viewBinding = true
+    }
+
+    dataBinding{
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.example.startevent"
@@ -64,6 +74,21 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.4.1'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
+
+    //LIBRERIAS DE LA CAMARA
+
+    implementation 'androidx.camera:camera-view:1.2.1'
+    implementation ('androidx.camera:camera-core:1.2.1')
+    implementation ('androidx.camera:camera-camera2:1.2.1')
+
+    //CameraX Lifecycle library
+    implementation('androidx.camera:camera-lifecycle:1.2.1')
+
+    //CameraX View class
+    implementation('androidx.camera:camera-view:1.2.1')
+
+    //CameraX Extensions library
+    //implementation('androix.camera:camera-extensions:1.0.0')
 
     //Dependencias para loguear con google junto a firebase-bom
     // Add the dependency for the Firebase Authentication library

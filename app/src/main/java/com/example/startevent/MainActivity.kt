@@ -17,6 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
@@ -159,5 +161,19 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         usermail= ""
         FirebaseAuth.getInstance().signOut()
         startActivity(Intent(this,LoginActivity::class.java))
+    }
+
+    /**
+     * Función que nos llevará a la pantalla de la cámara y se llevará mediante un intent la fecha de cuando se realizó la foto y el usuario
+     */
+    fun takePicture(v: View){
+        var dateRun = SimpleDateFormat("dd/MM/yyyy").format(Date())
+        val intent = Intent(this, CameraActivity::class.java)
+
+        val inParameter = intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        inParameter.putExtra("usuario", usermail)
+        inParameter.putExtra("dateRun", dateRun)
+
+        startActivity(intent)
     }
 }

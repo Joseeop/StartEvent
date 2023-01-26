@@ -17,7 +17,7 @@
     <color name="gris">#5b636b</color>
     <color name="gris_suave">#b7b0b3</color>
     <color name="blanco_azul">#F4F8F7</color>
-    <color name="transparent">#00ffffff</color>
+    <color name="transparent">#99000000</color>
 
     <color name="black_trans">#9F000000</color>
 
