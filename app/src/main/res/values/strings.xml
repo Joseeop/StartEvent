@@ -51,6 +51,9 @@
 
     <!--Strings de filtros de búsqueda -->
     <string name="Restablecer">Restablecer</string>
+    <string name="eventosDisponibles">Eventos disponibles</string>
+    <string name="orderby_dateAZ">Fecha (Recientes primero)</string>
+    <string name="orderby_dateZA">Fecha (Antiguos primero)</string>
 
     <string name="orderby_ubi">Ubicación </string>
 
@@ -60,6 +63,7 @@
     <!-- Strings para la actividad crear evento -->
 
     <string name="ubicacion">Ubicación </string>
+    <string name="NombreEmpresa">Nombre de la empresa </string>
     <string name="vacantes">Número de vacantes </string>
     <string name="descripcion">Descripción de la oferta </string>
     <string name="requisitos">Requisitos</string>

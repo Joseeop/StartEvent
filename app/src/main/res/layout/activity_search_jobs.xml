@@ -13,12 +13,12 @@
         android:fitsSystemWindows="true"
         android:transformPivotY="0dp">
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_profile"
+            android:id="@+id/toolbar_empleos"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue_dark"
             app:titleTextColor="@color/blanco_azul"
-            app:title="@string/filter"
+            app:title="@string/eventosDisponibles"
             app:layout_scrollFlags="scroll|enterAlways"
             >
 
@@ -33,7 +33,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rvListaEventos"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

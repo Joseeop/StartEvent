@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO Puede que haya que modificar estos items si únicamente se ve el icono y no el texto -->
+    <item android:title="/string/vacio"
+        android:id="@+id/ORDERBY"
+        app:showAsAction="always"
+        android:icon="@drawable/search"/>
+
+    <item android:id="@+id/orderby_date"
+        android:title="@string/orderby_dateZA"
+        />
+
+
+
+    <item android:id="@+id/orderby_ubi"
+        android:title="@string/orderby_ubi"/>
+
+    <item android:id="@+id/orderby_vacantes"
+        android:title="@string/vacantes"/>
+
+
+
+</menu>

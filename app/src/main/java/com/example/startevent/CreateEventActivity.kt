@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -47,6 +48,7 @@ class CreateEventActivity : AppCompatActivity() {
               if(task.isSuccessful){
               FirebaseFirestore.getInstance().collection("Eventos").document(titleEditText.text.toString()).set(
                   hashMapOf(
+                      "creador" to usermail,
                       "titulo" to titleEditText.text.toString(),
                       "ubicacion" to locationEditText.text.toString(),
                       "fecha_evento" to dateEditText.text.toString(),

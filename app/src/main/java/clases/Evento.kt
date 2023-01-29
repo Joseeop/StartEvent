@@ -2,15 +2,25 @@ package clases
 
 import com.google.firebase.Timestamp
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class Evento (
-    var tipoEvento:String,
-    var ubicacion: String,
-    var fechaEvento: LocalDate,
-    var tipoEmpleado: String,
-    var nVacantes: UShort,
-    var resquisitos: String,
-    var descripcion: String
+    var empresaCreadora:String?=null,
+
+    var tipoEvento:String?= null,
+
+    var ubicacion: String?= null,
+
+    var fechaEvento: String?= null,
+
+    var tipoEmpleado: String?= null,
+
+    var nVacantes: UShort?= null,
+
+    var resquisitos: String?= null,
+
+    var descripcion: String?= null
+
     ){
 
 
