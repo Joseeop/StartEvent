@@ -87,6 +87,12 @@ dependencies {
     //CameraX View class
     implementation('androidx.camera:camera-view:1.2.1')
 
+    //Galeria que permite sincronizar las miniaturas
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    // Skip this if you don't want to use integration libraries or configure Glide.
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
     //CameraX Extensions library
     //implementation('androix.camera:camera-extensions:1.0.0')
 

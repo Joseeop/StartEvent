@@ -167,7 +167,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
      * Función que nos llevará a la pantalla de la cámara y se llevará mediante un intent la fecha de cuando se realizó la foto y el usuario
      */
     fun takePicture(v: View){
-        var dateRun = SimpleDateFormat("dd/MM/yyyy").format(Date())
+        //ESTAS DOS VARIABLES SERÁN LOS IDENTIFICADORES DE LA FOTO, DE AHÍ A PONERLE MINUTOS Y SEGUNDOS, PARA QUE NO PUEDA REPETIRSE
+        var dateRun = SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Date())
         val intent = Intent(this, CameraActivity::class.java)
 
         val inParameter = intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
