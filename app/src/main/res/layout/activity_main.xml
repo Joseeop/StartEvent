@@ -195,7 +195,7 @@
                         android:paddingTop="2dp"
                         android:paddingRight="10dp"
                         android:paddingBottom="2dp"
-                        android:text="@string/crea_virtual"
+                        android:text="EJERCICIO PERMISO CÁMARA"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="12sp"
@@ -207,8 +207,10 @@
                         android:layout_height="75dp"
                         android:layout_marginTop="15dp"
                         android:background="@color/gray_dark"
-                        android:onClick="callCreateVirtualActivity"
-                        android:src="@drawable/video_conferencia" />
+                        android:onClick="takePicture"
+                        android:src="@drawable/camera" />
+                    <!--android:src="@drawable/video_conferencia"
+                    android:onClick="callCreateVirtualActivity"-->
                     <!--
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cviLevelRunning"
@@ -257,6 +259,7 @@
             android:layout_height="156dp"
             android:paddingTop="16dp"
             android:text="@string/inicio" />
+
 
 
         <LinearLayout

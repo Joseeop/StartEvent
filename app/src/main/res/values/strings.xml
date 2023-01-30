@@ -83,7 +83,46 @@
     <string name="experiencia">Experiencia laboral</string>
     <string name="idiomas">Idiomas</string>
     <string name="salir">Cerrar sesión</string>
-    <!--
+    <!--String para Datos Personales -->
+    <string name="actualizar_datos">Actualizar datos</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="DNI">DNI/NIF</string>
+    <string name="nacionalidad">Selecciona una nacionalidad: </string>
+    <string name="Genero">Selecciona un género: </string>
+    <string-array name="gender_options">
+        <item>Hombre</item>
+        <item>Mujer</item>
+        <item>Prefiero no decirlo</item>
+    </string-array>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="mis_datos_personales">Mis datos personales</string>
+    <string-array name="nationality_options">
+        <item>Española</item>
+        <item>Africana</item>
+        <item>Francesa</item>
+        <item>Italiana</item>
+        <item>Sueca</item>
+        <item>Alemana</item>
+        <item>Iraní</item>
+        <item>Británica</item>
+        <item>Danesa</item>
+        <item>Noruega</item>
+        <item>Finlandesa</item>
+        <item>Belga</item>
+        <item>Holandesa</item>
+        <item>Portuguesa</item>
+        <item>Griega</item>
+        <item>Checa</item>
+        <item>Polaca</item>
+        <item>Rusa</item>
+        <item>Hungría</item>
+        <item>Austriaca</item>
+        <item>Suiza</item>
+    </string-array>
+
+
+
+
 
     <string name="switch_exp">Sin experiencia </string>
 
