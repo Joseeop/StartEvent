@@ -1,5 +1,6 @@
 package clases
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.example.startevent.R
 import com.example.startevent.Utility.setHeightLinearLayout
 import io.grpc.Context
 
-class EmpleosAdapter(private val eventList: ArrayList<Evento>) :RecyclerView.Adapter<EmpleosAdapter.MyViewHolder>() {
+class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento>) :RecyclerView.Adapter<EmpleosAdapter.MyViewHolder>() {
 
     private lateinit var context : android.content.Context
 
@@ -19,7 +20,7 @@ class EmpleosAdapter(private val eventList: ArrayList<Evento>) :RecyclerView.Ada
         context = parent.context
         val itemView = LayoutInflater.from(context).inflate(R.layout.card_event,parent,false)
 
-        return MyViewHolder(itemView)
+        return EmpleosAdapter.MyViewHolder(actividadMadre.layoutInflater.inflate(R.layout.card_event,parent,false))
     }
 
     override fun onBindViewHolder(holder: EmpleosAdapter.MyViewHolder, position: Int) {
@@ -27,31 +28,14 @@ class EmpleosAdapter(private val eventList: ArrayList<Evento>) :RecyclerView.Ada
 
        val evento: Evento = eventList.get(position)
 
-        var day = evento.fechaEvento?.subSequence(8, 10)
-        var n_month = evento.fechaEvento?.subSequence(5, 7)
-        var month: String ?= null
-        var year = evento.fechaEvento?.subSequence(0, 4)
 
-        when (n_month) {
-            "01" -> month = "ENE"
-            "02" -> month = "FEB"
-            "03" -> month = "MAR"
-            "04" -> month = "ABR"
-            "05" -> month = "MAY"
-            "06" -> month = "JUN"
-            "07" -> month = "JUL"
-            "08" -> month = "AGO"
-            "09" -> month = "SEP"
-            "10" -> month = "OCT"
-            "11" -> month = "NOV"
-            "12" -> month = "DIC"
-        }
-        var date: String = "$day-$month-$year"
-        holder.txtFecha.text = date
+
+
 
         holder.txtTitulo.text=evento.tipoEvento
         holder.txtUbicacion.text=evento.ubicacion
-        holder.txtVacantes.text=evento.nVacantes.toString()
+        holder.txtVacantes.text="Vacantes: "+evento.nVacantes.toString()
+        holder.txtFecha.text=evento.fechaEvento.toString()
 
 
 

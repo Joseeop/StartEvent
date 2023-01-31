@@ -36,7 +36,23 @@ class SearchJobsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_jobs)
 
-        recyclerView = findViewById(R.id.rvListaEventos)
+        val valores= arrayListOf<Evento>()
+        for (i in 100 downTo 1){
+            var evento:Evento=Evento()
+            valores.add(evento)
+        }
+
+        val recyclerView1:RecyclerView=findViewById<RecyclerView>(R.id.rvListaEventos)
+        recyclerView1.adapter=EmpleosAdapter(this,valores)
+        recyclerView1.layoutManager=LinearLayoutManager(this)
+
+
+
+
+
+      /*  CÓDIGO PARA INFLAR RECYCLER MEDIANTE CONSULTAS A BBDD QUE NO HE LOGRADO IMPLEMENTAR
+      recyclerView = findViewById(R.id.rvListaEventos)
+
         recyclerView.layoutManager=LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
@@ -44,7 +60,7 @@ class SearchJobsActivity : AppCompatActivity() {
        /* var evento:Evento = Evento(null,"ASDF","Malaga","12/12/2045",null,2U)
         empleosArrayList.add(evento)*/
         //Vinculamos el array con la lista
-        myAdapter = EmpleosAdapter(empleosArrayList)
+        //myAdapter = EmpleosAdapter(empleosArrayList)
         recyclerView.adapter = myAdapter
 
 
@@ -141,6 +157,8 @@ class SearchJobsActivity : AppCompatActivity() {
                 Log.d("Eventos", "Documents size: " + empleosArrayList.size)
             }
         Log.d("Eventos", "Documents size: " + empleosArrayList.size)
+        */
+
     }
 
 
