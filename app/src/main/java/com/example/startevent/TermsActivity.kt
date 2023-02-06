@@ -16,7 +16,7 @@ class TermsActivity : AppCompatActivity() {
 
 
         val terminos = mutableListOf("COOKIES\n " +
-                "Empleamos el uso de cookies. Al utilizar el sitio web de (Nombre de la tienda), usted acepta el uso de cookies de acuerdo con la política de privacidad de (Nombre de la tienda). La mayoría de los modernos sitios web interactivos de hoy en día usan cookies para permitirnos recuperar los detalles del usuario para cada visita. ",
+                "Empleamos el usos de cookies. Al utilizar el sitio web de (Nombre de la tienda), usted acepta el uso de cookies de acuerdo con la política de privacidad de (Nombre de la tienda). La mayoría de los modernos sitios web interactivos de hoy en día usan cookies para permitirnos recuperar los detalles del usuario para cada visita. ",
             "LICENCIA \n No debes:\n" +
                     "\n" +
                     "Volver a publicar material desde (Añadir URL).\n" +
