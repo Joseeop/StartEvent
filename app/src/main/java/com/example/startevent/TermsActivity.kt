@@ -2,16 +2,15 @@ package com.example.startevent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
-import clases.Terms
 
 class TermsActivity : AppCompatActivity() {
+    lateinit var hola:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_terms)
+        setContentView(R.layout.listview_activity_terms)
 
         val arrayAdapter:ArrayAdapter<String>
 

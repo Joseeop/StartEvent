@@ -43,7 +43,7 @@
                     android:paddingTop="2dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="2dp"
-                    android:text="@string/job"
+                    android:text="ESTOS HEADERS SON TEMPORALES,SERÁN REEMPLAZADOS"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="12sp"
