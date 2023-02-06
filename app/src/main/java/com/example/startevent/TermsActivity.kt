@@ -7,7 +7,7 @@ import android.widget.ListView
 import android.widget.Toast
 
 class TermsActivity : AppCompatActivity() {
-    lateinit var hola:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.listview_activity_terms)
