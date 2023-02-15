@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -25,6 +26,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.BufferedReader
+import java.io.FileNotFoundException
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
@@ -44,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnGoogle : Button
     //Este linear layout al principio estará oculto.
     private lateinit var lyTerms: LinearLayout
-
+    private lateinit var swRecordarContraseña: Switch
     private lateinit var mAuth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -54,6 +59,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+        swRecordarContraseña= findViewById(R.id.swRecordarContraseña)
 
 
 
@@ -74,7 +82,17 @@ class LoginActivity : AppCompatActivity() {
         manageButtonLogin()
         etEmail.doOnTextChanged { text, start, before, count -> manageButtonLogin()  }
         etPass.doOnTextChanged { text, start, before, count -> manageButtonLogin()  }
+        try{
+            val lector : BufferedReader?= BufferedReader(InputStreamReader(this.openFileInput("datosLogin.txt")))
 
+            if(lector!=null){
+                etEmail.setText(lector.readLine())
+                etPass.setText(lector.readLine())
+                swRecordarContraseña.isChecked=true
+            }
+        }catch(e: FileNotFoundException){
+            Log.d("Archivos datos login","Archivo datosLogin no encontrado")
+        }
 
 
     }
@@ -135,6 +153,18 @@ class LoginActivity : AppCompatActivity() {
         email = etEmail.text.toString()
         password = etPass.text.toString()
 
+        if(swRecordarContraseña.isChecked){
+
+            var escritor: OutputStreamWriter = OutputStreamWriter(openFileOutput("datosLogin.txt",
+                MODE_PRIVATE
+            ))
+            escritor.write(etEmail.text.toString()+"\n")
+            escritor.write(etPass.text.toString())
+            escritor.flush()
+            escritor.close()
+        }else{
+            deleteFile("datosLogin.txt")
+        }
 
         mAuth.signInWithEmailAndPassword(email,password)
             //Cambiamos el it de la lamda por "task" para utilizarla más adelante.

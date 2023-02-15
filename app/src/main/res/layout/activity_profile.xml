@@ -29,14 +29,14 @@
            android:layout_marginTop="80dp">
 
            <androidx.appcompat.widget.AppCompatImageView
-               android:id="@+id/foto_perfil"
+               android:id="@+id/fotoPerfil"
                android:layout_width="100dp"
                android:layout_height="100dp"
                android:layout_marginTop="50dp"
                android:layout_marginStart="20dp"
                android:padding="3dp"
                android:onClick="takePicture"
-               android:src="@drawable/fotocv"/>
+               android:src="@drawable/camera"/>
 
            <!-- MÁS DATOS-->
         <androidx.appcompat.widget.LinearLayoutCompat

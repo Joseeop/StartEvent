@@ -2,7 +2,7 @@ package clases
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.firebase.Timestamp
+
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*

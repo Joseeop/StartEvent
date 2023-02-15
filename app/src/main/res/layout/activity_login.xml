@@ -66,10 +66,19 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
-
+    <Switch
+        android:id="@+id/swRecordarContraseña"
+        android:layout_marginTop="15dp"
+        style="@style/viewCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blanco_azul"
+        android:textSize="16dp"
+        android:text="@string/recordarContraseña" />
     <TextView
         style="@style/viewCustom"
         android:id="@+id/txtForgotPassword"
+        android:layout_marginTop="15dp"
         android:textColor="@color/gray"
         android:gravity="center_horizontal"
         android:layout_below="@id/tvLogin"

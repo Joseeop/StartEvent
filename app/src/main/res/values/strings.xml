@@ -14,6 +14,7 @@
 
 
     <string name="inicio">La excelencia en eventos nos define.¿Estás preparado?</string>
+    <string name="recordarContraseña">Recordar contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="logout">Cerrar sesión</string>
     <string name="resetPassword">Enviar Contraseña</string>
@@ -85,11 +86,14 @@
     <string name="salir">Cerrar sesión</string>
     <!--String para Datos Personales -->
     <string name="actualizar_datos">Actualizar datos</string>
+    <string name="cambiar_fecha">Establecer</string>
+    <string name="mayorEdad">Tienes que ser mayor de edad</string>
     <string name="apellidos">Apellidos</string>
     <string name="DNI">DNI/NIF</string>
     <string name="nacionalidad">Selecciona una nacionalidad: </string>
     <string name="Genero">Selecciona un género: </string>
     <string-array name="gender_options">
+        <item>--</item>
         <item>Hombre</item>
         <item>Mujer</item>
         <item>Prefiero no decirlo</item>
@@ -97,6 +101,7 @@
     <string name="fecha_nacimiento">Fecha de nacimiento</string>
     <string name="mis_datos_personales">Mis datos personales</string>
     <string-array name="nationality_options">
+        <item>--</item>
         <item>Española</item>
         <item>Africana</item>
         <item>Francesa</item>
@@ -137,5 +142,10 @@
     <string name="idiomaFR">Francés </string>
 
      -->
+
+    <!--Strings alerta foto -->
+    <string name="queQuieresHacer">¿Qué deseas hacer?</string>
+    <string name="tomarFoto">Hacer una foto</string>
+    <string name="CargarFoto">Tomar foto desde el carrete</string>
 
 </resources>
