@@ -25,6 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         val botonIrDatosPersonales:Button=findViewById<Button>(R.id.btnDatosPersonales)
+        val botonIrDatosContacto:Button=findViewById(R.id.btnDatosContacto)
         val tvUser: TextView =findViewById(R.id.tvUser)
         tvUser.text=  usermail
 
@@ -32,6 +33,11 @@ class ProfileActivity : AppCompatActivity() {
     botonIrDatosPersonales.setOnClickListener{
         val intent:Intent=Intent(this,DatosPersonalesActivity::class.java)
         this.startActivity(intent)
+        }
+
+        botonIrDatosContacto.setOnClickListener {
+            val intent:Intent=Intent(this,DatosContactoActivity::class.java)
+            this.startActivity(intent)
         }
 
 

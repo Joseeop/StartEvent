@@ -1,22 +1,22 @@
 package com.example.startevent
 
 
-import android.content.ContentValues
-import com.google.firebase.firestore.Query
-import androidx.appcompat.app.AppCompatActivity
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import clases.EmpleosAdapter
 import clases.Evento
-import com.example.startevent.LoginActivity.Companion.usermail
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
 
 
 class SearchJobsActivity : AppCompatActivity() {
@@ -36,15 +36,31 @@ class SearchJobsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_jobs)
 
-        val valores= arrayListOf<Evento>()
+       /* val valores= arrayListOf<Evento>()
         for (i in 100 downTo 1){
             var evento:Evento=Evento()
             valores.add(evento)
-        }
+        }*/
+        recyclerView = findViewById(R.id.rvListaEventos)
+        empleosArrayList = arrayListOf()
+        myAdapter = EmpleosAdapter(this, empleosArrayList)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = myAdapter
 
-        val recyclerView1:RecyclerView=findViewById<RecyclerView>(R.id.rvListaEventos)
-        recyclerView1.adapter=EmpleosAdapter(this,valores)
-        recyclerView1.layoutManager=LinearLayoutManager(this)
+        val db = FirebaseFirestore.getInstance()
+        db.collection("Eventos")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val evento = document.toObject(Evento::class.java)
+                    empleosArrayList.add(evento)
+                }
+                myAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+
 
 
 

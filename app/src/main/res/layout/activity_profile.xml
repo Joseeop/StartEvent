@@ -35,7 +35,6 @@
                android:layout_marginTop="50dp"
                android:layout_marginStart="20dp"
                android:padding="3dp"
-               android:onClick="takePicture"
                android:src="@drawable/camera"/>
 
            <!-- MÁS DATOS-->
@@ -200,7 +199,7 @@
                    <androidx.appcompat.widget.AppCompatImageView
                        android:layout_width="80dp"
                        android:layout_height="100dp"
-                       android:src="@drawable/formacion"
+                       android:src="@drawable/experiencia_profesional"
                        android:layout_gravity="center"/>
 
                        <Button
@@ -209,7 +208,7 @@
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:textColor="@color/blue_dark"
-                           android:text="@string/formacion"/>
+                           android:text="@string/experiencia"/>
 
                </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -223,13 +222,13 @@
                    <androidx.appcompat.widget.AppCompatImageView
                        android:layout_width="80dp"
                        android:layout_height="100dp"
-                       android:src="@drawable/experiencia_profesional"
+                       android:src="@drawable/settings"
                        android:layout_gravity="center"/>
                    <Button
                        android:id="@+id/btnExperienciaLab"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:text="@string/experiencia"
+                       android:text="@string/ajustes"
                        android:layout_marginStart="5dp"
                        style="@style/boton_personalizado"/>
 
@@ -243,6 +242,7 @@
                android:layout_marginTop="10dp"
                android:weightSum="2">
                 <!--IDIOMAS -->
+               <!--
                <androidx.appcompat.widget.LinearLayoutCompat
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -261,31 +261,33 @@
                        android:text="@string/idiomas"/>
 
                </androidx.appcompat.widget.LinearLayoutCompat>
-
+-->
                <!-- CERRAR SESIÓN-->
-               <androidx.appcompat.widget.LinearLayoutCompat
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"
-                   android:orientation="vertical">
+       <!--
+       <androidx.appcompat.widget.LinearLayoutCompat
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:orientation="vertical">
 
-                   <androidx.appcompat.widget.AppCompatImageView
-                       android:layout_width="80dp"
-                       android:layout_height="100dp"
-                       android:src="@drawable/puerta"
-                       android:layout_gravity="center"/>
+           <androidx.appcompat.widget.AppCompatImageView
+               android:layout_width="80dp"
+               android:layout_height="100dp"
+               android:src="@drawable/puerta"
+               android:layout_gravity="center"/>
 
-                   <Button
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       style="@style/boton_personalizado"
-                       android:layout_marginStart="5dp"
-                       android:text="@string/salir"/>
-               </androidx.appcompat.widget.LinearLayoutCompat>
-           </androidx.appcompat.widget.LinearLayoutCompat>
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               style="@style/boton_personalizado"
+               android:layout_marginStart="5dp"
+               android:text="@string/salir"/>
        </androidx.appcompat.widget.LinearLayoutCompat>
+       -->
+   </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>
 
-       <!--MENÚ DE OPCIONES-->
+<!--MENÚ DE OPCIONES-->
 
 
    </RelativeLayout>

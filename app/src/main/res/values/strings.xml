@@ -84,6 +84,7 @@
     <string name="experiencia">Experiencia laboral</string>
     <string name="idiomas">Idiomas</string>
     <string name="salir">Cerrar sesión</string>
+    <string name="ajustes">Ajustes</string>
     <!--String para Datos Personales -->
     <string name="actualizar_datos">Actualizar datos</string>
     <string name="cambiar_fecha">Establecer</string>
@@ -92,6 +93,25 @@
     <string name="DNI">DNI/NIF</string>
     <string name="nacionalidad">Selecciona una nacionalidad: </string>
     <string name="Genero">Selecciona un género: </string>
+    <!--String para datos de contacto -->
+    <string name="datos_contactoCAPS">DATOS DE CONTACTO</string>
+    <string name="pais">País</string>
+    <string name="codigo_postal">Código postal</string>
+    <string name="provincia">Provincia</string>
+    <string name="poblacion">Población</string>
+    <string name="telefonos">Teléfonos</string>
+    <string name="movil">Móvil</string>
+    <string name="rrss">RRSS</string>
+    <string name="linkedin">Linkdin</string>
+    <string name="instagram">Instagram</string>
+    <string name="movilidad">Movilidad</string>
+    <string name="carne_conducir">Carne de conducir</string>
+    <string name="transporte_propio">Transporte propio</string>
+    <string name="movilidad_geografica">Movilidad geográfica</string>
+    <string name="introduce_pais">Introduce tu país</string>
+    <string name="introduce_provincia">Introduce tu provincia</string>
+    <string name="introduce_cp">Introduce tu código postal</string>
+    <string name="introduce_movil">Introduce tu móvil</string>
     <string-array name="gender_options">
         <item>--</item>
         <item>Hombre</item>
@@ -126,14 +146,11 @@
     </string-array>
 
 
-
-
-
     <string name="switch_exp">Sin experiencia </string>
 
     <string name="switch_vehicle">Vehículo propio </string>
 
-     Check box de idiomas
+    Check box de idiomas
 
     <string name="idiomaES">Español </string>
     <string name="idiomaEN">Inglés </string>
@@ -141,11 +158,13 @@
     <string name="idiomaIT">Italiano </string>
     <string name="idiomaFR">Francés </string>
 
-     -->
+    -->
 
     <!--Strings alerta foto -->
     <string name="queQuieresHacer">¿Qué deseas hacer?</string>
     <string name="tomarFoto">Hacer una foto</string>
     <string name="CargarFoto">Tomar foto desde el carrete</string>
+
+
 
 </resources>

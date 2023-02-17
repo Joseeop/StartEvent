@@ -1,0 +1,121 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_pastel"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_dark"
+            android:text="@string/datos_contactoCAPS"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvPais"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pais"/>
+
+        <EditText
+            android:id="@+id/editTextPais"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/blue_dark"
+            android:hint="@string/introduce_pais"/>
+
+        <TextView
+            android:id="@+id/tvProvincia"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/provincia"/>
+
+        <EditText
+            android:id="@+id/editTextProvincia"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/blue_dark"
+            android:hint="@string/introduce_provincia"/>
+        <TextView
+            android:id="@+id/tvCP"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/codigo_postal"/>
+
+        <EditText
+            android:id="@+id/editTextCP"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColorHint="@color/blue_dark"
+            android:hint="@string/introduce_cp"/>
+
+        <TextView
+            android:id="@+id/tvMovil"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movil"/>
+        <EditText
+            style="@style/viewCustom_datosPersonales"
+            android:id="@+id/editTextMovil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:textColorHint="@color/blue_dark"
+            android:hint="@string/introduce_movil" />
+
+
+        <TextView
+            android:id="@+id/tvMovilidad"
+            style="@style/viewCustom_datosPersonales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movilidad"/>
+        <CheckBox
+            style="@style/viewCustom_datosPersonales"
+            android:id="@+id/checkBoxCarnetConducir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/carne_conducir" />
+
+        <CheckBox
+            style="@style/viewCustom_datosPersonales"
+            android:id="@+id/checkBoxTransportePropio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/transporte_propio" />
+
+        <CheckBox
+            style="@style/viewCustom_datosPersonales"
+            android:id="@+id/checkBoxMovilidadGeografica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/movilidad_geografica" />
+        <Button
+            android:id="@+id/actualizar_datos_button"
+            android:backgroundTint="@color/blue_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/actualizar_datos" />
+</LinearLayout>
+</ScrollView>

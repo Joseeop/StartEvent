@@ -57,7 +57,6 @@ class Evento : Parcelable{
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(tipoEvento)
         parcel.writeString(ubicacion)
-
         parcel.writeValue(nVacantes)
     }
 

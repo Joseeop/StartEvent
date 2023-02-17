@@ -195,7 +195,7 @@
                         android:paddingTop="2dp"
                         android:paddingRight="10dp"
                         android:paddingBottom="2dp"
-                        android:text="EJERCICIO PERMISO CÁMARA"
+                        android:text="@string/crea_virtual"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="12sp"
@@ -207,8 +207,7 @@
                         android:layout_height="75dp"
                         android:layout_marginTop="15dp"
                         android:background="@color/gray_dark"
-                        android:onClick="takePicture"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/video_conferencia" />
                     <!--android:src="@drawable/video_conferencia"
                     android:onClick="callCreateVirtualActivity"-->
                     <!--
