@@ -165,6 +165,12 @@
     <string name="tomarFoto">Hacer una foto</string>
     <string name="CargarFoto">Tomar foto desde el carrete</string>
 
-
-
+    <!--Strings zona premium -->
+    <string name="noAds">¡Sin publicidad!</string>
+    <string name="suscripcion_mensual">Suscripción mensual 3€ al mes</string>
+    <string name="suscripcion">Suscripción Premium Mensual</string>
+    <string name="unlimited">Inscripciones mensuales ilimitadas</string>
+    <string name="notificaciones_on">Se el primero en enterarte de un empleo, ¡Te envíamos notificaciones! </string>
+    <string name="pagoOK">¡Pago realizado con éxito!</string>
+    <string name="pagoNO">¡Error al realizar el pago!</string>
 </resources>

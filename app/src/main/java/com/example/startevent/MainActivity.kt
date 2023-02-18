@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.stripe.android.PaymentConfiguration
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -96,6 +97,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             R.id.nav_item_datos -> callProfileActivity()
             R.id.nav_item_signout -> logout()
             R.id.nav_item_job -> searchJobsActivity()
+            R.id.nav_item_premium -> premiumActivity()
         }
         /**
          * Una vez seleccionamos una opción cerramos el menú, para ello los gestionamos con el drawer, y le ponemos de posición del inicio, de donde salió. Se ocultará en el inicio.
@@ -121,6 +123,14 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
      */
     private fun callProfileActivity(){
         val intent = Intent (this,ProfileActivity::class.java)
+        startActivity(intent)
+    }
+    private fun premiumActivity(){
+        PaymentConfiguration.init(
+            applicationContext,
+            "pk_test_Dt4ZBItXSZT1EzmOd8yCxonL"
+        )
+        val intent = Intent (this,CheckoutActivity::class.java)
         startActivity(intent)
     }
 

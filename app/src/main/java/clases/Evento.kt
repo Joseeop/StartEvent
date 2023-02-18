@@ -17,13 +17,13 @@ class Evento : Parcelable{
     var descripcion: String?,
     var tipoEmpleado: String?,
     */
-    var tipoEvento:String?
+    var tipoEvento:String? =null
 
-    var ubicacion: String?
+    var ubicacion: String? =null
 
-    var fechaEvento: LocalDate?
+    var fechaEvento: LocalDate? =null
 
-    var nVacantes: Byte?
+    var nVacantes: Byte? =null
 
     constructor(parcel: Parcel) : this() {
         tipoEvento = parcel.readString()
@@ -41,6 +41,7 @@ class Evento : Parcelable{
             }
 
     constructor(){
+
         val random:Random= Random()
         val eventosPosibles=arrayOf<String>("Camerero","Repartidor","Azafato","Coordinador","Azafata","Camarera","Coordinadora","Promotor","Promotora","Recepcionista","Seguridad","Logistica",)
 

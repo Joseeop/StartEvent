@@ -96,6 +96,12 @@ dependencies {
     //recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
+    //Stripe Android SDK
+    implementation 'com.stripe:stripe-android:17.1.2'
+
+    //OkHttp & GSON
+    implementation 'com.squareup.okhttp3:okhttp:4.4.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
     //CameraX Extensions library
     //implementation('androix.camera:camera-extensions:1.0.0')
 
