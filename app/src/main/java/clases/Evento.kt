@@ -2,42 +2,47 @@ package clases
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.Timestamp
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 class Evento : Parcelable{
 
     /* VARIABLES QUE SE IMPLEMENTARÁN MÁS ADELANTE, SE HACE ESTO PARA EL EJERCICIO RECYCLERVIEW
-    var empresaCreadora:String?,
+    ,
 
-    var resquisitos: String?,
+    ,
 
-    var descripcion: String?,
+    ,
     var tipoEmpleado: String?,
     */
     var tipoEvento:String? =null
-
+    var empresa:String? = null
     var ubicacion: String? =null
 
-    var fechaEvento: LocalDate? =null
+    var fecha_evento: Timestamp? =null
+    var requisitos: String? = null
+    var vacantes: String? =null
+    var descripcion: String? = null
 
-    var nVacantes: Byte? =null
 
     constructor(parcel: Parcel) : this() {
         tipoEvento = parcel.readString()
         ubicacion = parcel.readString()
-
-        nVacantes = parcel.readValue(Byte::class.java.classLoader) as? Byte
+        vacantes = parcel.readString()
     }
 
-    constructor(tipoEvento:String,ubicacion:String,fechaEvento:LocalDate,nVacantes:Byte):
+    constructor(tipoEvento:String,ubicacion:String,nVacantes:String,
+                descripcion:String,requisitos:String,fecha_evento:Timestamp,empresa:String):
             this(){
                 this.tipoEvento=tipoEvento
                 this.ubicacion=ubicacion
-                this.nVacantes=nVacantes
-                this.fechaEvento=fechaEvento
+                this.vacantes=nVacantes
+                this.fecha_evento=fecha_evento
+                this.descripcion=descripcion
+                this.requisitos=requisitos
+                this.empresa=empresa
             }
 
     constructor(){
@@ -47,18 +52,22 @@ class Evento : Parcelable{
 
         val vacantesPosibles=arrayOf<Byte>(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
         val ubicacionesPosibles = arrayOf("Barcelona, Catalonia", "Madrid, Castilla y León", "Sevilla, Andalusia", "Valencia, Valencia", "Zaragoza, Aragon", "Málaga, Andalusia", "Murcia, Murcia", "Palma de Mallorca, Balearic Islands", "Las Palmas de Gran Canaria, Canary Islands", "Bilbao, Basque Country")
-        this.fechaEvento= LocalDate.of(LocalDate.now().year-100+random.nextInt(100),1+random.nextInt(12),1+random.nextInt(28))
+        this.fecha_evento= null
         this.tipoEvento=eventosPosibles[random.nextInt(eventosPosibles.size)]
-        this.nVacantes=vacantesPosibles[random.nextInt(vacantesPosibles.size)]
+        this.vacantes=""+vacantesPosibles[random.nextInt(vacantesPosibles.size)]
         this.ubicacion=ubicacionesPosibles[random.nextInt(ubicacionesPosibles.size)]
-
+        this.descripcion=""
+        this.requisitos=""
+        this.empresa=""
 
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(tipoEvento)
         parcel.writeString(ubicacion)
-        parcel.writeValue(nVacantes)
+        parcel.writeValue(vacantes)
+        parcel.writeString(descripcion)
+        parcel.writeString(requisitos)
     }
 
     override fun describeContents(): Int {

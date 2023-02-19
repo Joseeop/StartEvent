@@ -72,6 +72,7 @@
     <string name="crear_evento">Crear evento</string>
     <string name="title_event">Tipo de evento</string>
     <string name="empty">--</string>
+    <string name="create_event">CREACIÓN DE EVENTO</string>
 
     <!--String para la Zona Personal-->
 
@@ -173,4 +174,5 @@
     <string name="notificaciones_on">Se el primero en enterarte de un empleo, ¡Te envíamos notificaciones! </string>
     <string name="pagoOK">¡Pago realizado con éxito!</string>
     <string name="pagoNO">¡Error al realizar el pago!</string>
+    <string name="inscripcion">¡INSCRIBIRME!</string>
 </resources>

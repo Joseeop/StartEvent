@@ -61,7 +61,7 @@ class SearchJobsActivity : AppCompatActivity() {
                 Log.d(TAG, "Error getting documents: ", exception)
             }
 
-
+       // val evento = document.toObject(Evento::class.java)
 
 
 

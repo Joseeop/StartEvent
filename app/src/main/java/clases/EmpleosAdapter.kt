@@ -1,6 +1,8 @@
 package clases
 
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +10,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startevent.EventDetailsActivity
 import com.example.startevent.R
-import com.example.startevent.Utility.setHeightLinearLayout
-import io.grpc.Context
+import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento>) :RecyclerView.Adapter<EmpleosAdapter.MyViewHolder>() {
 
@@ -33,18 +37,34 @@ class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento
 
 
         holder.txtTitulo.text=evento.tipoEvento
-        holder.txtUbicacion.text=evento.ubicacion
-        holder.txtVacantes.text="Vacantes: "+evento.nVacantes.toString()
-        holder.txtFecha.text=evento.fechaEvento.toString()
+        holder.txtUbicacion.text="Ubicación: "+evento.ubicacion
+        holder.txtVacantes.text="Vacantes: "+evento.vacantes
+        val txtVacantesE="Vacantes: "+evento.vacantes
+        holder.txtFecha.text="Fecha del evento: "+evento.fecha_evento?.toDate()
+        val txtDescripcionE="Descripción de la oferta:\n "+evento.descripcion
+        val txtRequisitos="Requisitos: "+evento.requisitos
+        val txtEmpresaCreadora="Empresa Creadora: "+evento.empresa
 
 
 
 
 
 
-       /* holder.lyContenedor.setOnClickListener{
-            TODO DARLE ALGUNA FUNCIONALIDAD AL LAYOUT CUANDO LE HAGAMOS CLICK
-        }*/
+
+       holder.itemView.setOnClickListener {
+           val intent = Intent(holder.itemView.context, EventDetailsActivity::class.java)
+           val datos: Bundle =Bundle()
+
+           datos.putString("ubicacion",holder.txtUbicacion.text.toString())
+           datos.putString("vacantes",holder.txtVacantes.text.toString())
+           datos.putString("fecha",holder.txtFecha.text.toString())
+           datos.putString("titulo",holder.txtTitulo.text.toString())
+           datos.putString("descripcion",txtDescripcionE)
+           datos.putString("requisitos",txtRequisitos)
+           datos.putString("empresa",txtEmpresaCreadora)
+           intent.putExtras(datos)
+           holder.itemView.context.startActivity(intent)
+       }
 
 
     }
@@ -55,13 +75,14 @@ class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento
 
     public class MyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
 
+
         val lyContenedor: LinearLayout = itemView.findViewById(R.id.lyContenedor)
         val imgEmpresa: ImageView = itemView.findViewById(R.id.imgEmpresa)
         val txtTitulo: TextView = itemView.findViewById(R.id.txtTitulo)
         val txtUbicacion: TextView= itemView.findViewById(R.id.txtUbicacion)
         val txtVacantes: TextView= itemView.findViewById(R.id.txtVacantes)
         val txtFecha: TextView= itemView.findViewById(R.id.txtFecha)
-
+       // val txtDescripcion: TextView=itemView.findViewById(R.id.description_edit_text)
 
 
 

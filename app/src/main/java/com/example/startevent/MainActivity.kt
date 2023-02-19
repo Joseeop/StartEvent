@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         MobileAds.initialize(this)
         val adView = AdView(this)
         adView.setAdSize(AdSize.LARGE_BANNER)
+        //ID REAL, PROBAR CUANDO APRUEBEN LA APP EN ADMOB
+        //adView.adUnitId = "ca-app-pub-7223235588589783/8296319035"
         adView.adUnitId = "ca-app-pub-3940256099942544/6300978111"
         var lyAdsBanner = findViewById<LinearLayout>(R.id.lyAdsBanner)
         lyAdsBanner.addView(adView)
@@ -114,7 +116,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun getReadyAds(){
         var adRequest = AdRequest.Builder().build()
         unloadeadedAd = false
-
+        //ID REAL, PROBAR CUANDO APRUEBEN LA APP EN ADMOB
+        //InterstitialAd.load(this,"ca-app-pub-7223235588589783/2282123768", adRequest, object : InterstitialAdLoadCallback()
         InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d(TAG, adError.toString())

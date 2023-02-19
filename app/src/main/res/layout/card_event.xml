@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     style="@style/panel_azul"
+    android:background="@color/blue_pastel"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -24,24 +25,28 @@
             android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue_dark"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/txtUbicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue_dark"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/txtVacantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue_dark"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/txtFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue_dark"
             android:text="TextView" />
 
         <LinearLayout
