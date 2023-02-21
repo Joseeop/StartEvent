@@ -7,6 +7,7 @@
     <uses-feature android:name="android.hardware.camera.any" /> <!-- PERMISOS DE ESCRITURA Y LECTURA PARA LAS IMAGENES -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- PERMISO DEL USUARIO -->
+    <uses-permission android:name="android.permission.INTERNET"/> <!-- PERMISO PARA ACCESO A INTERNET -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />

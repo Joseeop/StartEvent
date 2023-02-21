@@ -31,16 +31,5 @@ class EventDetailsActivity : AppCompatActivity() {
 
 
     }
-    /*private fun initViews(){
-        binding.etTipoEvento
-        binding.etNombreEmpresa
-        binding.vacanciesEditText
-        binding.locationEditText
-    }*/
-    /*private fun initValues(){
-        if (intent != null && intent.extras != null) {
-            itemDetail = intent.extras!!.getSerializable("detalles") as ItemListIntents
-            binding.vacanciesEditText.setText(itemDetail.getText)
-        }
-    }*/
+
 }

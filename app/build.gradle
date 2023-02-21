@@ -110,12 +110,13 @@ dependencies {
     //CameraX Extensions library
     //implementation('androix.camera:camera-extensions:1.0.0')
 
-    //Dependencias para loguear con google junto a firebase-bom
-    // Add the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
+    //Dependencias para storage firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.3'
+    implementation 'com.google.firebase:firebase-firestore:24.4.3'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
 
 
-    // Also add the dependency for the Google Play services library and specify its version
 
 
     //implementation 'com.facebook.android:facebook-android-sdk:[4,5)'

@@ -3,6 +3,7 @@ package com.example.startevent
 import android.Manifest.permission.CAMERA
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Color
 import android.media.MediaScannerConnection
 import android.net.Uri
@@ -28,6 +29,11 @@ import java.lang.Math.min
 import kotlin.math.abs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.startevent.ProfileActivity.Companion.upImage
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
+import com.google.firebase.storage.ktx.storageMetadata
 
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -35,22 +41,29 @@ import java.util.concurrent.Executors
 class CameraActivity : AppCompatActivity() {
 
 
-    companion object{
-        private val REQUIRED_PERMISSIONS= arrayOf(Manifest.permission.CAMERA)
-        private val REQUEST_CODE_PERMISSIONS=10
+    companion object {
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private val REQUEST_CODE_PERMISSIONS = 10
 
 
+        private const val RATIO_4_3_VALUE = 4.0 / 3.0
+        private const val RATIO_16_9_VALUE = 16.0 / 9.0
 
-        private const val RATIO_4_3_VALUE = 4.0/3.0
-        private const val RATIO_16_9_VALUE = 16.0/9.0
 
     }
-    private var FILENAME : String = ""
+
+    /**
+     * Variable donde almacenaremos los metadatas de la foto
+     */
+    private lateinit var metadata: StorageMetadata
+
+    private var FILENAME: String = ""
+
     /**
      * Creamos esta variable para hacer referencia a la actividad a la que queremos hacer binding
      */
 
-    lateinit var binding : ActivityCameraBinding
+    lateinit var binding: ActivityCameraBinding
 
 
     private var preview: Preview? = null
@@ -64,12 +77,12 @@ class CameraActivity : AppCompatActivity() {
     /**
      * Proveedor de la cámara
      */
-    private var cameraProvider: ProcessCameraProvider?=null
+    private var cameraProvider: ProcessCameraProvider? = null
 
     /**
      * la imagen que estamos capturando en si
      */
-    private var imageCapture: ImageCapture?=null
+    private var imageCapture: ImageCapture? = null
 
     /**
      * Si lo vamos a guardar, determinamos el directorio en el que se va a guardar
@@ -80,15 +93,13 @@ class CameraActivity : AppCompatActivity() {
      * El ejecutor de la cámara, con el que ejecutaremos los servicios de la cámara
      */
 
-    private lateinit var cameraExecutor:ExecutorService
+    private lateinit var cameraExecutor: ExecutorService
 
     /**
      * Cómo guardar las fotos, para que no puedan guardarse con dos nombres iguales
      */
-    private lateinit var dateRun : String
-    private lateinit var usuario : String
-
-
+    private lateinit var dateRun: String
+    private lateinit var usuario: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,9 +113,8 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bundle = intent.extras
-        dateRun= bundle?.getString("dateRun").toString()
-        usuario=bundle?.getString("usuario").toString()
-
+        dateRun = bundle?.getString("dateRun").toString()
+        usuario = bundle?.getString("usuario").toString()
 
 
         /**
@@ -115,7 +125,7 @@ class CameraActivity : AppCompatActivity() {
         /**
          * ponemos onclick listener para el botón de hacer la foto
          */
-        binding.cameraCapturaButton.setOnClickListener{
+        binding.cameraCapturaButton.setOnClickListener {
             takePhoto()
         }
 
@@ -129,10 +139,10 @@ class CameraActivity : AppCompatActivity() {
          * Comprobamos dónde está mirando y si pulsamos el botón, cambiamos la visión
          * En esta función no se podrá ejecutar la cámara, pues el botón solo estará visible cuando ya se haya ejecutado
          */
-        binding.cameraSwitchButton.setOnClickListener{
-            lensFacing = if(CameraSelector.LENS_FACING_FRONT == lensFacing){
+        binding.cameraSwitchButton.setOnClickListener {
+            lensFacing = if (CameraSelector.LENS_FACING_FRONT == lensFacing) {
                 CameraSelector.LENS_FACING_BACK
-            }else{
+            } else {
                 CameraSelector.LENS_FACING_FRONT
             }
 
@@ -144,44 +154,51 @@ class CameraActivity : AppCompatActivity() {
          * Comprobamos si están los permisos concedidos, sino los pediría, y nos traerá un código de vuelta
          * En este punto será el único en el que se ejecutará la cámara, llamando a la función  startCamera()
          */
-        if(allPermissionsGranted()) startCamera()
+        if (allPermissionsGranted()) startCamera()
         else ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
-
 
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         //Ha vuelto de la ventana de permisos de la cámara y comprobamos si el código con el que vuelve es el mismo que el que lo valida (REQUEST_CODE_PERMISSIONS)
-        if(requestCode == REQUEST_CODE_PERMISSIONS){
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
             //En caso de que estén aprobados, se inicia la cámara
-            if(allPermissionsGranted()) startCamera()
-            else{
-                Toast.makeText(this,"¡Debes proporcionar permisos si quieres tomar fotos!",Toast.LENGTH_LONG).show()
+            if (allPermissionsGranted()) startCamera()
+            else {
+                Toast.makeText(
+                    this,
+                    "¡Debes proporcionar permisos si quieres tomar fotos!",
+                    Toast.LENGTH_LONG
+                ).show()
                 finish()
             }
         }
     }
+
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
 
-        ContextCompat.checkSelfPermission(baseContext,it)==PackageManager.PERMISSION_GRANTED
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
-
-
 
 
     /**
      * Función para vincular la cámara con las especificaciones correctas
      * aspectratio  y rotation  que hemos construido previamente
      */
-    private fun bindCamera(){
+    private fun bindCamera() {
 
         val metrics = DisplayMetrics().also { binding.viewFinder.display.getMetrics(it) }
-        val screenAspectRatio= aspectRatio(metrics.widthPixels,metrics.heightPixels)
-        val rotation=binding.viewFinder.display.rotation
+        val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
+        val rotation = binding.viewFinder.display.rotation
 
-        val cameraProvider=cameraProvider?: throw java.lang.IllegalStateException("Fallo al inciar la cámara")
+        val cameraProvider =
+            cameraProvider ?: throw java.lang.IllegalStateException("Fallo al inciar la cámara")
 
         val cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
@@ -190,7 +207,7 @@ class CameraActivity : AppCompatActivity() {
             .setTargetRotation(rotation)
             .build()
 
-        imageCapture=ImageCapture.Builder()
+        imageCapture = ImageCapture.Builder()
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
             .setTargetAspectRatio(screenAspectRatio)
             .setTargetRotation(rotation)
@@ -200,12 +217,12 @@ class CameraActivity : AppCompatActivity() {
 
         cameraProvider.unbindAll()
         //Hacemos un try-catch por si surgiese algún error al vincular la cámara, como si el dispositivo no tuviese cámara
-        try{
-        cameraProvider.bindToLifecycle(this,cameraSelector,imageCapture,preview)
+        try {
+            cameraProvider.bindToLifecycle(this, cameraSelector, imageCapture, preview)
             //Indicamos que preview se corresponde con el viewfinder
             preview?.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-        }catch(exc: Exception){
-            Log.e("CameraStartEvent","Fallo al vincular la cámara",exc)
+        } catch (exc: Exception) {
+            Log.e("CameraStartEvent", "Fallo al vincular la cámara", exc)
         }
     }
 
@@ -213,14 +230,14 @@ class CameraActivity : AppCompatActivity() {
      * Función que nos permite sacar el ratio dependiendo si el dispositivo está en vertical/horizontal
      * para ello dividimos el más grande entre el más pequeño.
      */
-    private fun aspectRatio(width:Int,height:Int):Int{
+    private fun aspectRatio(width: Int, height: Int): Int {
 
-        val previewRatio=max(width,height).toDouble() / min(width,height)
+        val previewRatio = max(width, height).toDouble() / min(width, height)
 
-        if(abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio- RATIO_16_9_VALUE)){
+        if (abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio - RATIO_16_9_VALUE)) {
             return AspectRatio.RATIO_4_3
         }
-            return AspectRatio.RATIO_16_9
+        return AspectRatio.RATIO_16_9
 
     }
 
@@ -228,13 +245,13 @@ class CameraActivity : AppCompatActivity() {
      * En esta función(padre) vincularemos la aplicación con el hardware del dispositivo
      * llamando a la función binding
      */
-    private fun startCamera(){
-        val cameraProviderFinnaly= ProcessCameraProvider.getInstance(this)
+    private fun startCamera() {
+        val cameraProviderFinnaly = ProcessCameraProvider.getInstance(this)
 
-        cameraProviderFinnaly.addListener( {
+        cameraProviderFinnaly.addListener({
             cameraProvider = cameraProviderFinnaly.get()
             //Reconocemos cuántas cámaras hay disponibles
-            lensFacing = when{
+            lensFacing = when {
                 hasBackCamera() -> CameraSelector.LENS_FACING_BACK
                 hasFrontCamera() -> CameraSelector.LENS_FACING_FRONT
                 else -> throw java.lang.IllegalStateException("No hay cámaras disponibles")
@@ -244,7 +261,7 @@ class CameraActivity : AppCompatActivity() {
             //Llamamos a la función que construye toda la camera
             bindCamera()
 
-        },ContextCompat.getMainExecutor(this))
+        }, ContextCompat.getMainExecutor(this))
 
 
     }
@@ -252,29 +269,29 @@ class CameraActivity : AppCompatActivity() {
     /**
      * Funcion que devuelve un boolean y comprueba si tiene cámara trasera
      */
-    private fun hasBackCamera(): Boolean{
-        return cameraProvider?.hasCamera(CameraSelector.DEFAULT_BACK_CAMERA)?: false
+    private fun hasBackCamera(): Boolean {
+        return cameraProvider?.hasCamera(CameraSelector.DEFAULT_BACK_CAMERA) ?: false
     }
 
     /**
      * Función que devuelve un boolean y comprueba si el dispositivo tiene cámara delantera
      */
 
-    private fun hasFrontCamera(): Boolean{
-        return cameraProvider?.hasCamera(CameraSelector.DEFAULT_FRONT_CAMERA)?: false
+    private fun hasFrontCamera(): Boolean {
+        return cameraProvider?.hasCamera(CameraSelector.DEFAULT_FRONT_CAMERA) ?: false
     }
 
 
-    private fun manageSwitchButton(){
+    private fun manageSwitchButton() {
         val switchButton = binding.cameraSwitchButton
 
         //Hacemos Trycatch para manejar el botón de switch, en caso de que alguna de las camaras no esté disponible en el try comprobamos que ambas cámaras están disponibles.
         // En el catch lanzaremos una excepción. Y desactivaremos el botón
 
-        try{
+        try {
             switchButton.isEnabled = hasBackCamera() && hasFrontCamera()
-        }catch (exc: CameraInfoUnavailableException){
-            switchButton.isEnabled=false
+        } catch (exc: CameraInfoUnavailableException) {
+            switchButton.isEnabled = false
         }
 
     }
@@ -285,59 +302,84 @@ class CameraActivity : AppCompatActivity() {
      * sino crearemos un nuevo directorio con apply
      */
 
-    private fun getOutputDirectory(): File{
-        val mediaDir = externalMediaDirs.firstOrNull()?.let{
-            File(it,"StartEvent").apply { mkdirs() }
+    private fun getOutputDirectory(): File {
+        val mediaDir = externalMediaDirs.firstOrNull()?.let {
+            File(it, "StartEvent").apply { mkdirs() }
         }
-        return if (mediaDir !=null && mediaDir.exists()) mediaDir else filesDir
+        return if (mediaDir != null && mediaDir.exists()) mediaDir else filesDir
     }
+
     /**
      * Función que hará la foto, y le daremos un nombre de archivo, que será el momento en el que se toma la foto y el usuario que la toma
      * sustituimos carácteres como ":" y "/" por cadena vacía para que el nombre del archivo no sea tan extenso.
      * también le añadimos la extensión .jpg, para que sea guardada en ese formato
      */
-    private fun takePhoto(){
-        FILENAME = getString(R.string.app_name)+ usermail + dateRun
-        FILENAME = FILENAME.replace(":","")
-        FILENAME = FILENAME.replace("/","")
+    private fun takePhoto() {
+        FILENAME = getString(R.string.app_name) + usermail + dateRun
+        FILENAME = FILENAME.replace(":", "")
+        FILENAME = FILENAME.replace("/", "")
 
-        val photoFile=File(outputDirectory,FILENAME+".jpg")
+        /**
+         * Comprobamos la orientación con la que se realizó la foto, para guardarla en metadatas
+         */
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            metadata = storageMetadata {
+                contentType = "image/jpg"
+                setCustomMetadata("orientation", "horizontal")
+            }
+
+
+        } else {
+            metadata = storageMetadata {
+                contentType = "image/jpg"
+                setCustomMetadata("orientation", "horizontal")
+            }
+
+        }
+
+        val photoFile = File(outputDirectory, FILENAME + ".jpg")
         //Opciones de salida, que será igual a la imagen que estamos capturando
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         //Capturamos la imagen
         imageCapture?.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback{
+            object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
 
                     //Actualizamos la galeria de las imagenes, usamos el "uri", identificador único de archivos
 
                     val savedUri = Uri.fromFile(photoFile)
                     //Comprobamos la SDK del terminal y actualizamos la galeria
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        setGalleryThumbnail (savedUri)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        setGalleryThumbnail(savedUri)
                     }
                     //Referenciamos el archivo que queremos actualizar
-                    val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(savedUri.toFile().extension)
+                    val mimeType = MimeTypeMap.getSingleton()
+                        .getMimeTypeFromExtension(savedUri.toFile().extension)
                     //Escaneamos el archivo que queremos encontrar
-                    MediaScannerConnection.scanFile(baseContext, arrayOf(savedUri.toFile().absolutePath),
-                    arrayOf(mimeType)
-                    ){ _,uri->
+                    MediaScannerConnection.scanFile(
+                        baseContext, arrayOf(savedUri.toFile().absolutePath),
+                        arrayOf(mimeType)
+                    ) { _, uri ->
 
                     }
                     var clMain = findViewById<ConstraintLayout>(R.id.clMain)
-                    Snackbar.make(clMain, "Imagen guardada con éxito", Snackbar.LENGTH_LONG).setAction("OK"){
-                        clMain.setBackgroundColor(Color.CYAN)
-                    }.show()
+                    Snackbar.make(clMain, "Imagen guardada con éxito", Snackbar.LENGTH_LONG)
+                        .setAction("OK") {
+                            clMain.setBackgroundColor(Color.CYAN)
+                        }.show()
 
+                    upLoadFile(photoFile)
                 }
+
                 //EN caso de que haya un error al hacer la captura
                 override fun onError(exception: ImageCaptureException) {
                     var clMain = findViewById<ConstraintLayout>(R.id.clMain)
-                    Snackbar.make(clMain, "Error al guardar la imagen", Snackbar.LENGTH_LONG).setAction("OK"){
-                        clMain.setBackgroundColor(Color.CYAN)
-                    }.show()
+                    Snackbar.make(clMain, "Error al guardar la imagen", Snackbar.LENGTH_LONG)
+                        .setAction("OK") {
+                            clMain.setBackgroundColor(Color.CYAN)
+                        }.show()
                 }
             })
     }
@@ -345,17 +387,95 @@ class CameraActivity : AppCompatActivity() {
     /**
      * Función que se encarga de cargar la miniatura
      */
-    private fun setGalleryThumbnail(uri: Uri){
+    private fun setGalleryThumbnail(uri: Uri) {
 
         var thumbnail = binding.photoViewButton
-        thumbnail.post{
-            Glide.with(thumbnail).load(uri).apply(RequestOptions.circleCropTransform()).into(thumbnail)
+        thumbnail.post {
+            Glide.with(thumbnail).load(uri).apply(RequestOptions.circleCropTransform())
+                .into(thumbnail)
         }
     }
+
+    /**
+     * Función que recibe un File por parámetros y que la sube al Storage de Firebase.
+     */
+    private fun upLoadFile(image: File) {
+        var dirName = usermail + dateRun
+        dirName = dirName.replace(":", "")
+        dirName = dirName.replace("/", "")
+
+        var fileName = dirName
+
+        var storageReference =
+            FirebaseStorage.getInstance().getReference("images/$usermail/$fileName")
+
+        storageReference.putFile(Uri.fromFile(image))
+            .addOnSuccessListener {
+                upImage = "images/$usermail/$fileName"
+
+                val myFile = File(image.absolutePath)
+                myFile.delete()
+
+                val metaRef =
+                    FirebaseStorage.getInstance().getReference("images/$usermail/$fileName")
+                metaRef.updateMetadata(metadata)
+
+                var clMain = findViewById<ConstraintLayout>(R.id.clMain)
+                Snackbar.make(clMain, "Imagen subida a la nube", Snackbar.LENGTH_LONG)
+                    .setAction("OK") {
+                        clMain.setBackgroundColor(Color.CYAN)
+                    }
+            }
+            .addOnFailureListener {
+                Toast.makeText(
+                    this,
+                    "Tu imagen se guardó en el teléfono, pero no en la nube",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        val db = FirebaseFirestore.getInstance()
+        val userRef = db.collection("Usuarios").document(usermail)
+
+        storageReference.downloadUrl.addOnSuccessListener { uri ->
+            val fotoPerfilUrl = uri.toString()
+
+            userRef.update("foto_perfil", fotoPerfilUrl)
+                .addOnSuccessListener {
+                    // La URL de la foto de perfil se ha actualizado correctamente
+                }
+                .addOnFailureListener {
+                    // La actualización de la URL de la foto de perfil ha fallado
+                }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
     }
-                }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

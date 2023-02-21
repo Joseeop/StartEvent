@@ -12,33 +12,42 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.example.startevent.R
+import com.example.startevent.databinding.ActivityDatosPersonalesBinding
+import com.example.startevent.databinding.ActivityProfileBinding
 import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
-    private lateinit var viewPager: ViewPager
 
+    companion object{
+        var upImage : String= ""
+    }
+    private lateinit var viewPager: ViewPager
+    private lateinit var binding: ActivityProfileBinding
     private lateinit var tabLayout: TabLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        val botonIrDatosPersonales:Button=findViewById<Button>(R.id.btnDatosPersonales)
-        val botonIrDatosContacto:Button=findViewById(R.id.btnDatosContacto)
-        val tvUser: TextView =findViewById(R.id.tvUser)
-        tvUser.text=  usermail
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-    botonIrDatosPersonales.setOnClickListener{
+        binding.tvUser.text=  usermail
+
+
+
+        binding.btnDatosPersonales.setOnClickListener{
         val intent:Intent=Intent(this,DatosPersonalesActivity::class.java)
         this.startActivity(intent)
         }
 
-        botonIrDatosContacto.setOnClickListener {
+        binding.btnDatosContacto.setOnClickListener {
             val intent:Intent=Intent(this,DatosContactoActivity::class.java)
             this.startActivity(intent)
         }
+
 
 
 }
