@@ -9,6 +9,7 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import clases.ActividadMadre
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,7 +20,7 @@ import java.util.*
 
 
 
-class CreateEventActivity : AppCompatActivity() {
+class CreateEventActivity : ActividadMadre() {
     private lateinit var locationEditText: EditText
     private lateinit var titleEditText: EditText
     private lateinit var tvFecha: TextView
@@ -102,7 +103,7 @@ class CreateEventActivity : AppCompatActivity() {
                   ))
                   val intent = Intent (this,MainActivity::class.java)
                   startActivity(intent)
-                  Toast.makeText(this,"!clases.Evento creado con éxito¡",Toast.LENGTH_SHORT).show()
+                  Toast.makeText(this,"Evento creado con éxito¡",Toast.LENGTH_SHORT).show()
               }else {
                   Toast.makeText(this,"No se ha podido crear el evento",Toast.LENGTH_SHORT).show()
               }

@@ -2,8 +2,9 @@ package com.example.startevent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import clases.ActividadMadre
 
-class DatosContactoActivity : AppCompatActivity() {
+class DatosContactoActivity : ActividadMadre(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

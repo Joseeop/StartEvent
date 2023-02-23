@@ -1,5 +1,6 @@
 package com.example.startevent
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -17,18 +18,22 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.core.view.isGone
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LiveData
+import clases.ActividadMadre
+import clases.Usuario
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.stripe.android.PaymentConfiguration
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedListener {
     /**
      * variable que hace referencia a el id del drawer que hemos creado en activity_main.xml
      * Lo necesitamos ya que el activity main está dentro de una etiqueta drawerlayout
@@ -44,13 +49,58 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
 
 
-        //  ivCreateEvent=findViewById(R.id.ivCreateEvent)
-        // ivCreateEvent.visibility=View.GONE
+        val auth = FirebaseFirestore.getInstance()
+        val userRef = auth.collection("users").document(usermail)
+        userRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val nombre = documentSnapshot.getString("nombre")
+                val apellidos = documentSnapshot.getString("apellidos")
+                val dni = documentSnapshot.getString("dni")
+                val fecha_nacimiento = documentSnapshot.getTimestamp("fecha_nacimiento")
+                val genero = documentSnapshot.getString("genero")
+                val nacionalidad = documentSnapshot.getString("nacionalidad")
+                val pais = documentSnapshot.getString("pais")
+                val provincia = documentSnapshot.getString("provincia")
+                val cp = documentSnapshot.getLong("cp")?.toShort()
+                val movil = documentSnapshot.getString("movil")
+                val carnet_conducir = documentSnapshot.getBoolean("carnet_conducir")
+                val transporte_propio = documentSnapshot.getBoolean("transporte_propio")
+                val movilidad_geografica = documentSnapshot.getBoolean("movilidad_geografica")
+                val foto_perfil = documentSnapshot.getString("foto_perfil")
+
+                val usuario = Usuario(
+                    nombre,
+                    apellidos,
+                    dni,
+                    fecha_nacimiento,
+                    genero,
+                    nacionalidad,
+                    pais,
+                    provincia,
+                    cp,
+                    movil,
+                    carnet_conducir,
+                    transporte_propio,
+                    movilidad_geografica,
+                    foto_perfil
+                )
+
+                usuarioLogado = usuario
+
+
+                Toast.makeText(this,usuarioLogado?.nombre.toString(),Toast.LENGTH_SHORT).show()
+                //goHome(email, "email")
+            }else {
+                Toast.makeText(this, "El usuario no existe en la base de datos.", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(this, "Error al obtener datos del usuario: ${exception.message}", Toast.LENGTH_SHORT).show()
+        }
 
         initToolBar()
         initNavigationView()
         val tvUser: TextView = findViewById(R.id.tvUser)
-        tvUser.text = "Bienvenid@, " + usermail
+        tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
         initAds()
 
         //Toast de bienvenida con el mail del usuario
@@ -166,7 +216,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.addHeaderView(headerView)
 
         val tvUser: TextView = headerView.findViewById(R.id.tvUser)
-        tvUser.text = usermail
+        tvUser.text = usuarioLogado?.nombre
 
 
     }
@@ -206,13 +256,40 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun callCreateVirtualActivity(v: View) {
         createVirtualActivity()
     }
+    /*fun pillarDatosDeUsuarioNoVerificado(activity: Activity): LiveData<MutableList<Usuario>> {
+        val mutableData = MutableLiveData<MutableList<Usuario>>()
+        val circuloDeCarga: DialogDeCarga = DialogDeCarga(activity)
+        circuloDeCarga.empezarAGirar()
 
+        FirebaseFirestore.getInstance().collection("usuarios").whereEqualTo("verificado", false)
+            .get().addOnSuccessListener { result ->
+                val datosDeUsuarios = mutableListOf<Usuario>()
+                for (document in result) {
+                    var actual: Usuario = Usuario(
+                        "" + document.getString("nombre"),
+                        "" + document.getString("apellidos"),
+                        "" + document.getString("dni"),
+                        "" + document.getString("email"),
+                        "" + document.getString("plan"),
+                        "" + document.getString("telefono"),
+                        document.getBoolean("admin"),
+                        document.getBoolean("verificado")
+                    )
+                    datosDeUsuarios.add(actual)
+                }
+                mutableData.value = datosDeUsuarios
+                circuloDeCarga.dialog.dismiss()
+            }
+        return mutableData
+    }*/
+    //TODO TENEMOS QUE HACER PULL DE LA BBDD CON LOS DATOS DE USUARIO PARA POSTERIORMENTE PASARLO POR BUNDLE AL RESTO DE ACTIVIDADES.
     /**
      * Función que nos lleva a la pantalla "Zona personal"
      */
     private fun callProfileActivity() {
-        val intent = Intent(this, ProfileActivity::class.java)
-        startActivity(intent)
+        //val intent = Intent(this, ProfileActivity::class.java)
+        //startActivity(intent)
+        this.cambiarAPantalla("ProfileActivity")
     }
 
     private fun premiumActivity() {
@@ -231,21 +308,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun searchJobsActivity() {
         if(unloadeadedAd == true) getReadyAds()
         showIntersitial()
-        val intent = Intent(this, SearchJobsActivity::class.java)
-        startActivity(intent)
+        //val intent = Intent(this, SearchJobsActivity::class.java)
+        //startActivity(intent)
+        this.cambiarAPantalla("SearchJobsActivity")
     }
 
     /**
      * Función que nos lleva a la pantalla "Crear clases.Evento"
      */
     private fun createEventActivity() {
-        val intent = Intent(this, CreateEventActivity::class.java)
-        startActivity(intent)
+        //val intent = Intent(this, CreateEventActivity::class.java)
+        //startActivity(intent)
+        this.cambiarAPantalla("CreateEventActivity")
     }
 
     private fun createVirtualActivity() {
-        val intent = Intent(this, CreateVirtualActivity::class.java)
-        startActivity(intent)
+        //val intent = Intent(this, CreateVirtualActivity::class.java)
+        //startActivity(intent)
+        this.cambiarAPantalla("CreateVirtualActivity")
     }
 
 

@@ -17,11 +17,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import clases.ActividadMadre
+import clases.Usuario
+import clases.UsuarioActual
+import clases.UsuarioActual.usuario
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -31,14 +36,16 @@ import java.io.FileNotFoundException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 import kotlin.properties.Delegates
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : ActividadMadre() {
 
     companion object{
         lateinit var usermail: String
         lateinit var providerSession: String
+        //lateinit var dateRegister: Date
     }
 
     //Poniendo Delegates.notNull nos aseguramos de que ese dato no pueda ser null
@@ -171,6 +178,55 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this){task ->
                 //Si existe el email y la contraseña lo mandaremos a la pantalla principal
                 if(task.isSuccessful){
+                    val auth = FirebaseFirestore.getInstance()
+                    val userRef = auth.collection("users").document(email)
+                    userRef.get().addOnSuccessListener { documentSnapshot ->
+                        if (documentSnapshot.exists()) {
+                            val nombre = documentSnapshot.getString("nombre")
+                            val apellidos = documentSnapshot.getString("apellidos")
+                            val dni = documentSnapshot.getString("dni")
+                            val fecha_nacimiento = documentSnapshot.getTimestamp("fecha_nacimiento")
+                            val genero = documentSnapshot.getString("genero")
+                            val nacionalidad = documentSnapshot.getString("nacionalidad")
+                            val pais = documentSnapshot.getString("pais")
+                            val provincia = documentSnapshot.getString("provincia")
+                            val cp = documentSnapshot.getLong("cp")?.toShort()
+                            val movil = documentSnapshot.getString("movil")
+                            val carnet_conducir = documentSnapshot.getBoolean("carnet_conducir")
+                            val transporte_propio = documentSnapshot.getBoolean("transporte_propio")
+                            val movilidad_geografica = documentSnapshot.getBoolean("movilidad_geografica")
+                            val foto_perfil = documentSnapshot.getString("foto_perfil")
+
+                            val usuario = Usuario(
+                                nombre,
+                                apellidos,
+                                dni,
+                                fecha_nacimiento,
+                                genero,
+                                nacionalidad,
+                                pais,
+                                provincia,
+                                cp,
+                                movil,
+                                carnet_conducir,
+                                transporte_propio,
+                                movilidad_geografica,
+                                foto_perfil
+                            )
+
+                            usuarioLogado = usuario
+                            this.cambiarAPantalla("MainActivity")
+                            //TODO HAY QUE USAR LA FUNCION PASARPANTALLA DE ACTIVIDAD MADRE PARA CONSERVAR LOS DATOS
+                            Toast.makeText(this,usuarioLogado?.nombre.toString(),Toast.LENGTH_SHORT).show()
+                            //goHome(email, "email")
+                        }else {
+                            Toast.makeText(this, "El usuario no existe en la base de datos.", Toast.LENGTH_SHORT).show()
+                        }
+                    }.addOnFailureListener { exception ->
+                        Toast.makeText(this, "Error al obtener datos del usuario: ${exception.message}", Toast.LENGTH_SHORT).show()
+                    }
+
+
                     goHome(email, "email")
                     //En el else caben dos opciones: Que haya introducido mal los datos o que ese usuario sea nuevo
                 }else{
@@ -194,7 +250,7 @@ class LoginActivity : AppCompatActivity() {
      * Función que llevará a la pantalla de inicio de la aplicación una vez el usuario se haya registrado
      * Recibirá por parámetros email y provedor de registro que se utilizó para iniciar sesión.
      */
-    private fun goHome(email:String , provider: String){
+    private fun goHome(email:String , provider: String,){
 
         usermail = email
         providerSession = provider

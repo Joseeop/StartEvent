@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import clases.ActividadMadre
+import clases.UsuarioActual.usuario
+import com.example.startevent.LoginActivity.Companion.usermail
 import com.example.startevent.ProfileActivity.Companion.upImage
 import com.example.startevent.databinding.ActivityDatosPersonalesBinding
 import com.google.firebase.Timestamp
@@ -17,7 +20,7 @@ import java.time.LocalDate
 import java.time.ZoneOffset
 import java.util.*
 
-class DatosPersonalesActivity : AppCompatActivity() {
+class DatosPersonalesActivity : ActividadMadre() {
 
     lateinit var binding: ActivityDatosPersonalesBinding
     val lanzadorElegirImagen = registerForActivityResult(ActivityResultContracts.GetContent()) {
@@ -28,6 +31,39 @@ class DatosPersonalesActivity : AppCompatActivity() {
 
         binding = ActivityDatosPersonalesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        /**
+         * Aquí establecemos los hints con los datos que recogemos de la bbdd y hemos asignado a usuarioLogado
+         * Pero para ello debemos comprobar primero si el campo es nulo, porque sino por defecto aparecería vacío
+         * si el usuario aún no ha rellenado los datos.
+         */
+        val opcionesGenero= resources.getStringArray(R.array.gender_options)
+        val posicionGenero = opcionesGenero.indexOf(usuarioLogado?.genero)
+        binding.genderSpinner.setSelection(posicionGenero)
+        val opcionesNacionalidad = resources.getStringArray(R.array.nationality_options)
+        val posicion = opcionesNacionalidad.indexOf(usuarioLogado?.nacionalidad)
+        binding.natioSpinner.setSelection(posicion)
+
+
+        //TODO HAY QUE PONER UN TEXT VIEW ENCIMA DE CADA EDITTEXT PARA FACILITAR EL QUE LOS CAMPOS SE QUEDEN VACIOS.
+        binding.etNombre.hint = usuarioLogado?.nombre ?: getString(R.string.nombre)
+        binding.etApellidos.hint = usuarioLogado?.apellidos ?: getString(R.string.apellidos)
+        binding.etDNI.hint = usuarioLogado?.dni ?: getString(R.string.DNI)
+        val fechaNacimiento = usuarioLogado?.fecha_nacimiento
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        binding.txtFecha.hint = fechaNacimiento?.let { sdf.format(it.toDate()) } ?: getString(R.string.fecha_nacimiento)
+
+
+
+        /*val fechaNacimiento = usuarioLogado?.fecha_nacimiento?.toDate()?.let { date ->
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
+        } ?: ""
+        binding.txtFecha.text = fechaNacimiento*/
+
+
+        //Ponemos focus en el botón, para que al entrar an la app no lo fije en el primer editText
+        binding.actualizarDatosButton.requestFocus()
+
 
 
         //Hacemos los adapters para los Spinners
@@ -132,7 +168,7 @@ class DatosPersonalesActivity : AppCompatActivity() {
                 FirebaseFirestore.getInstance().collection("users").get().addOnCompleteListener(this) { task ->
                     if(task.isSuccessful){
                         val usuariosRef = FirebaseFirestore.getInstance().collection("users")
-                        usuariosRef.document(binding.etDNI.text.toString()).set(
+                        usuariosRef.document(usermail).set(
                             hashMapOf(
                                 "nombre" to binding.etNombre.text.toString(),
                                 "apellidos" to binding.etApellidos.text.toString(),
@@ -141,6 +177,8 @@ class DatosPersonalesActivity : AppCompatActivity() {
                                 "genero" to binding.genderSpinner.selectedItem.toString(),
                                 "nacionalidad" to binding.natioSpinner.selectedItem.toString(),
                                 "foto_perfil" to upImage,
+                                "email" to usermail,
+                                "fecha_registro" to Timestamp.now()
                                 //TODO INSERTAR URL DE IMAGEN Y HACER QUE EL INSERT SE HAGA EN LA COLECCIÓN CORRECTA.
                             ))
                         val intent = Intent (this,MainActivity::class.java)

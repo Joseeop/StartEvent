@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import clases.ActividadMadre
+import clases.Usuario
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.example.startevent.R
 import com.example.startevent.databinding.ActivityDatosPersonalesBinding
@@ -18,7 +20,7 @@ import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : ActividadMadre() {
 
     companion object{
         var upImage : String= ""
@@ -34,18 +36,22 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.tvUser.text=  usermail
+        binding.tvUser.text=  usuarioLogado?.nombre
 
+        binding.tvEmail.text= usermail
+       // binding.tvCiudad.text=usuarioLogado!!.nombre
 
 
         binding.btnDatosPersonales.setOnClickListener{
-        val intent:Intent=Intent(this,DatosPersonalesActivity::class.java)
-        this.startActivity(intent)
+        //val intent:Intent=Intent(this,DatosPersonalesActivity::class.java)
+        //this.startActivity(intent)
+            this.cambiarAPantalla("DatosPersonalesActivity")
         }
 
         binding.btnDatosContacto.setOnClickListener {
-            val intent:Intent=Intent(this,DatosContactoActivity::class.java)
-            this.startActivity(intent)
+            //val intent:Intent=Intent(this,DatosContactoActivity::class.java)
+            //this.startActivity(intent)
+            this.cambiarAPantalla("DatosContactoActivity")
         }
 
 

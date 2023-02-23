@@ -3,6 +3,8 @@ package clases
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentSnapshot
+
 
 class Usuario : Parcelable {
 
@@ -102,5 +104,24 @@ class Usuario : Parcelable {
         override fun newArray(size: Int): Array<Usuario?> {
             return arrayOfNulls(size)
         }
+        fun fromDocumentSnapshot(documentSnapshot: DocumentSnapshot): Usuario {
+            val nombre = documentSnapshot.getString("nombre")
+            val apellidos = documentSnapshot.getString("apellidos")
+            val dni = documentSnapshot.getString("dni")
+            val fecha_nacimiento = documentSnapshot.getTimestamp("fecha_nacimiento")
+            val genero = documentSnapshot.getString("genero")
+            val nacionalidad = documentSnapshot.getString("nacionalidad")
+            val pais = documentSnapshot.getString("pais")
+            val provincia = documentSnapshot.getString("provincia")
+            val cp = documentSnapshot.getLong("cp")?.toShort()
+            val movil = documentSnapshot.getString("movil")
+            val carnet_conducir = documentSnapshot.getBoolean("carnet_conducir")
+            val transporte_propio = documentSnapshot.getBoolean("transporte_propio")
+            val movilidad_geografica = documentSnapshot.getBoolean("movilidad_geografica")
+            val foto_perfil = documentSnapshot.getString("foto_perfil")
+
+            return Usuario(nombre, apellidos, dni, fecha_nacimiento, genero, nacionalidad, pais, provincia, cp, movil, carnet_conducir, transporte_propio, movilidad_geografica, foto_perfil)
+        }
     }
+
 }

@@ -9,6 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     tools:openDrawer="start">
+
     <LinearLayout
         android:id="@+id/nav_header"
         android:orientation="vertical"
@@ -255,7 +256,7 @@
         <TextView
             android:id="@+id/tvHello"
             android:layout_width="match_parent"
-            android:layout_height="156dp"
+            android:layout_height="80dp"
             android:paddingTop="16dp"
             android:text="@string/inicio" />
 

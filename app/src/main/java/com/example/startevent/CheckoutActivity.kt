@@ -91,12 +91,14 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun showAlert(title: String, message: String? = null) {
-        runOnUiThread {
-            val builder = AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-            builder.setPositiveButton("Ok", null)
-            builder.create().show()
+        if (!isFinishing) {
+            runOnUiThread {
+                val builder = AlertDialog.Builder(this)
+                    .setTitle(title)
+                    .setMessage(message)
+                builder.setPositiveButton("Ok", null)
+                builder.create().show()
+            }
         }
     }
 
