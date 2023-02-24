@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    android:key="preferenciasPersonalizadas"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:key="modoOscuro"
+        android:defaultValue="false"
+        android:title="@string/modoOscuro">
+    </SwitchPreference>
+
+    <PreferenceCategory
+        android:title="@string/otrasOpciones">
+        <ListPreference android:title="@string/idiomas"
+            android:key="idiomaElegido"
+            android:entries="@array/arrayIdioma"
+            android:entryValues="@array/arrayIdioma">
+
+        </ListPreference>
+
+    </PreferenceCategory>
+</PreferenceScreen>

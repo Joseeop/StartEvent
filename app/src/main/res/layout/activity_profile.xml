@@ -203,12 +203,12 @@
                        android:layout_gravity="center"/>
 
                        <Button
-                           android:id="@+id/btnFormacion"
+                           android:id="@+id/btnAlerta"
                            style="@style/boton_personalizado"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:textColor="@color/blue_dark"
-                           android:text="@string/experiencia"/>
+                           android:text="ALERTA"/>
 
                </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -225,7 +225,7 @@
                        android:src="@drawable/settings"
                        android:layout_gravity="center"/>
                    <Button
-                       android:id="@+id/btnExperienciaLab"
+                       android:id="@+id/btnAjustes"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:text="@string/ajustes"

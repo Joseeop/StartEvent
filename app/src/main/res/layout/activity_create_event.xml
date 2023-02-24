@@ -37,7 +37,8 @@
             android:textColorHint="@color/blue_dark"
             android:inputType="text" />
 
-        <EditText
+        <!--
+       <EditText
             android:id="@+id/etTipoEvento"
             style="@style/viewCustom_createEvent"
             android:layout_width="match_parent"
@@ -45,6 +46,7 @@
             android:hint="@string/title_event"
             android:textColorHint="@color/blue_dark"
             android:inputType="text" />
+            -->
         <EditText
             android:id="@+id/location_edit_text"
             style="@style/viewCustom_createEvent"
@@ -55,6 +57,7 @@
             android:inputType="text" />
         <LinearLayout
             android:id="@+id/lyFecha"
+            style="@style/viewCustom_createEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
@@ -83,15 +86,35 @@
         </LinearLayout>
 
 
-        <EditText
-            android:id="@+id/employee_type_edit_text"
-            style="@style/viewCustom_createEvent"
-            android:layout_width="match_parent"
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Tipo de empleado"
-            android:textColorHint="@color/blue_dark"
-            android:prompt="@string/profile" />
-        <!-- android:entries="@array/employee_types"-->
+            android:orientation="horizontal"
+            style="@style/viewCustom_createEvent"
+
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="@integer/material_motion_duration_long_1"
+                android:id="@+id/date_edit_text"
+                android:textSize="20dp"
+                style="@style/viewCustom_createEvent"
+                android:paddingLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tipo_empleado"
+                android:textColor="@color/blue_dark"
+                />
+            <Spinner
+                android:layout_weight="1"
+
+                android:id="@+id/employee_spinner"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/job_options" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         <EditText

@@ -11,6 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import clases.ActividadMadre
 import com.example.startevent.LoginActivity.Companion.usermail
+import com.example.startevent.databinding.ActivityCreateEventBinding
+import com.example.startevent.databinding.ActivityDatosPersonalesBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,7 +24,7 @@ import java.util.*
 
 class CreateEventActivity : ActividadMadre() {
     private lateinit var locationEditText: EditText
-    private lateinit var titleEditText: EditText
+
     private lateinit var tvFecha: TextView
     private lateinit var employeeTypeEditText: EditText
     private lateinit var vacanciesEditText: EditText
@@ -33,18 +35,19 @@ class CreateEventActivity : ActividadMadre() {
     private lateinit var database: DatabaseReference
     private lateinit var btnFecha: Button
 
-
+lateinit var binding : ActivityCreateEventBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
         database = FirebaseDatabase.getInstance().reference
 
+        binding = ActivityCreateEventBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         //Enlazamos los elementos del layout con las variables
         locationEditText = findViewById(R.id.location_edit_text)
         nombreEmpresaEditText = findViewById(R.id.etNombreEmpresa)
-        titleEditText = findViewById(R.id.etTipoEvento)
         tvFecha = findViewById(R.id.tvFecha)
-        employeeTypeEditText = findViewById(R.id.employee_type_edit_text)
         vacanciesEditText = findViewById(R.id.vacancies_edit_text)
         requirementsEditText = findViewById(R.id.requirements_edit_text)
         descriptionEditText = findViewById(R.id.description_edit_text)
@@ -87,16 +90,15 @@ class CreateEventActivity : ActividadMadre() {
 
 
              //TODO Hacer función que compruebe que el evento no ha sido creado con anterioridad, tomando como referencia
-              //la clave primaria (el título)
+              //la clave primaria (el título), ingresar como document el usermail y la fecha de creacion .now
               if(task.isSuccessful){
-              FirebaseFirestore.getInstance().collection("Eventos").document(titleEditText.text.toString()).set(
+              FirebaseFirestore.getInstance().collection("Eventos").document(usermail).set(
                   hashMapOf(
                       "creador" to usermail,
                       "empresa" to nombreEmpresaEditText.text.toString(),
-                      "titulo" to titleEditText.text.toString(),
                       "ubicacion" to locationEditText.text.toString(),
                       "fecha_evento" to timestamp,
-                      "tipo_empleado" to employeeTypeEditText.text.toString(),
+                      "tipo_empleado" to binding.employeeSpinner.selectedItem.toString(),
                       "vacantes" to vacanciesEditText.text.toString(),
                       "requisitos" to requirementsEditText.text.toString(),
                       "descripcion" to descriptionEditText.text.toString(),

@@ -71,6 +71,7 @@
     <string name="fecha">Fecha del evento</string>
     <string name="crear_evento">Crear evento</string>
     <string name="title_event">Tipo de evento</string>
+    <string name="tipo_empleado">Tipo empleado</string>
     <string name="empty">--</string>
     <string name="create_event">CREACIÓN DE EVENTO</string>
 
@@ -92,8 +93,10 @@
     <string name="mayorEdad">Tienes que ser mayor de edad</string>
     <string name="apellidos">Apellidos</string>
     <string name="DNI">DNI/NIF</string>
-    <string name="nacionalidad">Selecciona una nacionalidad: </string>
-    <string name="Genero">Selecciona un género: </string>
+    <string name="select_nation">Selecciona una nacionalidad: </string>
+    <string name="nacionalidad">Nacionalidad:  </string>
+    <string name="select_gender">Selecciona un género: </string>
+    <string name="genero">Genero: </string>
     <!--String para datos de contacto -->
     <string name="datos_contactoCAPS">DATOS DE CONTACTO</string>
     <string name="pais">País</string>
@@ -175,4 +178,45 @@
     <string name="pagoOK">¡Pago realizado con éxito!</string>
     <string name="pagoNO">¡Error al realizar el pago!</string>
     <string name="inscripcion">¡INSCRIBIRME!</string>
+
+    <!-- Strings de tipos de empleado posibles -->
+    <string-array name="job_options">
+        <item>--</item>
+        <item>Camerero</item>
+        <item>Repartidor</item>
+        <item>Azafato</item>
+        <item>Coordinador</item>
+        <item>Azafata</item>
+        <item>Camarera</item>
+        <item>Coordinadora</item>
+        <item>Promotor</item>
+        <item>Promotora</item>
+        <item>Recepcionista</item>
+        <item>Seguridad</item>
+        <item>Logistica</item>
+        <item>Otro</item>
+    </string-array>
+    <!-- Strings examen -->
+
+    <string name="examenSoporte">Soporte técnico: 2,99 €/mes</string>
+    <string name="examenComprar">Comprar</string>
+    <string name="seleccion">Selecciona una opción</string>
+    <string name="examenCancelar">Cancelar</string>
+    <string name="examenPremium">Experiencia premium: 4,99 €/mes</string>
+    <string name="examenCaridad">Caridad para la empresa, porque el jefe necesita su 3º yate: 19,99€/mes</string>
+
+    <string name="español">Español</string>
+    <string name="ingles">Inglés</string>
+    <string name="frances">Francés</string>
+    <string name="modoOscuro">Modo oscuro</string>
+    <string name="otrasOpciones">Otras opciones</string>
+
+
+    <array name="arrayIdioma">
+        <item>@string/español</item>
+        <item>@string/ingles</item>
+        <item>@string/frances</item>
+    </array>
+
+
 </resources>

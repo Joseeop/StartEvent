@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StartEvent</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome, </string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="vacio">" "</string>
+    <string name="permiso_camera">You must provide permission to take photos!</string>
+
+
+    <string name="inicio">Excellence in events defines us. Are you ready?</string>
+    <string name="recordarContraseña">Remember password</string>
+    <string name="login">Log in</string>
+    <string name="logout">Log out</string>
+    <string name="resetPassword">Send password</string>
+    <string name="acept">I have read and accept the</string>
+    <string name="terms">terms and conditions</string>
+    <string name="empty_email">Please enter an email.</string>
+    <string name="invalid_email">Oops, it seems that the email is not correct!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgotPassword">Forgot your password?</string>
+    <string name="google">SIGN IN WITH GOOGLE</string>
+    <string name="facebook">SIGN IN WITH FACEBOOK</string>
+    <string name="title_terms">Terms and Conditions of Use.</string>
+    <string name="term1">Term 1</string>
+    <string name="term2">Term 2</string>
+    <string name="term3">Term 3</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="menu_zona">Choose your city</string>
+    <string name="menu_becamepremium">Go Premium</string>
+    <string name="menu_empresas">Business area</string>
+    <string name="menu_anuncio_prom">Promote yourself here</string>
+    <string name="menu_anuncio">Advertisement</string>
+
+    <string name="menu_datos">Personal area</string>
+    <string name="menu_about_us">About us</string>
+    <string name="profile">Account</string>
+    <string name="user">Welcome, José</string>
+    <string name="job">Job search</string>
+    <string name="create">Create an event</string>
+    <string name="crea_virtual">Create a virtual event</string>
+
+    <string name="close">Close</string>
+    <string name="menu">Menu</string>
+    <string name="filter">Filter your search</string>
+
+    <!-- Search filter strings -->
+    <string name="Restablecer">Reset</string>
+    <string name="eventosDisponibles">Available events</string>
+    <string name="orderby_dateAZ">Date (Most recent first)</string>
+    <string name="orderby_dateZA">Date (Oldest first)</string>
+    <string name="orderby_ubi">Location</string>
+    <string name="tipo_empleo">Type of job</string>
+    <string name="mensaje_premium">Go premium and put your message here</string>
+
+    <!-- Strings for create event activity -->
+    <string name="ubicacion">Location</string>
+    <string name="NombreEmpresa">Company name</string>
+    <string name="vacantes">Number of vacancies</string>
+    <string name="descripcion">Offer description</string>
+    <string name="requisitos">Requirements</string>
+    <string name="fecha">Event date</string>
+    <string name="crear_evento">Create event</string>
+    <string name="title_event">Type of event</string>
+    <string name="tipo_empleado">Employee Type</string>
+    <string name="empty">--</string>
+    <string name="create_event">CREATE EVENT</string>
+
+
+    <!-- Strings for the Personal Zone -->
+    <string name="nombre">Name</string>
+    <string name="correo">Email</string>
+    <string name="ciudad">City</string>
+    <string name="datos_personales">Personal Information</string>
+    <string name="formacion">Education</string>
+    <string name="datos_contacto">Contact Information</string>
+    <string name="experiencia">Work Experience</string>
+    <string name="idiomas">Languages</string>
+    <string name="salir">Log out</string>
+    <string name="ajustes">Settings</string>
+
+    <!-- Strings for Personal Information -->
+    <string name="actualizar_datos">Update Information</string>
+    <string name="cambiar_fecha">Set</string>
+    <string name="mayorEdad">You must be of legal age</string>
+    <string name="apellidos">Last Name</string>
+    <string name="DNI">ID Number</string>
+    <string name="select_nation">Select a nationality: </string>
+    <string name="nacionalidad">Nationality: </string>
+    <string name="select_gender">Select a gender: </string>
+    <string name="genero">Gender: </string>
+
+    <!-- Strings for Contact Information -->
+    <string name="datos_contactoCAPS">CONTACT INFORMATION</string>
+    <string name="pais">Country</string>
+    <string name="codigo_postal">Postal Code</string>
+    <string name="provincia">Province</string>
+    <string name="poblacion">City</string>
+    <string name="telefonos">Phones</string>
+    <string name="movil">Mobile</string>
+    <string name="rrss">Social Media</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="instagram">Instagram</string>
+    <string name="movilidad">Mobility</string>
+    <string name="carne_conducir">Driver\'s License</string>
+    <string name="transporte_propio">Own Vehicle</string>
+    <string name="movilidad_geografica">Geographical Mobility</string>
+    <string name="introduce_pais">Enter your country</string>
+    <string name="introduce_provincia">Enter your province</string>
+    <string name="introduce_cp">Enter your postal code</string>
+    <string name="introduce_movil">Enter your mobile</string>
+    <string-array name="gender_options">
+        <item>--</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Prefer not to say</item>
+    </string-array>
+
+    <string name="fecha_nacimiento">Date of Birth</string>
+    <string name="mis_datos_personales">My Personal Information</string>
+    <string name="examenSoporte">Technical support: €2.99/month</string>
+    <string name="examenComprar">Buy</string>
+    <string name="seleccion">Select an option</string>
+    <string name="examenCancelar">Cancel</string>
+    <string name="examenPremium">Premium experience: €4.99/month</string>
+    <string name="examenCaridad">Charity for the company, because the boss needs their 3rd yacht: €19.99/month</string>
+
+    <string name="español">Spanish</string>
+    <string name="ingles">English</string>
+    <string name="frances">French</string>
+    <string name="modoOscuro">Dark mode</string>
+    <string name="otrasOpciones">Other options</string>
+
+    <array name="arrayIdioma">
+        <item>@string/español</item>
+        <item>@string/ingles</item>
+        <item>@string/frances</item>
+    </array>
+    <string name="switch_exp">No experience</string>
+    <string name="switch_vehicle">Own vehicle</string>
+
+    Language checkbox
+
+    <string name="idiomaES">Spanish</string>
+    <string name="idiomaEN">English</string>
+    <string name="idiomaGER">German</string>
+    <string name="idiomaIT">Italian</string>
+    <string name="idiomaFR">French</string>
+
+    -->
+
+    <!--Photo alert strings-->
+    <string name="queQuieresHacer">What do you want to do?</string>
+    <string name="tomarFoto">Take a photo</string>
+    <string name="CargarFoto">Load photo from gallery</string>
+
+    <!--Premium zone strings-->
+    <string name="noAds">No ads!</string>
+    <string name="suscripcion_mensual">Monthly subscription €3 per month</string>
+    <string name="suscripcion">Monthly Premium Subscription</string>
+    <string name="unlimited">Unlimited monthly registrations</string>
+    <string name="notificaciones_on">Be the first to find out about a job, we\'ll send you notifications!</string>
+    <string name="pagoOK">Payment successful!</string>
+    <string name="pagoNO">Error making payment!</string>
+    <string name="inscripcion">SIGN ME UP!</string>
+</resources>

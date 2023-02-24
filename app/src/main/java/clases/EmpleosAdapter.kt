@@ -1,6 +1,5 @@
 package clases
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,11 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startevent.EventDetailsActivity
 import com.example.startevent.R
-import java.time.LocalDate
-import java.util.*
 import kotlin.collections.ArrayList
 
-class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento>) :RecyclerView.Adapter<EmpleosAdapter.MyViewHolder>() {
+class EmpleosAdapter(val actividadMadre:ActividadMadre,val eventList: ArrayList<Evento>) :RecyclerView.Adapter<EmpleosAdapter.MyViewHolder>() {
 
     private lateinit var context : android.content.Context
 
@@ -36,7 +33,7 @@ class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento
 
 
 
-        holder.txtTitulo.text=evento.tipoEvento
+        holder.txtTitulo.text=evento.tipo_empleado
         holder.txtUbicacion.text="Ubicación: "+evento.ubicacion
         holder.txtVacantes.text="Vacantes: "+evento.vacantes
         val txtVacantesE="Vacantes: "+evento.vacantes
@@ -44,6 +41,8 @@ class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento
         val txtDescripcionE="Descripción de la oferta:\n "+evento.descripcion
         val txtRequisitos="Requisitos: "+evento.requisitos
         val txtEmpresaCreadora="Empresa Creadora: "+evento.empresa
+        val txtTitulo=""+evento.tipo_empleado
+
 
 
 
@@ -55,10 +54,12 @@ class EmpleosAdapter(val actividadMadre:Activity,val eventList: ArrayList<Evento
            val intent = Intent(holder.itemView.context, EventDetailsActivity::class.java)
            val datos: Bundle =Bundle()
 
+           datos.putParcelable("usuarioLogado", actividadMadre.usuarioLogado)
            datos.putString("ubicacion",holder.txtUbicacion.text.toString())
            datos.putString("vacantes",holder.txtVacantes.text.toString())
            datos.putString("fecha",holder.txtFecha.text.toString())
            datos.putString("titulo",holder.txtTitulo.text.toString())
+           datos.putString("tipoEmpleado",txtTitulo)
            datos.putString("descripcion",txtDescripcionE)
            datos.putString("requisitos",txtRequisitos)
            datos.putString("empresa",txtEmpresaCreadora)

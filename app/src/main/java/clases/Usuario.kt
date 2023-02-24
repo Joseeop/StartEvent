@@ -16,7 +16,7 @@ class Usuario : Parcelable {
     var nacionalidad: String? = null
     var pais: String? = null
     var provincia: String? = null
-    var cp: Short? = null
+    var cp: Int? = null
     var movil: String? = null
     var carnet_conducir: Boolean? = null
     var transporte_propio: Boolean? = null
@@ -32,7 +32,7 @@ class Usuario : Parcelable {
         nacionalidad = parcel.readString()
         pais = parcel.readString()
         provincia = parcel.readString()
-        cp = parcel.readByte().toShort()
+        cp = parcel.readByte().toInt()
         movil = parcel.readString()
         carnet_conducir = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
         transporte_propio = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
@@ -49,7 +49,7 @@ class Usuario : Parcelable {
         nacionalidad: String?,
         pais: String?,
         provincia: String?,
-        cp: Short?,
+        cp: Int?,
         movil: String?,
         carnet_conducir: Boolean?,
         transporte_propio: Boolean?,
@@ -113,7 +113,7 @@ class Usuario : Parcelable {
             val nacionalidad = documentSnapshot.getString("nacionalidad")
             val pais = documentSnapshot.getString("pais")
             val provincia = documentSnapshot.getString("provincia")
-            val cp = documentSnapshot.getLong("cp")?.toShort()
+            val cp = documentSnapshot.getLong("cp")?.toInt()
             val movil = documentSnapshot.getString("movil")
             val carnet_conducir = documentSnapshot.getBoolean("carnet_conducir")
             val transporte_propio = documentSnapshot.getBoolean("transporte_propio")

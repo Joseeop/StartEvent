@@ -61,7 +61,7 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
                 val nacionalidad = documentSnapshot.getString("nacionalidad")
                 val pais = documentSnapshot.getString("pais")
                 val provincia = documentSnapshot.getString("provincia")
-                val cp = documentSnapshot.getLong("cp")?.toShort()
+                val cp = documentSnapshot.getLong("cp")?.toInt()
                 val movil = documentSnapshot.getString("movil")
                 val carnet_conducir = documentSnapshot.getBoolean("carnet_conducir")
                 val transporte_propio = documentSnapshot.getBoolean("transporte_propio")
@@ -100,6 +100,7 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         initToolBar()
         initNavigationView()
         val tvUser: TextView = findViewById(R.id.tvUser)
+        //TODO COMPROBAR PORQUÉ ESTOS CAMPOS NO SE RELLENAN EN EL PRIMER LOGIN Y APARECEN NULOS
         tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
         initAds()
 

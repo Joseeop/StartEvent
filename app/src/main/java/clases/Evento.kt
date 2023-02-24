@@ -4,23 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.firebase.Timestamp
 
-import java.time.LocalDate
 import java.util.*
 
 class Evento : Parcelable{
 
-    /* VARIABLES QUE SE IMPLEMENTARÁN MÁS ADELANTE, SE HACE ESTO PARA EL EJERCICIO RECYCLERVIEW
-    ,
 
-    ,
-
-    ,
-    var tipoEmpleado: String?,
-    */
+    var tipo_empleado: String?=null
     var tipoEvento:String? =null
     var empresa:String? = null
     var ubicacion: String? =null
-
     var fecha_evento: Timestamp? =null
     var requisitos: String? = null
     var vacantes: String? =null
@@ -34,7 +26,7 @@ class Evento : Parcelable{
     }
 
     constructor(tipoEvento:String,ubicacion:String,nVacantes:String,
-                descripcion:String,requisitos:String,fecha_evento:Timestamp,empresa:String):
+                descripcion:String,requisitos:String,fecha_evento:Timestamp,empresa:String,tipoEmpleado:String):
             this(){
                 this.tipoEvento=tipoEvento
                 this.ubicacion=ubicacion
@@ -43,6 +35,7 @@ class Evento : Parcelable{
                 this.descripcion=descripcion
                 this.requisitos=requisitos
                 this.empresa=empresa
+                this.tipo_empleado=tipoEmpleado
             }
 
     constructor(){
@@ -53,12 +46,13 @@ class Evento : Parcelable{
         val vacantesPosibles=arrayOf<Byte>(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
         val ubicacionesPosibles = arrayOf("Barcelona, Catalonia", "Madrid, Castilla y León", "Sevilla, Andalusia", "Valencia, Valencia", "Zaragoza, Aragon", "Málaga, Andalusia", "Murcia, Murcia", "Palma de Mallorca, Balearic Islands", "Las Palmas de Gran Canaria, Canary Islands", "Bilbao, Basque Country")
         this.fecha_evento= null
-        this.tipoEvento=eventosPosibles[random.nextInt(eventosPosibles.size)]
+        this.tipoEvento=""
         this.vacantes=""+vacantesPosibles[random.nextInt(vacantesPosibles.size)]
         this.ubicacion=ubicacionesPosibles[random.nextInt(ubicacionesPosibles.size)]
         this.descripcion=""
         this.requisitos=""
         this.empresa=""
+        this.tipo_empleado=""
 
     }
 
@@ -68,6 +62,7 @@ class Evento : Parcelable{
         parcel.writeValue(vacantes)
         parcel.writeString(descripcion)
         parcel.writeString(requisitos)
+        parcel.writeString(tipo_empleado)
     }
 
     override fun describeContents(): Int {

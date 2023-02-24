@@ -1,22 +1,14 @@
 package com.example.startevent
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import clases.ActividadMadre
-import clases.Usuario
 import com.example.startevent.LoginActivity.Companion.usermail
-import com.example.startevent.R
-import com.example.startevent.databinding.ActivityDatosPersonalesBinding
 import com.example.startevent.databinding.ActivityProfileBinding
 import com.google.android.material.tabs.TabLayout
+import emergentes.AlertaExamen
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,6 +29,8 @@ class ProfileActivity : ActividadMadre() {
 
 
         binding.tvUser.text=  usuarioLogado?.nombre
+        //binding.fotoPerfil=usuarioLogado?.foto_perfil
+        binding.tvCiudad.text= usuarioLogado?.provincia
 
         binding.tvEmail.text= usermail
        // binding.tvCiudad.text=usuarioLogado!!.nombre
@@ -54,6 +48,14 @@ class ProfileActivity : ActividadMadre() {
             this.cambiarAPantalla("DatosContactoActivity")
         }
 
+        binding.btnAlerta.setOnClickListener {
+            val alertaExamen = AlertaExamen(this)
+            alertaExamen.show()
+        }
+
+        binding.btnAjustes.setOnClickListener {
+            this.cambiarAPantalla("ActividadPreferenciasPorDefecto")
+        }
 
 
 }

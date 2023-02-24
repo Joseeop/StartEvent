@@ -190,7 +190,7 @@ class LoginActivity : ActividadMadre() {
                             val nacionalidad = documentSnapshot.getString("nacionalidad")
                             val pais = documentSnapshot.getString("pais")
                             val provincia = documentSnapshot.getString("provincia")
-                            val cp = documentSnapshot.getLong("cp")?.toShort()
+                            val cp = documentSnapshot.getLong("cp")?.toInt()
                             val movil = documentSnapshot.getString("movil")
                             val carnet_conducir = documentSnapshot.getBoolean("carnet_conducir")
                             val transporte_propio = documentSnapshot.getBoolean("transporte_propio")
@@ -216,7 +216,7 @@ class LoginActivity : ActividadMadre() {
 
                             usuarioLogado = usuario
                             this.cambiarAPantalla("MainActivity")
-                            //TODO HAY QUE USAR LA FUNCION PASARPANTALLA DE ACTIVIDAD MADRE PARA CONSERVAR LOS DATOS
+                            //TODO VERIFICAR SI ES RENTABLE HACER LA CONSULTA EN EL LOGIN
                             Toast.makeText(this,usuarioLogado?.nombre.toString(),Toast.LENGTH_SHORT).show()
                             //goHome(email, "email")
                         }else {

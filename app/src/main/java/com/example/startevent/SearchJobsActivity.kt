@@ -9,6 +9,7 @@ import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import clases.ActividadMadre
 import clases.EmpleosAdapter
 import clases.Evento
 import com.google.firebase.database.DataSnapshot
@@ -19,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 
 
-class SearchJobsActivity : AppCompatActivity() {
+class SearchJobsActivity : ActividadMadre() {
 
 
     private lateinit var recyclerView: RecyclerView
