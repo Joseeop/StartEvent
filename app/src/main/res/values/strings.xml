@@ -37,6 +37,8 @@
     <string name="menu_empresas">Zona empresas</string>
     <string name="menu_anuncio_prom">Promociónate aquí</string>
     <string name="menu_anuncio">Anuncio</string>
+    <string name="eventos_creados">Eventos Creados</string>
+    <string name="mis_inscripciones">Mis Candidaturas</string>
 
     <string name="menu_datos">Zona personal</string>
     <string name="menu_about_us">Sobre Nosotros</string>

@@ -28,62 +28,40 @@
             android:layout_marginRight="20dp">
 
             <RelativeLayout
-                android:id="@+id/rlBuscarTrabajo"
+                android:id="@+id/rlBienvenida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top">
 
-                <TextView
-                    android:id="@+id/tvEmployees"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:background="@color/blue_pastel"
-                    android:paddingTop="2dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="2dp"
-                    android:text="ESTOS HEADERS SON TEMPORALES,SERÁN REEMPLAZADOS"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:translationZ="10dp" />
-
-                <ImageView
-                    android:id="@+id/ivEmployees"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/gray_dark"
-                    android:src="@drawable/employees" />
- <!--
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cviLevelBike"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:id="@+id/cvBienvenida"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_marginLeft="5dp"
                     android:translationZ="10dp"
                     app:cardBackgroundColor="@color/blue_pastel"
-                    app:cardCornerRadius="32.5dp">
+                    app:cardCornerRadius="32.5dp"
+                    android:layout_centerInParent="true">
 
                     <ImageView
-                        android:id="@+id/ivLevelBike"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:id="@+id/fotoPerfilHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="0dp"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/employees" />
                 </androidx.cardview.widget.CardView>
--->
+
                 <TextView
-                    android:id="@+id/tvUltimaOfertaTrabajo"
+                    android:id="@+id/tvUserWelcome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="85dp"
                     android:paddingTop="4dp"
-                    android:text="Última oferta: Hoy 16:30" />
+                    android:text="@string/empty"
+                    android:layout_below="@+id/cvBienvenida"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"/>
             </RelativeLayout>
 
 
@@ -93,18 +71,20 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp">
             <RelativeLayout
-                android:id="@+id/rlCreateEvent"
+                android:id="@+id/rlAplycations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:gravity="top">
                 <TextView
-                    android:id="@+id/tvCreateEvent"
+                    android:id="@+id/tvMyAplications"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create"
+                    android:text="@string/mis_inscripciones"
                     android:textAlignment="textEnd"
                     android:background="@color/blue_pastel"
                     android:textColor="@color/black"
@@ -117,11 +97,12 @@
                     android:translationZ="10dp"/>
 
                 <ImageView
-                    android:id="@+id/ivCreateEvent"
+                    android:id="@+id/ivMyAplycations"
                     android:layout_width="match_parent"
                     android:layout_height="76dp"
                     android:layout_marginTop="15dp"
-                    android:background="@color/gray_dark"
+
+                    android:background="@color/green"
                     android:src="@drawable/talent_search" />
                 <!--
                 <androidx.cardview.widget.CardView
@@ -143,14 +124,7 @@
                         />
                 </androidx.cardview.widget.CardView>
                 -->
-                <TextView
-                    android:id="@+id/tvUltimaOfertaCrear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="85dp"
-                    android:paddingTop="4dp"
-                    android:text="Última oferta: Hoy 16:30" />
+ />
 
             </RelativeLayout>
 
@@ -162,23 +136,23 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/lyPromote"
+            android:id="@+id/lyEventesCreated"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp">
             <RelativeLayout
-                android:id="@+id/lyHeaderPromote"
+                android:id="@+id/lyHeaderEventsCreated"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:gravity="bottom"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/tvPromote"
+                    android:id="@+id/tvEventsCreated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/crea_virtual"
+                    android:text="@string/eventos_creados"
                     android:textAlignment="textEnd"
                     android:background="@color/blue_pastel"
                     android:textColor="@color/black"
@@ -191,10 +165,10 @@
                     android:translationZ="10dp"/>
 
                 <ImageView
-                    android:id="@+id/ivPromote"
+                    android:id="@+id/ivEventsCreated"
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
-                    android:background="@color/gray_dark"
+                    android:background="@color/green"
                     android:src="@drawable/video_conferencia"
                     android:layout_marginTop="15dp"/>
                 <!--
@@ -216,15 +190,7 @@
                         android:src="@drawable/promotion"/>
                 </androidx.cardview.widget.CardView>
                 -->
-                <TextView
-                    android:id="@+id/tvUltimoEventoParaPromocionar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="4dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="85dp"
-                    android:text="Próximo evento: Hoy 12:30"
-                     />
+
             </RelativeLayout>
 
 

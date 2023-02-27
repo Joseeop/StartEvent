@@ -52,7 +52,7 @@ class DatosPersonalesActivity : ActividadMadre() {
          * Pero para ello debemos comprobar primero si el campo es nulo, porque sino por defecto aparecería vacío
          * si el usuario aún no ha rellenado los datos.
          */
-
+        Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
 
         //TODO HAY QUE PONER UN TEXT VIEW ENCIMA DE CADA EDITTEXT PARA FACILITAR EL QUE LOS CAMPOS SE QUEDEN VACIOS.
         binding.tvNacionalidad.text= getString(R.string.nacionalidad)+" "+usuarioLogado?.nacionalidad ?: getString(R.string.nacionalidad)

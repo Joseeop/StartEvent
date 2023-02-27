@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import clases.ActividadMadre
+import com.bumptech.glide.Glide
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.example.startevent.databinding.ActivityProfileBinding
 import com.google.android.material.tabs.TabLayout
@@ -28,6 +29,7 @@ class ProfileActivity : ActividadMadre() {
         setContentView(binding.root)
 
 
+        Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
         binding.tvUser.text=  usuarioLogado?.nombre
         //binding.fotoPerfil=usuarioLogado?.foto_perfil
         binding.tvCiudad.text= usuarioLogado?.provincia

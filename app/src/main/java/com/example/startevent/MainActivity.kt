@@ -21,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LiveData
 import clases.ActividadMadre
 import clases.Usuario
+import com.bumptech.glide.Glide
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -86,7 +87,9 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
                 )
 
                 usuarioLogado = usuario
-
+                val tvUser: TextView = findViewById(R.id.tvUser)
+                //TODO COMPROBAR PORQUÉ ESTOS CAMPOS NO SE RELLENAN EN EL PRIMER LOGIN Y APARECEN NULOS
+                tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
 
                 Toast.makeText(this,usuarioLogado?.nombre.toString(),Toast.LENGTH_SHORT).show()
                 //goHome(email, "email")
@@ -99,9 +102,9 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
 
         initToolBar()
         initNavigationView()
-        val tvUser: TextView = findViewById(R.id.tvUser)
+       // val tvUser: TextView = findViewById(R.id.tvUser)
         //TODO COMPROBAR PORQUÉ ESTOS CAMPOS NO SE RELLENAN EN EL PRIMER LOGIN Y APARECEN NULOS
-        tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
+       // tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
         initAds()
 
         //Toast de bienvenida con el mail del usuario
@@ -218,6 +221,10 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
 
         val tvUser: TextView = headerView.findViewById(R.id.tvUser)
         tvUser.text = usuarioLogado?.nombre
+        val tvUser2:TextView=headerView.findViewById(R.id.tvUserWelcome)
+        tvUser2.text=getString(R.string.welcome)+usuarioLogado?.nombre
+        val fotoPerfilHeader: ImageView=headerView.findViewById(R.id.fotoPerfilHeader)
+        Glide.with(this).load(usuarioLogado?.foto_perfil).into(fotoPerfilHeader)
 
 
     }

@@ -38,6 +38,8 @@
     <string name="menu_empresas">Business area</string>
     <string name="menu_anuncio_prom">Promote yourself here</string>
     <string name="menu_anuncio">Advertisement</string>
+    <string name="eventos_creados">Events Created</string>
+    <string name="mis_inscripciones">My Applications</string>
 
     <string name="menu_datos">Personal area</string>
     <string name="menu_about_us">About us</string>
