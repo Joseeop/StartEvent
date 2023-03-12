@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.startevent.EventDetailsActivity
 import com.example.startevent.R
 import kotlin.collections.ArrayList
@@ -36,6 +37,7 @@ class EmpleosAdapter(val actividadMadre:ActividadMadre,val eventList: ArrayList<
         holder.txtTitulo.text=evento.tipo_empleado
         holder.txtUbicacion.text="Ubicación: "+evento.ubicacion
         holder.txtVacantes.text="Vacantes: "+evento.vacantes
+        //Glide.with(holder.itemView.context).load(actividadMadre.usuarioLogado?.foto_perfil).into(holder.imgEmpresa)
         val txtVacantesE="Vacantes: "+evento.vacantes
         holder.txtFecha.text="Fecha del evento: "+evento.fecha_evento?.toDate()
         val txtDescripcionE="Descripción de la oferta:\n "+evento.descripcion

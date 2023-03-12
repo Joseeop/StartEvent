@@ -36,7 +36,8 @@ class Usuario : Parcelable {
         movil = parcel.readString()
         carnet_conducir = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
         transporte_propio = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
-        movilidad_geografica = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
+        //TODO PREGUNTAR A MIGUEL EL CRASHEO
+       // movilidad_geografica = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
         foto_perfil = parcel.readString()
     }
 
@@ -72,6 +73,9 @@ class Usuario : Parcelable {
         this.foto_perfil = foto_perfil
     }
 
+    constructor(foto_perfil: String?) {
+        this.foto_perfil = foto_perfil
+    }
     constructor() {
         // constructor vacío
     }

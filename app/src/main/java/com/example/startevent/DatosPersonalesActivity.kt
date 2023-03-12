@@ -47,12 +47,28 @@ class DatosPersonalesActivity : ActividadMadre() {
             .into(binding.fotoPerfil)
         Log.d("DatosPersonalesActivity", "Imagen subida con éxito a Firebase Storage.")
         Log.d("DatosPersonalesActivity", "URL de descarga de la imagen: $upImage")
+
+        val auth = FirebaseFirestore.getInstance()
+        val userRef = auth.collection("users").document(usermail)
+        userRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val foto_perfil = documentSnapshot.getString("foto_perfil")
+                    Glide.with(this).load(foto_perfil).into(binding.fotoPerfil)
+                } else {
+                    Toast.makeText(this, "El usuario no existe en la base de datos.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Error al obtener datos del usuario: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+        Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
         /**
          * Aquí establecemos los hints con los datos que recogemos de la bbdd y hemos asignado a usuarioLogado
          * Pero para ello debemos comprobar primero si el campo es nulo, porque sino por defecto aparecería vacío
          * si el usuario aún no ha rellenado los datos.
          */
-        Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
+
 
         //TODO HAY QUE PONER UN TEXT VIEW ENCIMA DE CADA EDITTEXT PARA FACILITAR EL QUE LOS CAMPOS SE QUEDEN VACIOS.
         binding.tvNacionalidad.text= getString(R.string.nacionalidad)+" "+usuarioLogado?.nacionalidad ?: getString(R.string.nacionalidad)

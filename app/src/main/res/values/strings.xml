@@ -38,6 +38,7 @@
     <string name="menu_anuncio_prom">Promociónate aquí</string>
     <string name="menu_anuncio">Anuncio</string>
     <string name="eventos_creados">Eventos Creados</string>
+    <string name="eventos_creados_by_me">Eventos Creados Por Mi</string>
     <string name="mis_inscripciones">Mis Candidaturas</string>
 
     <string name="menu_datos">Zona personal</string>

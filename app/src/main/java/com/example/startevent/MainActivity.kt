@@ -88,11 +88,10 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
 
                 usuarioLogado = usuario
                 val tvUser: TextView = findViewById(R.id.tvUser)
-                //TODO COMPROBAR PORQUÉ ESTOS CAMPOS NO SE RELLENAN EN EL PRIMER LOGIN Y APARECEN NULOS
                 tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
-
                 Toast.makeText(this,usuarioLogado?.nombre.toString(),Toast.LENGTH_SHORT).show()
-                //goHome(email, "email")
+
+                initNavigationView()
             }else {
                 Toast.makeText(this, "El usuario no existe en la base de datos.", Toast.LENGTH_SHORT).show()
             }
@@ -101,7 +100,7 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         }
 
         initToolBar()
-        initNavigationView()
+        //initNavigationView()
        // val tvUser: TextView = findViewById(R.id.tvUser)
         //TODO COMPROBAR PORQUÉ ESTOS CAMPOS NO SE RELLENAN EN EL PRIMER LOGIN Y APARECEN NULOS
        // tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
@@ -219,12 +218,14 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         navigationView.removeHeaderView(headerView)
         navigationView.addHeaderView(headerView)
 
-        val tvUser: TextView = headerView.findViewById(R.id.tvUser)
-        tvUser.text = usuarioLogado?.nombre
+
         val tvUser2:TextView=headerView.findViewById(R.id.tvUserWelcome)
         tvUser2.text=getString(R.string.welcome)+usuarioLogado?.nombre
         val fotoPerfilHeader: ImageView=headerView.findViewById(R.id.fotoPerfilHeader)
         Glide.with(this).load(usuarioLogado?.foto_perfil).into(fotoPerfilHeader)
+
+        //val irAEventosCreados:LinearLayout=headerView.findViewById(R.id.lyEventsCreated)
+
 
 
     }
@@ -264,6 +265,9 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
     fun callCreateVirtualActivity(v: View) {
         createVirtualActivity()
     }
+    fun callEventsCreated(v: View) {
+        eventsCreated()
+    }
     /*fun pillarDatosDeUsuarioNoVerificado(activity: Activity): LiveData<MutableList<Usuario>> {
         val mutableData = MutableLiveData<MutableList<Usuario>>()
         val circuloDeCarga: DialogDeCarga = DialogDeCarga(activity)
@@ -300,6 +304,8 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         this.cambiarAPantalla("ProfileActivity")
     }
 
+
+
     private fun premiumActivity() {
         PaymentConfiguration.init(
             applicationContext,
@@ -330,6 +336,9 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         this.cambiarAPantalla("CreateEventActivity")
     }
 
+    private fun eventsCreated(){
+        this.cambiarAPantalla("EventCreatedByUsermail")
+    }
     private fun createVirtualActivity() {
         //val intent = Intent(this, CreateVirtualActivity::class.java)
         //startActivity(intent)

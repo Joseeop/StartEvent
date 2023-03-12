@@ -74,6 +74,7 @@
     <string name="tipo_empleado">Employee Type</string>
     <string name="empty">--</string>
     <string name="create_event">CREATE EVENT</string>
+    <string name="eventos_creados_by_me">Events Created By Me</string>
 
 
     <!-- Strings for the Personal Zone -->

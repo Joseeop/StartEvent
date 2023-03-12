@@ -30,6 +30,7 @@
     <color name="salmon_dark">#ff4f78</color>
 
     <color name="blue_pastel">#cce6ff</color>
+    <color name="blue_pastel_soft">#aec6cf</color>
     <color name="blue_light">#00BCD4</color>
     <color name="blue">#2b91f7</color>
     <color name="blue_dark">#040C3E</color>
@@ -45,4 +46,7 @@
     <color name="chrono_running">#D6250C</color>
     <color name="chrono_walking">#fc4a8aff</color>
     <color name="green">#4CAF50</color>
+    <color name="green_pastel">#a0e7a0</color>
+    <color name="green_dark">#3ace3a</color>
+    <color name="green_dark_intense">#013220</color>
 </resources>
