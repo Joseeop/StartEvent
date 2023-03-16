@@ -9,6 +9,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="primer_login">¡Si es tu primera vez, introduce usuario y correo para registrarte!</string>
     <string name="vacio">" "</string>
     <string name="permiso_camera">¡Debes proporcionar permisos si quieres tomar fotos!</string>
 

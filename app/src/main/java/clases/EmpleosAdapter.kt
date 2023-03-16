@@ -61,10 +61,11 @@ class EmpleosAdapter(val actividadMadre:ActividadMadre,val eventList: ArrayList<
            datos.putString("vacantes",holder.txtVacantes.text.toString())
            datos.putString("fecha",holder.txtFecha.text.toString())
            datos.putString("titulo",holder.txtTitulo.text.toString())
-           datos.putString("tipoEmpleado",txtTitulo)
+           datos.putString("tipoEmpleado",evento.tipo_empleado)
            datos.putString("descripcion",txtDescripcionE)
            datos.putString("requisitos",txtRequisitos)
            datos.putString("empresa",txtEmpresaCreadora)
+           datos.putString("id", evento.id)
            intent.putExtras(datos)
            holder.itemView.context.startActivity(intent)
        }

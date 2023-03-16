@@ -3,17 +3,14 @@ package com.example.startevent
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import clases.ActividadMadre
-import clases.Usuario
 import com.bumptech.glide.Glide
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.example.startevent.databinding.ActivityProfileBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
-import emergentes.AlertaExamen
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -72,10 +69,7 @@ class ProfileActivity : ActividadMadre() {
             this.cambiarAPantalla("DatosContactoActivity")
         }
 
-        binding.btnAlerta.setOnClickListener {
-            val alertaExamen = AlertaExamen(this)
-            alertaExamen.show()
-        }
+
 
         binding.btnAjustes.setOnClickListener {
             this.cambiarAPantalla("ActividadPreferenciasPorDefecto")

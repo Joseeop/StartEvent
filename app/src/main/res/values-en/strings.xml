@@ -12,6 +12,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="vacio">" "</string>
     <string name="permiso_camera">You must provide permission to take photos!</string>
+    <string name="primer_login">If it\'s your first time, enter your username and email to register!</string>
 
 
     <string name="inicio">Excellence in events defines us. Are you ready?</string>

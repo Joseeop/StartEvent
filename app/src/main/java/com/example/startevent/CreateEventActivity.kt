@@ -92,23 +92,27 @@ lateinit var binding : ActivityCreateEventBinding
              //TODO Hacer función que compruebe que el evento no ha sido creado con anterioridad, tomando como referencia
               //la clave primaria (el título), ingresar como document el usermail y la fecha de creacion .now
               if(task.isSuccessful){
-              FirebaseFirestore.getInstance().collection("Eventos").document(usermail).set(
-                  hashMapOf(
-                      "creador" to usermail,
-                      "empresa" to nombreEmpresaEditText.text.toString(),
-                      "ubicacion" to locationEditText.text.toString(),
-                      "fecha_evento" to timestamp,
-                      "tipo_empleado" to binding.employeeSpinner.selectedItem.toString(),
-                      "vacantes" to vacanciesEditText.text.toString(),
-                      "requisitos" to requirementsEditText.text.toString(),
-                      "descripcion" to descriptionEditText.text.toString(),
-                  ))
-                  val intent = Intent (this,MainActivity::class.java)
-                  startActivity(intent)
-                  Toast.makeText(this,"Evento creado con éxito¡",Toast.LENGTH_SHORT).show()
-              }else {
-                  Toast.makeText(this,"No se ha podido crear el evento",Toast.LENGTH_SHORT).show()
-              }
+                  FirebaseFirestore.getInstance().collection("Eventos").add(
+                      hashMapOf(
+                          "creador" to usermail,
+                          "empresa" to nombreEmpresaEditText.text.toString(),
+                          "ubicacion" to locationEditText.text.toString(),
+                          "fecha_evento" to timestamp,
+                          "tipo_empleado" to binding.employeeSpinner.selectedItem.toString(),
+                          "vacantes" to vacanciesEditText.text.toString(),
+                          "requisitos" to requirementsEditText.text.toString(),
+                          "descripcion" to descriptionEditText.text.toString(),
+                      )
+                  ).addOnSuccessListener { documentReference ->
+                      val eventoId = documentReference.id
+                      FirebaseFirestore.getInstance().collection("Eventos").document(eventoId).update("id_evento", eventoId)
+                      val intent = Intent (this,MainActivity::class.java)
+                      startActivity(intent)
+                      Toast.makeText(this,"Evento creado con éxito¡",Toast.LENGTH_SHORT).show()
+
+                  }.addOnFailureListener {
+                      Toast.makeText(this,"No se ha podido crear el evento",Toast.LENGTH_SHORT).show()
+                  }
 
 
 
@@ -116,4 +120,4 @@ lateinit var binding : ActivityCreateEventBinding
 
           }
         }
-}}
+}}}

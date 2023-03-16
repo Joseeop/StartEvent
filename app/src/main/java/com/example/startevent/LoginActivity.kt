@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import clases.ActividadMadre
@@ -69,6 +70,7 @@ class LoginActivity : ActividadMadre() {
 
 
         swRecordarContraseña= findViewById(R.id.swRecordarContraseña)
+
 
 
 
@@ -140,9 +142,11 @@ class LoginActivity : ActividadMadre() {
         email = etEmail.text.toString()
         password = etPass.text.toString()
 
+
         if(TextUtils.isEmpty(password) ||ValidateEmail.isEmail(email)==false){
             tvLogin.setBackgroundColor(ContextCompat.getColor(this,R.color.gray))
             tvLogin.isEnabled = false
+
 
         }else{
             tvLogin.setBackgroundColor(ContextCompat.getColor(this,R.color.green))
@@ -336,53 +340,38 @@ class LoginActivity : ActividadMadre() {
     fun callSignInGoogle (view:View){
         signInGoogle()
     }
+    // Define un objeto ActivityResultLauncher para manejar el inicio de sesión de Google
+    private val googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_CODE_GOOGLE_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)!!
+                email = account.email!!
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                mAuth.signInWithCredential(credential).addOnCompleteListener{
+                    if (it.isSuccessful) goHome(email, "Google")
+                    else Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    // Modifica el método signInGoogle para llamar al ActivityResultLauncher en lugar de startActivityForResult
     private fun signInGoogle(){
-        // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
         var googleSignInClient = GoogleSignIn.getClient(this, gso)
-        //Cerramos sesión por si hubiese alguna ya logueada.
-        googleSignInClient.signOut()
-
-        startActivityForResult(googleSignInClient.signInIntent, RESULT_CODE_GOOGLE_SIGN_IN)
-
+       googleSignInClient.signOut()
+        googleSignInLauncher.launch(googleSignInClient.signInIntent)
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RESULT_CODE_GOOGLE_SIGN_IN) {
-
-            try {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)!!
-                //Si la cuenta no es nula marcamos el email
-                //guardamos las credenciales con el token que hemos redibido
-                //y hacemos el signin con nuestros credenciales del firebase
-                //Si es exitoso el login lo mandamos a la pantalla home.
-                if (account != null){
-                    email = account.email!!
-                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                    mAuth.signInWithCredential(credential).addOnCompleteListener{
-                        if (it.isSuccessful) goHome(email, "Google")
-                        else Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT)
-
-                    }
-                }
-
-
-            } catch (e: ApiException) {
-                Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT)
-            }
-        }
 
     }
     //FINAL DEL LOGIN CON GOOGLE.
 
 
-}

@@ -8,7 +8,7 @@ import java.util.*
 
 class Evento : Parcelable{
 
-
+    var id: String? = null
     var tipo_empleado: String?=null
     var tipoEvento:String? =null
     var empresa:String? = null
@@ -17,7 +17,7 @@ class Evento : Parcelable{
     var requisitos: String? = null
     var vacantes: String? =null
     var descripcion: String? = null
-
+    var lista_inscritos: List<String>? = null  // Nuevo campo para la lista de inscritos
 
     constructor(parcel: Parcel) : this() {
         tipoEvento = parcel.readString()

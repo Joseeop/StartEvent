@@ -2,17 +2,21 @@ package com.example.startevent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import clases.ActividadMadre
 import clases.Evento
 import clases.Usuario
+import com.example.startevent.LoginActivity.Companion.usermail
 import com.example.startevent.databinding.ActivityDatosPersonalesBinding
 import com.example.startevent.databinding.LayoutEventDetailsBinding
 import com.google.android.gms.actions.ItemListIntents
+import com.google.firebase.firestore.FirebaseFirestore
 
 class EventDetailsActivity : ActividadMadre() {
     lateinit var binding: LayoutEventDetailsBinding
     lateinit var itemDetail : ItemListIntents
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_event_details)
@@ -41,10 +45,43 @@ class EventDetailsActivity : ActividadMadre() {
          * Lo haremos mediante un alert y pondremos un botón que nos llevará a la zona personal y otro que sea cancelar
          */
         binding.btnInscripcion.setOnClickListener {
-            if(usuarioLogado?.nombre==null){
-                Toast.makeText(this,"Debes rellenar el campo nombre",Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this,"YA ESTÁ! "+usuarioLogado.nombre,Toast.LENGTH_SHORT).show()
+            // Comprobamos si el usuario está logueado
+            if(usuarioLogado?.nombre == null) {
+                Toast.makeText(this,"Debes iniciar sesión para poder inscribirte",Toast.LENGTH_SHORT).show()
+            } else {
+                // Creamos una referencia a la colección de asistentes del evento en Firestore
+                val db = FirebaseFirestore.getInstance()
+                val eventoId = bundleRecibido?.getString("id")
+
+                val asistentesRef = eventoId?.let { it1 -> db.collection("Eventos").document(it1).collection("asistentes") }
+                if (eventoId != null) {
+                    val asistentesRef = db.collection("Eventos").document(eventoId).collection("asistentes")
+                    // resto del código
+                } else {
+                    Toast.makeText(this, "Error al obtener el ID del evento", Toast.LENGTH_SHORT).show()
+                }
+
+                // Creamos un objeto con los datos del usuario que se va a inscribir en el evento
+                val datosUsuario = hashMapOf(
+                    "nombre" to usuarioLogado.nombre,
+                    "apellidos" to usuarioLogado.apellidos,
+                    "email" to usermail
+                )
+
+                // Añadimos los datos del usuario a la colección de asistentes del evento
+                if (asistentesRef != null) {
+                    asistentesRef.add(datosUsuario)
+                        .addOnSuccessListener {
+                            // Mostramos un mensaje de éxito y actualizamos el botón de inscripción
+                            Toast.makeText(this,"Te has inscrito en el evento",Toast.LENGTH_SHORT).show()
+                            binding.btnInscripcion.text = "Inscrito"
+                            binding.btnInscripcion.isEnabled = false
+                        }
+                        .addOnFailureListener {
+                            // Mostramos un mensaje de error en caso de que no se haya podido realizar la inscripción
+                            Toast.makeText(this,"Error al inscribirse en el evento",Toast.LENGTH_SHORT).show()
+                        }
+                }
             }
         }
     }

@@ -54,6 +54,7 @@ class SearchJobsActivity : ActividadMadre() {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val evento = document.toObject(Evento::class.java)
+                    evento.id = document.id // Asignar el ID al objeto Evento
                     empleosArrayList.add(evento)
                 }
                 myAdapter.notifyDataSetChanged()
