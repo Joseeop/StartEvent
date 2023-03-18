@@ -1,12 +1,18 @@
 package clases
 
 
-import android.app.Activity
+
+
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.startevent.MainActivity
+import java.util.Locale
+
 
 
 open abstract class ActividadMadre : AppCompatActivity() {
@@ -17,12 +23,19 @@ open abstract class ActividadMadre : AppCompatActivity() {
         val REQUEST_ALMACENAMIENTO_EXTERNO: Int = 654567543
     }
 
+
     public fun cambiarAPantalla(nombreActividad:String): Unit {
         val intent: Intent = Intent(this,Class.forName("com.example.startevent."+nombreActividad))
         val bundle: Bundle = Bundle()
         bundle.putParcelable("usuarioLogado", usuarioLogado)
         intent.putExtras(bundle)
         startActivity(intent)
+    }
+    fun reiniciarAplicacion() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +51,14 @@ open abstract class ActividadMadre : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val sharedPreferences = newBase.getSharedPreferences("preferenciasPersonalizadas", Context.MODE_PRIVATE)
+        val languageCode = sharedPreferences.getString("idiomaElegido", Locale.getDefault().language) ?: Locale.getDefault().language
+        val newLocale = Locale(languageCode)
+        val context = newBase.createConfigurationContext(newBase.resources.configuration.apply { setLocale(newLocale) })
+        super.attachBaseContext(context)
     }
 
 

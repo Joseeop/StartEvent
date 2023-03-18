@@ -4,4 +4,12 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="round_button_medium" />
     <dimen name="stroke_small" />
+    <dimen name="text_size_large">30sp</dimen>
+    <dimen name="text_size_medium">28sp</dimen>
+    <dimen name="text_size_small">26sp</dimen>
+    <dimen name="image_size">150dp</dimen>
+    <dimen name="margin_large">50dp</dimen>
+    <dimen name="margin_medium">40dp</dimen>
+    <dimen name="margin_small">30dp</dimen>
+    <dimen name="description_large_height">200dp</dimen>
 </resources>

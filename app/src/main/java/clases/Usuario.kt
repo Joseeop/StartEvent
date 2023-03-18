@@ -5,7 +5,13 @@ import android.os.Parcelable
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 
+/**
 
+Clase que representa a un usuario de la aplicación.
+Contiene información personal del usuario, como nombre, apellidos, DNI, fecha de nacimiento, género,
+nacionalidad, país, provincia, código postal, número de teléfono móvil, carnet de conducir, transporte propio,
+movilidad geográfica y foto de perfil.
+ */
 class Usuario : Parcelable {
 
     var nombre: String? = null
@@ -22,7 +28,10 @@ class Usuario : Parcelable {
     var transporte_propio: Boolean? = null
     var movilidad_geografica: Boolean? = null
     var foto_perfil: String? = null
+    /**
 
+    Constructor primario vacío de la clase Usuario.
+     */
     constructor(parcel: Parcel) : this() {
         nombre = parcel.readString()
         apellidos = parcel.readString()
@@ -36,10 +45,26 @@ class Usuario : Parcelable {
         movil = parcel.readString()
         carnet_conducir = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
         transporte_propio = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
-        //TODO PREGUNTAR A MIGUEL EL CRASHEO
-       // movilidad_geografica = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
         foto_perfil = parcel.readString()
     }
+/**
+
+Constructor secundario de la clase Usuario.
+@param nombre El nombre del usuario.
+@param apellidos Los apellidos del usuario.
+@param dni El DNI del usuario.
+@param fecha_nacimiento La fecha de nacimiento del usuario en formato Timestamp.
+@param genero El género del usuario.
+@param nacionalidad La nacionalidad del usuario.
+@param pais El país de residencia del usuario.
+@param provincia La provincia de residencia del usuario.
+@param cp El código postal de residencia del usuario.
+@param movil El número de teléfono móvil del usuario.
+@param carnet_conducir Indica si el usuario tiene carnet de conducir o no.
+@param transporte_propio Indica si el usuario tiene transporte propio o no.
+@param movilidad_geografica Indica si el usuario tiene movilidad geográfica o no.
+@param foto_perfil La ruta de la foto de perfil del usuario.
+ */
 
     constructor(
         nombre: String?,
@@ -80,6 +105,13 @@ class Usuario : Parcelable {
         // constructor vacío
     }
 
+
+    /**
+
+    Función que se utiliza para escribir los datos del usuario en un objeto Parcel.
+    @param parcel El objeto Parcel en el que se escribirán los datos.
+    @param flags Los flags que indican cómo debe ser escrito el objeto.
+     */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(nombre)
         parcel.writeString(apellidos)
@@ -95,7 +127,11 @@ class Usuario : Parcelable {
         parcel.writeValue(movilidad_geografica)
         parcel.writeString(foto_perfil)
     }
+    /**
 
+    Función que devuelve el tipo de contenido de la clase.
+    @return El tipo de contenido de la clase.
+     */
     override fun describeContents(): Int {
         return 0
     }
@@ -108,6 +144,12 @@ class Usuario : Parcelable {
         override fun newArray(size: Int): Array<Usuario?> {
             return arrayOfNulls(size)
         }
+        /**
+
+        Método utilizado para crear un objeto de la clase Usuario a partir de un objeto DocumentSnapshot de Firebase.
+        @param documentSnapshot El objeto DocumentSnapshot de Firebase del que se obtendrá la información.
+        @return El objeto Usuario creado a partir del objeto DocumentSnapshot.
+         */
         fun fromDocumentSnapshot(documentSnapshot: DocumentSnapshot): Usuario {
             val nombre = documentSnapshot.getString("nombre")
             val apellidos = documentSnapshot.getString("apellidos")

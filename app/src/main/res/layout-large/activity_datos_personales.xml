@@ -1,0 +1,182 @@
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_pastel"
+    >
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_pastel">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".DatosPersonalesActivity">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/blue_pastel"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mis_datos_personales"
+                android:textSize="20sp"
+                android:textColor="@color/blue_dark"
+                android:textAlignment="center"
+                style="@style/viewCustom_createEvent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fotoPerfil"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/camera"/>
+
+            <TextView
+                android:id="@+id/tvNombre"
+                style="@style/viewCustom_datosPersonales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nombre"/>
+            <EditText
+                android:id="@+id/etNombre"
+                style="@style/viewCustom_createEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nombre"
+                android:textColorHint="@color/blue_dark"
+                android:inputType="text" />
+            <TextView
+                android:id="@+id/tvApellidos"
+                style="@style/viewCustom_datosPersonales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apellidos"/>
+            <EditText
+                android:id="@+id/etApellidos"
+                style="@style/viewCustom_createEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/apellidos"
+                android:textColorHint="@color/blue_dark"
+                android:inputType="text" />
+            <TextView
+                android:id="@+id/tvDNI"
+                style="@style/viewCustom_datosPersonales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/DNI"/>
+            <EditText
+                android:id="@+id/etDNI"
+                style="@style/viewCustom_createEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/DNI"
+                android:textColorHint="@color/blue_dark"
+                android:inputType="text" />
+            <LinearLayout
+                android:id="@+id/lyFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="17sp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/fecha_nacimiento" />
+
+                <Button
+                    android:id="@+id/btnFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/blue_dark"
+                    android:text="@string/cambiar_fecha" />
+            </LinearLayout>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:weightSum="2">
+                <TextView
+                    android:layout_weight="@integer/material_motion_duration_long_1"
+                    android:id="@+id/tvGenero"
+                    android:textSize="15dp"
+                    android:paddingLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/genero"
+                    android:textColor="@color/blue_dark"
+                    />
+                <Spinner
+                    android:layout_weight="1"
+                    android:id="@+id/gender_spinner"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/gender_options" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:weightSum="2">
+                <TextView
+                    android:id="@+id/tvNacionalidad"
+                    android:paddingLeft="10dp"
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue_dark"
+                    android:text="@string/nacionalidad"
+                    android:prompt="@string/profile" />
+                <Spinner
+                    android:layout_weight="1"
+                    android:id="@+id/natio_spinner"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/nationality_options" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <Button
+                android:id="@+id/actualizar_datos_button"
+                android:backgroundTint="@color/blue_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/actualizar_datos" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</ScrollView>

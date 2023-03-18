@@ -18,7 +18,22 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
+/**
 
+Actividad para procesar pagos a través de Stripe utilizando el Payment Sheet.
+
+Se conecta con el backend a través de una solicitud HTTP POST para obtener el secreto del cliente.
+
+Permite al usuario pagar utilizando el Payment Sheet y maneja los resultados de la transacción.
+
+@property paymentIntentClientSecret el secreto del cliente proporcionado por el backend para procesar el pago
+
+@property paymentSheet el objeto PaymentSheet que se utiliza para presentar la pantalla de pago
+
+@property payButton el botón que el usuario debe presionar para iniciar el proceso de pago
+
+@constructor crea la actividad e inicializa los elementos de la interfaz de usuario y el backend
+ */
 class CheckoutActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CheckoutActivity"
@@ -49,7 +64,12 @@ class CheckoutActivity : AppCompatActivity() {
 
 
     }
+    /**
 
+    Realiza una solicitud HTTP POST al backend para obtener el secreto del cliente necesario para procesar el pago.
+
+    El secreto se almacena en la variable paymentIntentClientSecret y se habilita el botón de pago.
+     */
     private fun fetchPaymentIntent() {
         val url = "$BACKEND_URL/create-payment-intent"
 
@@ -89,7 +109,12 @@ class CheckoutActivity : AppCompatActivity() {
                 }
             })
     }
+    /**
 
+    Muestra una alerta al usuario con el título y el mensaje proporcionados.
+    @param title el título de la alerta
+    @param message el mensaje de la alerta
+     */
     private fun showAlert(title: String, message: String? = null) {
         if (!isFinishing) {
             runOnUiThread {
@@ -101,7 +126,11 @@ class CheckoutActivity : AppCompatActivity() {
             }
         }
     }
+    /**
 
+    Displays a toast message with the provided message string.
+    @param message the message string to be displayed
+     */
     private fun showToast(message: String) {
         runOnUiThread {
             Toast.makeText(this,  message, Toast.LENGTH_LONG).show()
@@ -114,6 +143,13 @@ class CheckoutActivity : AppCompatActivity() {
         // Present Payment Sheet
         paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration)
     }
+    /**
+     *
+
+    Maneja el resultado de la hoja de pago mostrando un mensaje Toast si el pago se completó correctamente,
+    mostrando un cuadro de diálogo de alerta si hubo un error, o no haciendo nada si el pago fue cancelado.
+    @param paymentResult el resultado de la hoja de pago
+     */
     private fun onPaymentSheetResult(paymentResult: PaymentSheetResult) {
         when (paymentResult) {
             is PaymentSheetResult.Completed -> {

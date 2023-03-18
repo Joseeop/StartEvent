@@ -39,7 +39,7 @@ class DatosPersonalesActivity : ActividadMadre() {
 
         binding = ActivityDatosPersonalesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//TODO REVISAR LA FUNCION subirImagenFirebase y el que se actualiza correctamente upImage.
+
         Glide.with(this)
             .load(upImage)
             .skipMemoryCache(true)
@@ -70,7 +70,7 @@ class DatosPersonalesActivity : ActividadMadre() {
          */
 
 
-        //TODO HAY QUE PONER UN TEXT VIEW ENCIMA DE CADA EDITTEXT PARA FACILITAR EL QUE LOS CAMPOS SE QUEDEN VACIOS.
+
         binding.tvNacionalidad.text= getString(R.string.nacionalidad)+" "+usuarioLogado?.nacionalidad ?: getString(R.string.nacionalidad)
         binding.tvGenero.text=getString(R.string.genero)+" "+usuarioLogado?.genero ?: getString(R.string.genero)
         binding.etNombre.hint = usuarioLogado?.nombre ?: getString(R.string.nombre)
@@ -83,10 +83,6 @@ class DatosPersonalesActivity : ActividadMadre() {
 
 
 
-        /*val fechaNacimiento = usuarioLogado?.fecha_nacimiento?.toDate()?.let { date ->
-            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
-        } ?: ""
-        binding.txtFecha.text = fechaNacimiento*/
 
 
         //Ponemos focus en el botón, para que al entrar an la app no lo fije en el primer editText
@@ -219,55 +215,55 @@ class DatosPersonalesActivity : ActividadMadre() {
                         fecha.atStartOfDay(ZoneOffset.UTC).toEpochSecond() * 1000
                     ) // Convertir LocalDate a Timestamp
 
-                FirebaseFirestore.getInstance().collection("users").get().addOnCompleteListener(this) { task ->
-                    if(task.isSuccessful){
-                        val usuariosRef = FirebaseFirestore.getInstance().collection("users").document(usermail)
-                        usuariosRef.get().addOnSuccessListener { documentSnapshot ->
-                            val data = documentSnapshot.data
-                            // Crear un mapa con los campos y valores a actualizar
-                            val newData = HashMap<String, Any>()
-                            if (binding.etNombre.text.toString().isNotBlank()) {
-                                newData["nombre"] = binding.etNombre.text.toString()
+                    FirebaseFirestore.getInstance().collection("users").get().addOnCompleteListener(this) { task ->
+                        if(task.isSuccessful){
+                            val usuariosRef = FirebaseFirestore.getInstance().collection("users").document(usermail)
+                            usuariosRef.get().addOnSuccessListener { documentSnapshot ->
+                                val data = documentSnapshot.data
+                                // Crear un mapa con los campos y valores a actualizar
+                                val newData = HashMap<String, Any>()
+                                if (binding.etNombre.text.toString().isNotBlank()) {
+                                    newData["nombre"] = binding.etNombre.text.toString()
+                                }
+                                if (binding.etApellidos.text.toString().isNotBlank()) {
+                                    newData["apellidos"] = binding.etApellidos.text.toString()
+                                }
+                                if (binding.etDNI.text.toString().isNotBlank()) {
+                                    newData["dni"] = binding.etDNI.text.toString()
+                                }
+                                if (timestamp != null) {
+                                    newData["fecha_nacimiento"] = timestamp
+                                }
+                                if (binding.genderSpinner.selectedItem.toString().isNotBlank()) {
+                                    newData["genero"] = binding.genderSpinner.selectedItem.toString()
+                                }
+                                if (binding.natioSpinner.selectedItem.toString().isNotBlank()) {
+                                    newData["nacionalidad"] =
+                                        binding.natioSpinner.selectedItem.toString()
+                                }
+                                if (upImage != null) {
+                                    newData["foto_perfil"] = upImage
+                                }
+                                // Actualizar los campos en Firestore sin sobrescribir los valores existentes en los campos restantes
+                                usuariosRef.update(newData)
+                                this.cambiarAPantalla("MainActivity")
+                                Toast.makeText(this, "!Datos actualizados¡", Toast.LENGTH_SHORT).show()
                             }
-                            if (binding.etApellidos.text.toString().isNotBlank()) {
-                                newData["apellidos"] = binding.etApellidos.text.toString()
-                            }
-                            if (binding.etDNI.text.toString().isNotBlank()) {
-                                newData["dni"] = binding.etDNI.text.toString()
-                            }
-                            if (timestamp != null) {
-                                newData["fecha_nacimiento"] = timestamp
-                            }
-                            if (binding.genderSpinner.selectedItem.toString().isNotBlank()) {
-                                newData["genero"] = binding.genderSpinner.selectedItem.toString()
-                            }
-                            if (binding.natioSpinner.selectedItem.toString().isNotBlank()) {
-                                newData["nacionalidad"] =
-                                    binding.natioSpinner.selectedItem.toString()
-                            }
-                            if (upImage != null) {
-                                newData["foto_perfil"] = upImage
-                            }
-                            // Actualizar los campos en Firestore sin sobrescribir los valores existentes en los campos restantes
-                            usuariosRef.update(newData)
-                            this.cambiarAPantalla("MainActivity")
-                            Toast.makeText(this, "!Datos actualizados¡", Toast.LENGTH_SHORT).show()
+                        }else {
+                            Toast.makeText(this,"No se han podido actualizar los datos",Toast.LENGTH_SHORT).show()
                         }
-                    }else {
-                        Toast.makeText(this,"No se han podido actualizar los datos",Toast.LENGTH_SHORT).show()
                     }
+                } catch(e: DateTimeException) {
+                    Toast.makeText(this,"Rellena el campo fecha", Toast.LENGTH_LONG).show()
                 }
-            } catch(e: DateTimeException) {
-            Toast.makeText(this,"Rellena el campo fecha", Toast.LENGTH_LONG).show()
+            }
+
+
+
+
         }
-        }
-
-
-
 
     }
-
-}
     private fun subirImagenFirebase(uri: Uri) {
         val storageRef = FirebaseStorage.getInstance().reference
         val imagesRef = storageRef.child("images/${usermail}/foto_perfil.jpg")

@@ -2,6 +2,7 @@
 <PreferenceScreen
     android:key="preferenciasPersonalizadas"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <SwitchPreference
         android:key="modoOscuro"
         android:defaultValue="false"
@@ -13,7 +14,8 @@
         <ListPreference android:title="@string/idiomas"
             android:key="idiomaElegido"
             android:entries="@array/arrayIdioma"
-            android:entryValues="@array/arrayIdioma">
+            android:entryValues="@array/idioma_values"
+            android:defaultValue="en">
 
         </ListPreference>
 

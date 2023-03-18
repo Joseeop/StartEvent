@@ -93,6 +93,7 @@
     <string name="ajustes">Ajustes</string>
     <!--String para Datos Personales -->
     <string name="actualizar_datos">Actualizar datos</string>
+    <string name="btnFoto">Actualizado tu foto o establece una</string>
     <string name="cambiar_fecha">Establecer</string>
     <string name="mayorEdad">Tienes que ser mayor de edad</string>
     <string name="apellidos">Apellidos</string>
@@ -217,10 +218,16 @@
 
 
     <array name="arrayIdioma">
-        <item>@string/español</item>
         <item>@string/ingles</item>
-        <item>@string/frances</item>
+        <item>@string/español</item>
+
+
     </array>
+
+    <string-array name="idioma_values">
+        <item>en</item>
+        <item>es</item>
+    </string-array>
 
 
 </resources>

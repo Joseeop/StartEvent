@@ -15,11 +15,11 @@ class DatosContactoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inflate the layout
+        // Inflar la vista
         binding = LayoutDatosContactoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Populate the fields with data from the database, if available
+        // Rellenar los campos con los datos de la base de datos, si están disponibles
         val usuariosRef = FirebaseFirestore.getInstance().collection("users").document(usermail)
         usuariosRef.get().addOnSuccessListener { documentSnapshot ->
             binding.editTextPais.setText(documentSnapshot.getString("pais") ?: "")
@@ -31,9 +31,9 @@ class DatosContactoActivity : AppCompatActivity() {
             binding.checkBoxMovilidadGeografica.isChecked = documentSnapshot.getBoolean("movilidad_geografica") ?: false
         }
 
-        // Set up the button to update the data in the database
+        // Configurar el botón para actualizar los datos en la base de datos
         binding.actualizarDatosButton.setOnClickListener {
-            // Validate the input fields
+            // Validar los campos de entrada
             val pais = binding.editTextPais.text.toString().trim()
             val provincia = binding.editTextProvincia.text.toString().trim()
             val cp = binding.editTextCP.text.toString().toIntOrNull()
@@ -43,10 +43,10 @@ class DatosContactoActivity : AppCompatActivity() {
             val movilidadGeografica = binding.checkBoxMovilidadGeografica.isChecked
 
             if (pais.isBlank() || provincia.isBlank() || cp == null || movil.isBlank()) {
-                // Show an error message if any of the required fields are empty
+                // Mostrar un mensaje de error si alguno de los campos obligatorios está vacío
                 Toast.makeText(this, "Por favor, rellene todos los campos.", Toast.LENGTH_SHORT).show()
             } else {
-                // Create a map with the updated data
+                // Crear un mapa con los datos actualizados
                 val newData = hashMapOf(
                     "pais" to pais,
                     "provincia" to provincia,
@@ -57,7 +57,7 @@ class DatosContactoActivity : AppCompatActivity() {
                     "movilidad_geografica" to movilidadGeografica
                 )
 
-                // Update the data in the database
+                // Actualizar los datos en la base de datos
                 usuariosRef.update(newData as Map<String, Any>).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Datos actualizados correctamente.", Toast.LENGTH_SHORT).show()

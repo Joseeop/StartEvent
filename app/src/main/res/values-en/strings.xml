@@ -100,6 +100,7 @@
     <string name="nacionalidad">Nationality: </string>
     <string name="select_gender">Select a gender: </string>
     <string name="genero">Gender: </string>
+    <string name="btnFoto">Update your photo or set one</string>
 
     <!-- Strings for Contact Information -->
     <string name="datos_contactoCAPS">CONTACT INFORMATION</string>
@@ -145,7 +146,7 @@
     <array name="arrayIdioma">
         <item>@string/español</item>
         <item>@string/ingles</item>
-        <item>@string/frances</item>
+
     </array>
     <string name="switch_exp">No experience</string>
     <string name="switch_vehicle">Own vehicle</string>

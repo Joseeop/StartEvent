@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
-
+/**
+ *Esta actividad muestra una lista de términos y condiciones,
+ *  con una funcionalidad para mostrar un toast al hacer clic en un elemento de la lista
+ */
 class TermsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +18,8 @@ class TermsActivity : AppCompatActivity() {
         val arrayAdapter:ArrayAdapter<String>
 
 
+
+        /** Lista de términos y condiciones */
         val terminos = mutableListOf("COOKIES\n " +
                 "Empleamos el usos de cookies. Al utilizar el sitio web de (Nombre de la tienda), usted acepta el uso de cookies de acuerdo con la política de privacidad de (Nombre de la tienda). La mayoría de los modernos sitios web interactivos de hoy en día usan cookies para permitirnos recuperar los detalles del usuario para cada visita. ",
             "LICENCIA \n No debes:\n" +

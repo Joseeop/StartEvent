@@ -50,10 +50,20 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         setContentView(R.layout.activity_main)
 
 
+        // Inicializo Firebase
         val auth = FirebaseFirestore.getInstance()
-        val userRef = auth.collection("users").document(usermail)
+
+        // Obtengo el correo electrónico del usuario actual
+        val userMail = FirebaseAuth.getInstance().currentUser?.email ?: ""
+
+        // Obtengo la referencia al documento del usuario actual en Firestore
+        val userRef = auth.collection("users").document(userMail)
+
+        // Obtengo los datos del usuario actual del documento correspondiente en Firestore
         userRef.get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot.exists()) {
+                // Si existe un documento en Firestore para el usuario actual, obtiene los datos
+                // correspondientes y crea un objeto Usuario
                 val nombre = documentSnapshot.getString("nombre")
                 val apellidos = documentSnapshot.getString("apellidos")
                 val dni = documentSnapshot.getString("dni")
@@ -85,7 +95,8 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
                     movilidad_geografica,
                     foto_perfil
                 )
-
+                // Asigno el objeto Usuario a la variable usuarioLogado y muestra un Toast con el nombre
+                // del usuario
                 usuarioLogado = usuario
                 val tvUser: TextView = findViewById(R.id.tvUser)
                 tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
@@ -128,7 +139,12 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
 // TODO: Add adView to your view hierarchy
 
     }
+    /**
 
+    Función que muestra el anuncio intersticial si está cargado y listo para mostrarse.
+
+    Si el anuncio no está cargado, se muestra un mensaje en el Log indicando que no está listo todavía.
+     */
     private fun showIntersitial(){
         if (mInterstitialAd != null) {
             unloadeadedAd = true
@@ -166,6 +182,16 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
             Log.d("TAG", "The interstitial ad wasn't ready yet.")
         }
     }
+    /**
+
+    Función que carga el anuncio intersticial.
+
+    Se crea un objeto AdRequest para solicitar el anuncio y se utiliza el ID de prueba de AdMob.
+
+    Si la carga del anuncio falla, se muestra un mensaje en el Log indicando el error.
+
+    Si la carga del anuncio es exitosa, se guarda el objeto InterstitialAd en la variable mInterstitialAd.
+     */
     private fun getReadyAds(){
         var adRequest = AdRequest.Builder().build()
         unloadeadedAd = false
@@ -224,7 +250,7 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         val fotoPerfilHeader: ImageView=headerView.findViewById(R.id.fotoPerfilHeader)
         Glide.with(this).load(usuarioLogado?.foto_perfil).into(fotoPerfilHeader)
 
-        //val irAEventosCreados:LinearLayout=headerView.findViewById(R.id.lyEventsCreated)
+
 
 
 
@@ -268,33 +294,8 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
     fun callEventsCreated(v: View) {
         eventsCreated()
     }
-    /*fun pillarDatosDeUsuarioNoVerificado(activity: Activity): LiveData<MutableList<Usuario>> {
-        val mutableData = MutableLiveData<MutableList<Usuario>>()
-        val circuloDeCarga: DialogDeCarga = DialogDeCarga(activity)
-        circuloDeCarga.empezarAGirar()
 
-        FirebaseFirestore.getInstance().collection("usuarios").whereEqualTo("verificado", false)
-            .get().addOnSuccessListener { result ->
-                val datosDeUsuarios = mutableListOf<Usuario>()
-                for (document in result) {
-                    var actual: Usuario = Usuario(
-                        "" + document.getString("nombre"),
-                        "" + document.getString("apellidos"),
-                        "" + document.getString("dni"),
-                        "" + document.getString("email"),
-                        "" + document.getString("plan"),
-                        "" + document.getString("telefono"),
-                        document.getBoolean("admin"),
-                        document.getBoolean("verificado")
-                    )
-                    datosDeUsuarios.add(actual)
-                }
-                mutableData.value = datosDeUsuarios
-                circuloDeCarga.dialog.dismiss()
-            }
-        return mutableData
-    }*/
-    //TODO TENEMOS QUE HACER PULL DE LA BBDD CON LOS DATOS DE USUARIO PARA POSTERIORMENTE PASARLO POR BUNDLE AL RESTO DE ACTIVIDADES.
+
     /**
      * Función que nos lleva a la pantalla "Zona personal"
      */

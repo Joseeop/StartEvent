@@ -12,34 +12,33 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="@dimen/text_size_large"
         android:text="@string/suscripcion"
         android:textColor="@color/orange"
         android:textAlignment="center"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="@dimen/margin_large"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
         android:layout_gravity="center">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
             android:src="@drawable/noads"
             />
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="24dp"
+            android:textSize="@dimen/text_size_medium"
             android:text="@string/noAds"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/margin_small"
             android:textColor="@color/blanco_azul"/>
 
     </LinearLayout>
@@ -47,66 +46,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
         android:layout_gravity="center">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
             android:src="@drawable/nolimits"
             />
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="22dp"
+            android:textSize="@dimen/text_size_medium"
             android:text="@string/unlimited"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/margin_small"
             android:textColor="@color/blanco_azul"/>
 
     </LinearLayout>
     <LinearLayout
-        android:layout_marginBottom="500dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
         android:layout_gravity="center">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
             android:src="@drawable/notificationon"
             />
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="@string/notificaciones_on"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/margin_small"
             android:textColor="@color/blanco_azul"/>
 
     </LinearLayout>
-
     <Button
         android:id="@+id/pay_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/orange"
-        android:text="@string/suscripcion_mensual"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_large"
         android:textColor="@color/black"
-        android:textSize="16dp" />
-
+        android:textSize="@dimen/text_size_small"
+        android:text="@string/suscripcion_mensual"
+        android:backgroundTint="@color/orange"/>
 
 </LinearLayout>

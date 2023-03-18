@@ -14,14 +14,19 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+
+Actividad que muestra el perfil del usuario logueado. Muestra los datos personales, de contacto y permite
+cambiar ajustes. Además, permite tomar una foto y envía la fecha de realización y el usuario mediante un intent.
+ */
 class ProfileActivity : ActividadMadre() {
 
     companion object{
         var upImage : String= ""
     }
-    private lateinit var viewPager: ViewPager
+
     private lateinit var binding: ActivityProfileBinding
-    private lateinit var tabLayout: TabLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -29,9 +34,7 @@ class ProfileActivity : ActividadMadre() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //TODO NO SE ME ALMACENA LA IMAGEN DE USUARIO EN EL OBJETO Y TENGO QUE HACER CONSULTA A BBDD PARA QUE
-        //TODO VUELVA A APARECER. POSIBLE SOLUCIÓN SERÍA CREAR UN CONSTRUCTOR SOLO CON LA FOTO_PERFIL
-        //TODO PERO ESO PISARÍA EL RESTO DE DATOS DE USUARIO PARA LA SIGUIENTE ACTIVIDAD.
+        // Carga la foto de perfil del usuario logueado
         val auth = FirebaseFirestore.getInstance()
         val userRef = auth.collection("users").document(usermail)
         userRef.get()
@@ -47,40 +50,30 @@ class ProfileActivity : ActividadMadre() {
                 Toast.makeText(this, "Error al obtener datos del usuario: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
 
-        //TODO DEBERÍA PODER ACTUALIAR LA FOTO DE PERFIL SOLO CON ESTA VARIABLE, PERO LA FOTO_PERFIL ES NULA EN ESTE PUNTO
+        // Muestra los datos personales del usuario logueado
         Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
         binding.tvUser.text=  usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
-        //binding.fotoPerfil=usuarioLogado?.foto_perfil
         binding.tvCiudad.text= usuarioLogado?.provincia
-
         binding.tvEmail.text= usermail
-       // binding.tvCiudad.text=usuarioLogado!!.nombre
 
-
+        // Botones para acceder a las actividades de datos personales, datos de contacto y ajustes
         binding.btnDatosPersonales.setOnClickListener{
-        //val intent:Intent=Intent(this,DatosPersonalesActivity::class.java)
-        //this.startActivity(intent)
             this.cambiarAPantalla("DatosPersonalesActivity")
         }
 
         binding.btnDatosContacto.setOnClickListener {
-            //val intent:Intent=Intent(this,DatosContactoActivity::class.java)
-            //this.startActivity(intent)
             this.cambiarAPantalla("DatosContactoActivity")
         }
-
-
 
         binding.btnAjustes.setOnClickListener {
             this.cambiarAPantalla("ActividadPreferenciasPorDefecto")
         }
+    }
 
-
-}
     /**
      * Función que nos llevará a la pantalla de la cámara y se llevará mediante un intent la fecha de cuando se realizó la foto y el usuario
      */
-     fun takePicture(v: View){
+    fun takePicture(v: View){
         var dateRun = SimpleDateFormat("dd/MM/yyyy").format(Date())
         val intent = Intent(this, CameraActivity::class.java)
 
@@ -90,5 +83,4 @@ class ProfileActivity : ActividadMadre() {
 
         startActivity(intent)
     }
-
 }
