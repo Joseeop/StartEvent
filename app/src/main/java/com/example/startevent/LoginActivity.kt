@@ -58,6 +58,7 @@ class LoginActivity : ActividadMadre() {
     //Este linear layout al principio estará oculto.
     private lateinit var lyTerms: LinearLayout
     private lateinit var swRecordarContraseña: Switch
+    private lateinit var tvRegisterInfo : TextView
     private lateinit var mAuth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -74,7 +75,7 @@ class LoginActivity : ActividadMadre() {
 
 
 
-
+         tvRegisterInfo = findViewById(R.id.txtRegister)
 
 
         //Ponemos layaout por defecto en invisible.
@@ -164,6 +165,7 @@ class LoginActivity : ActividadMadre() {
         email = etEmail.text.toString()
         password = etPass.text.toString()
 
+
         if(swRecordarContraseña.isChecked){
 
             var escritor: OutputStreamWriter = OutputStreamWriter(openFileOutput("datosLogin.txt",
@@ -235,13 +237,15 @@ class LoginActivity : ActividadMadre() {
                     //En el else caben dos opciones: Que haya introducido mal los datos o que ese usuario sea nuevo
                 }else{
                     //Ponemos términos en visible para que los acepte en caso de que el usuario no exista.
+                    //También pondremos solo la información de cómo registrarse visible si es la primera vez que entra
 
                     if(lyTerms.visibility == android.view.View.INVISIBLE) {
                         Toast.makeText(this,"Tienes que aceptar los términos y condiciones",Toast.LENGTH_LONG).show()
                         lyTerms.visibility = View.VISIBLE
+                        tvRegisterInfo.visibility = View.INVISIBLE
                     }
                     else{
-
+                        tvRegisterInfo.visibility = View.VISIBLE
                         //Si ya está marcado el checkBox de aceptar terminos lo mandaremos a la función register.
                         var cbAcept = findViewById<CheckBox>(R.id.cbAcept)
                         if(cbAcept.isChecked) register()

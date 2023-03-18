@@ -76,7 +76,7 @@
     <string name="empty">--</string>
     <string name="create_event">CREATE EVENT</string>
     <string name="eventos_creados_by_me">Events Created By Me</string>
-
+    <string name="register">If you\'re new, enter your email and password to automatically register</string>
 
     <!-- Strings for the Personal Zone -->
     <string name="nombre">Name</string>

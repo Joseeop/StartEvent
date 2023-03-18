@@ -100,7 +100,12 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
                 usuarioLogado = usuario
                 val tvUser: TextView = findViewById(R.id.tvUser)
                 tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
-                Toast.makeText(this,usuarioLogado?.nombre.toString(),Toast.LENGTH_SHORT).show()
+                if(usuarioLogado?.nombre==null || usuarioLogado?.dni ==null){
+                    Toast.makeText(this,"Hola "+ usermail+"Ve a la zona personal para rellenar tu información.",
+                        Toast.LENGTH_LONG).show()
+
+                }
+
 
                 initNavigationView()
             }else {

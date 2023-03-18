@@ -43,6 +43,15 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:src="@drawable/camera"/>
+        <Button
+            android:id="@+id/btnFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:backgroundTint="@color/blue_dark"
+            android:text="@string/btnFoto" />
+
 
         <TextView
             android:id="@+id/tvNombre"

@@ -14,7 +14,9 @@
     <string name="permiso_camera">¡Debes proporcionar permisos si quieres tomar fotos!</string>
 
 
+
     <string name="inicio">La excelencia en eventos nos define.¿Estás preparado?</string>
+    <string name="register">Si eres nuevo, ingresa tu correo electrónico y contraseña para registrarte automáticamente</string>
     <string name="recordarContraseña">Recordar contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="logout">Cerrar sesión</string>

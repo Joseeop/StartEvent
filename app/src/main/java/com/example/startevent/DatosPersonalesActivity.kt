@@ -37,9 +37,11 @@ class DatosPersonalesActivity : ActividadMadre() {
         setContentView(R.layout.activity_datos_personales)
 
 
+        // Inflamos el layout usando view binding
         binding = ActivityDatosPersonalesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Cargamos la imagen de perfil del usuario desde Firebase Storage
         Glide.with(this)
             .load(upImage)
             .skipMemoryCache(true)
@@ -70,13 +72,15 @@ class DatosPersonalesActivity : ActividadMadre() {
          */
 
 
-
+        // Asignamos los hints a los campos de texto con los datos del usuario, si están disponibles
         binding.tvNacionalidad.text= getString(R.string.nacionalidad)+" "+usuarioLogado?.nacionalidad ?: getString(R.string.nacionalidad)
         binding.tvGenero.text=getString(R.string.genero)+" "+usuarioLogado?.genero ?: getString(R.string.genero)
         binding.etNombre.hint = usuarioLogado?.nombre ?: getString(R.string.nombre)
         binding.etApellidos.hint = usuarioLogado?.apellidos ?: getString(R.string.apellidos)
         binding.etDNI.hint = usuarioLogado?.dni ?: getString(R.string.DNI)
 
+
+        // Mostramos la fecha de nacimiento del usuario, si está disponible
         val fechaNacimiento = usuarioLogado?.fecha_nacimiento
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         binding.txtFecha.hint = fechaNacimiento?.let { sdf.format(it.toDate()) } ?: getString(R.string.fecha_nacimiento)
@@ -89,6 +93,26 @@ class DatosPersonalesActivity : ActividadMadre() {
         binding.actualizarDatosButton.requestFocus()
 
         binding.fotoPerfil.setOnClickListener {
+            val alerta: Alerta = Alerta(
+                this.resources.getString(R.string.queQuieresHacer),
+                this.resources.getString(R.string.CargarFoto),
+                this.resources.getString(R.string.tomarFoto),
+                this,
+                {
+                    lanzadorElegirImagen.launch("image/*")
+                },
+                {
+                    var dateRun = SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Date())
+                    val intent = Intent(this, CameraActivity::class.java)
+                    val inParameter = intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    inParameter.putExtra("usuario", LoginActivity.usermail)
+                    inParameter.putExtra("dateRun", dateRun)
+                    startActivity(intent)
+                }
+            )
+            alerta.mostrar()
+        }
+        binding.btnFoto?.setOnClickListener {
             val alerta: Alerta = Alerta(
                 this.resources.getString(R.string.queQuieresHacer),
                 this.resources.getString(R.string.CargarFoto),
