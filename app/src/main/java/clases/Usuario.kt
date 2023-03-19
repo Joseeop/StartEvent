@@ -28,6 +28,7 @@ class Usuario : Parcelable {
     var transporte_propio: Boolean? = null
     var movilidad_geografica: Boolean? = null
     var foto_perfil: String? = null
+
     /**
 
     Constructor primario vacío de la clase Usuario.
@@ -47,24 +48,25 @@ class Usuario : Parcelable {
         transporte_propio = parcel.readValue(Boolean::class.java.classLoader) as Boolean?
         foto_perfil = parcel.readString()
     }
-/**
 
-Constructor secundario de la clase Usuario.
-@param nombre El nombre del usuario.
-@param apellidos Los apellidos del usuario.
-@param dni El DNI del usuario.
-@param fecha_nacimiento La fecha de nacimiento del usuario en formato Timestamp.
-@param genero El género del usuario.
-@param nacionalidad La nacionalidad del usuario.
-@param pais El país de residencia del usuario.
-@param provincia La provincia de residencia del usuario.
-@param cp El código postal de residencia del usuario.
-@param movil El número de teléfono móvil del usuario.
-@param carnet_conducir Indica si el usuario tiene carnet de conducir o no.
-@param transporte_propio Indica si el usuario tiene transporte propio o no.
-@param movilidad_geografica Indica si el usuario tiene movilidad geográfica o no.
-@param foto_perfil La ruta de la foto de perfil del usuario.
- */
+    /**
+
+    Constructor secundario de la clase Usuario.
+    @param nombre El nombre del usuario.
+    @param apellidos Los apellidos del usuario.
+    @param dni El DNI del usuario.
+    @param fecha_nacimiento La fecha de nacimiento del usuario en formato Timestamp.
+    @param genero El género del usuario.
+    @param nacionalidad La nacionalidad del usuario.
+    @param pais El país de residencia del usuario.
+    @param provincia La provincia de residencia del usuario.
+    @param cp El código postal de residencia del usuario.
+    @param movil El número de teléfono móvil del usuario.
+    @param carnet_conducir Indica si el usuario tiene carnet de conducir o no.
+    @param transporte_propio Indica si el usuario tiene transporte propio o no.
+    @param movilidad_geografica Indica si el usuario tiene movilidad geográfica o no.
+    @param foto_perfil La ruta de la foto de perfil del usuario.
+     */
 
     constructor(
         nombre: String?,
@@ -101,6 +103,7 @@ Constructor secundario de la clase Usuario.
     constructor(foto_perfil: String?) {
         this.foto_perfil = foto_perfil
     }
+
     constructor() {
         // constructor vacío
     }
@@ -127,6 +130,7 @@ Constructor secundario de la clase Usuario.
         parcel.writeValue(movilidad_geografica)
         parcel.writeString(foto_perfil)
     }
+
     /**
 
     Función que devuelve el tipo de contenido de la clase.
@@ -144,6 +148,7 @@ Constructor secundario de la clase Usuario.
         override fun newArray(size: Int): Array<Usuario?> {
             return arrayOfNulls(size)
         }
+
         /**
 
         Método utilizado para crear un objeto de la clase Usuario a partir de un objeto DocumentSnapshot de Firebase.
@@ -166,7 +171,22 @@ Constructor secundario de la clase Usuario.
             val movilidad_geografica = documentSnapshot.getBoolean("movilidad_geografica")
             val foto_perfil = documentSnapshot.getString("foto_perfil")
 
-            return Usuario(nombre, apellidos, dni, fecha_nacimiento, genero, nacionalidad, pais, provincia, cp, movil, carnet_conducir, transporte_propio, movilidad_geografica, foto_perfil)
+            return Usuario(
+                nombre,
+                apellidos,
+                dni,
+                fecha_nacimiento,
+                genero,
+                nacionalidad,
+                pais,
+                provincia,
+                cp,
+                movil,
+                carnet_conducir,
+                transporte_propio,
+                movilidad_geografica,
+                foto_perfil
+            )
         }
     }
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import clases.ActividadMadre
+import clases.Usuario
 import clases.UsuarioActual.usuario
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -34,9 +35,11 @@ import java.sql.Timestamp as SqlTimestamp
 class DatosPersonalesActivity : ActividadMadre() {
 
     lateinit var binding: ActivityDatosPersonalesBinding
-    private val lanzadorElegirImagen = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        it?.let { uri -> subirImagenFirebase(uri) }
-    }
+    private val lanzadorElegirImagen =
+        registerForActivityResult(ActivityResultContracts.GetContent()) {
+            it?.let { uri -> subirImagenFirebase(uri) }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datos_personales)
@@ -63,11 +66,19 @@ class DatosPersonalesActivity : ActividadMadre() {
                     val foto_perfil = documentSnapshot.getString("foto_perfil")
                     Glide.with(this).load(foto_perfil).into(binding.fotoPerfil)
                 } else {
-                    Toast.makeText(this, this.resources.getString(R.string.usuario_no_existe), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        this.resources.getString(R.string.usuario_no_existe),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, this.resources.getString(R.string.error_datos), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    this.resources.getString(R.string.error_datos),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
         /**
@@ -86,13 +97,7 @@ class DatosPersonalesActivity : ActividadMadre() {
 
 
         // Mostramos la fecha de nacimiento del usuario, si está disponible
-        val fecha = usuarioLogado?.fecha_nacimiento?.toDate()
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        binding.txtFecha.hint = fecha?.let { sdf.format(it) } ?: getString(R.string.fecha_nacimiento)
-
-
-
-
+        updateFechaNacimiento()
 
 
         //Ponemos focus en el botón, para que al entrar an la app no lo fije en el primer editText
@@ -140,11 +145,7 @@ class DatosPersonalesActivity : ActividadMadre() {
         }
 
 
-
-
-
-
-        //Hacemos los adapters para los Spinners
+        // Configura los adapters para los spinners
         val adapterNatio = ArrayAdapter.createFromResource(
             this,
             R.array.nationality_options,
@@ -160,6 +161,9 @@ class DatosPersonalesActivity : ActividadMadre() {
         binding.natioSpinner.adapter = adapterNatio
         binding.genderSpinner.adapter = adapterGender
 
+// Llama a la función para actualizar los spinners con los datos almacenados en Firestore
+        updateSpinners()
+
 
         //OnItemSelectedListener para el género
         binding.genderSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -170,7 +174,7 @@ class DatosPersonalesActivity : ActividadMadre() {
                 id: Long
             ) {
                 val selectedGender = parent.getItemAtPosition(position).toString()
-                // aquí puedes hacer algo con el género seleccionado, como guardarlo en una variable o enviarlo a un servidor
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -188,7 +192,7 @@ class DatosPersonalesActivity : ActividadMadre() {
                 id: Long
             ) {
                 val selectedGender = parent.getItemAtPosition(position).toString()
-                // aquí puedes hacer algo con el género seleccionado, como guardarlo en una variable o enviarlo a un servidor
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -198,8 +202,12 @@ class DatosPersonalesActivity : ActividadMadre() {
         val dateSetListener: DatePickerDialog.OnDateSetListener =
             DatePickerDialog.OnDateSetListener() { datePicker: DatePicker, year: Int, month: Int, day: Int ->
                 val hoy: LocalDate = LocalDate.now()
-                val fechaElegida: LocalDate = LocalDate.of(year, month, day)
-                if (!fechaElegida.minusYears(18).isBefore(hoy)) {
+                val fechaElegida: LocalDate = LocalDate.of(year, month + 1, day)
+                val fechaMinimaPermitida = hoy.minusYears(18)
+
+                if (fechaElegida.isAfter(hoy)) {
+                    Toast.makeText(this, R.string.fechaFutura, Toast.LENGTH_LONG).show()
+                } else if (fechaElegida.isAfter(fechaMinimaPermitida)) {
                     Toast.makeText(this, R.string.mayorEdad, Toast.LENGTH_LONG).show()
                 } else {
                     binding.txtFecha.text = fechaElegida.toString()
@@ -227,7 +235,9 @@ class DatosPersonalesActivity : ActividadMadre() {
         binding.actualizarDatosButton.setOnClickListener {
 
 
-            if (binding.etNombre.text.toString().isEmpty() || binding.etDNI.text.toString().isEmpty() || !isValidDNI(binding.etDNI.text.toString())) {
+            if (binding.etNombre.text.toString().isEmpty() || binding.etDNI.text.toString()
+                    .isEmpty() || !isValidDNI(binding.etDNI.text.toString())
+            ) {
                 if (binding.etNombre.text.toString().isEmpty()) {
                     binding.etNombre.error = getString(R.string.nombreObligatorio)
                 }
@@ -244,63 +254,89 @@ class DatosPersonalesActivity : ActividadMadre() {
 
 
                     val fecha = LocalDate.parse(fechaString) // Convertir fechaString a LocalDate
-                    val timestamp = java.sql.Timestamp(fecha.atStartOfDay(ZoneOffset.UTC).toEpochSecond() * 1000) // Convertir LocalDate a Timestamp
+                    val timestamp = java.sql.Timestamp(
+                        fecha.atStartOfDay(ZoneOffset.UTC).toEpochSecond() * 1000
+                    ) // Convertir LocalDate a Timestamp
                     // Convertir LocalDate a Timestamp
 
-                    FirebaseFirestore.getInstance().collection("users").get().addOnCompleteListener(this) { task ->
-                        if(task.isSuccessful){
-                            val usuariosRef = FirebaseFirestore.getInstance().collection("users").document(usermail)
-                            usuariosRef.get().addOnSuccessListener { documentSnapshot ->
-                                val data = documentSnapshot.data
-                                val previousFotoPerfil = usuarioLogado?.foto_perfil
-                                val previousFechaNacimiento = usuarioLogado?.fecha_nacimiento
-                                // Crear un mapa con los campos y valores a actualizar
-                                val newData = HashMap<String, Any>()
-                                if (binding.etNombre.text.toString().isNotBlank()) {
-                                    newData["nombre"] = binding.etNombre.text.toString()
+                    FirebaseFirestore.getInstance().collection("users").get()
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                val usuariosRef =
+                                    FirebaseFirestore.getInstance().collection("users")
+                                        .document(usermail)
+                                usuariosRef.get().addOnSuccessListener { documentSnapshot ->
+                                    val data = documentSnapshot.data
+                                    val previousFotoPerfil = usuarioLogado?.foto_perfil
+                                    val previousFechaNacimiento = usuarioLogado?.fecha_nacimiento
+                                    // Crear un mapa con los campos y valores a actualizar
+                                    val newData = HashMap<String, Any>()
+                                    if (binding.etNombre.text.toString().isNotBlank()) {
+                                        newData["nombre"] = binding.etNombre.text.toString()
+                                    }
+                                    if (binding.etApellidos.text.toString().isNotBlank()) {
+                                        newData["apellidos"] = binding.etApellidos.text.toString()
+                                    }
+                                    if (binding.etDNI.text.toString().isNotBlank()) {
+                                        newData["dni"] = binding.etDNI.text.toString()
+                                    }
+                                    if (timestamp != null) {
+                                        newData["fecha_nacimiento"] = timestamp
+                                    } else if (previousFechaNacimiento != null) {
+                                        newData["fecha_nacimiento"] = previousFechaNacimiento
+                                    }
+                                    if (binding.genderSpinner.selectedItem.toString()
+                                            .isNotBlank()
+                                    ) {
+                                        newData["genero"] =
+                                            binding.genderSpinner.selectedItem.toString()
+                                    }
+                                    if (binding.natioSpinner.selectedItem.toString().isNotBlank()) {
+                                        newData["nacionalidad"] =
+                                            binding.natioSpinner.selectedItem.toString()
+                                    }
+                                    if (upImage != null) {
+                                        newData["foto_perfil"] = upImage
+                                    } else if (previousFotoPerfil != null) {
+                                        newData["foto_perfil"] = previousFotoPerfil
+                                    }
+                                    // Actualizar los campos en Firestore sin sobrescribir los valores existentes en los campos restantes
+                                    usuariosRef.update(newData)
+                                    this.cambiarAPantalla("MainActivity")
+                                    Toast.makeText(
+                                        this,
+                                        getText(R.string.datosActualizados),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                                if (binding.etApellidos.text.toString().isNotBlank()) {
-                                    newData["apellidos"] = binding.etApellidos.text.toString()
-                                }
-                                if (binding.etDNI.text.toString().isNotBlank()) {
-                                    newData["dni"] = binding.etDNI.text.toString()
-                                }
-                                if (timestamp != null) {
-                                    newData["fecha_nacimiento"] = timestamp
-                                } else if (previousFechaNacimiento != null) {
-                                    newData["fecha_nacimiento"] = previousFechaNacimiento
-                                }
-                                if (binding.genderSpinner.selectedItem.toString().isNotBlank()) {
-                                    newData["genero"] = binding.genderSpinner.selectedItem.toString()
-                                }
-                                if (binding.natioSpinner.selectedItem.toString().isNotBlank()) {
-                                    newData["nacionalidad"] = binding.natioSpinner.selectedItem.toString()
-                                }
-                                if (upImage != null) {
-                                    newData["foto_perfil"] = upImage
-                                } else if (previousFotoPerfil != null) {
-                                    newData["foto_perfil"] = previousFotoPerfil
-                                }
-                                // Actualizar los campos en Firestore sin sobrescribir los valores existentes en los campos restantes
-                                usuariosRef.update(newData)
-                                this.cambiarAPantalla("MainActivity")
-                                Toast.makeText(this, getText(R.string.datosActualizados), Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    R.string.noSePuedeActualizar,
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
-                        }else {
-                            Toast.makeText(this,R.string.noSePuedeActualizar,Toast.LENGTH_SHORT).show()
                         }
-                    }
-                } catch(e: DateTimeException) {
-                    Toast.makeText(this,R.string.rellenaFecha, Toast.LENGTH_LONG).show()
+                } catch (e: DateTimeException) {
+                    Toast.makeText(this, R.string.rellenaFecha, Toast.LENGTH_LONG).show()
                 }
             }
-
-
 
 
         }
 
     }
+
+    private fun getGenderPosition(gender: String?): Int {
+        val genderOptions = resources.getStringArray(R.array.gender_options)
+        return gender?.let { genderOptions.indexOf(it) } ?: 0
+    }
+
+    private fun getNationalityPosition(nationality: String?): Int {
+        val nationalityOptions = resources.getStringArray(R.array.nationality_options)
+        return nationality?.let { nationalityOptions.indexOf(it) } ?: 0
+    }
+
     private fun subirImagenFirebase(uri: Uri) {
         val storageRef = FirebaseStorage.getInstance().reference
         val imagesRef = storageRef.child("images/${usermail}/foto_perfil.jpg")
@@ -323,14 +359,25 @@ class DatosPersonalesActivity : ActividadMadre() {
             }
         }
     }
-    private fun getGenderPosition(gender: String?): Int {
-        val genderOptions = resources.getStringArray(R.array.gender_options)
-        return gender?.let { genderOptions.indexOf(it) } ?: 0
-    }
 
-    private fun getNationalityPosition(nationality: String?): Int {
-        val nationalityOptions = resources.getStringArray(R.array.nationality_options)
-        return nationality?.let { nationalityOptions.indexOf(it) } ?: 0
+    /**
+     * Función para actualizar los spinners de género y nacionalidad con los valores almacenados en Firestore.
+     *
+     * Obtiene la referencia al documento del usuario actual y, una vez obtenido el documento,
+     * actualiza los spinners de género y nacionalidad con los valores almacenados en Firestore
+     * utilizando las funciones 'getGenderPosition()' y 'getNationalityPosition()' respectivamente.
+     */
+
+    private fun updateSpinners() {
+        val usermail = LoginActivity.usermail
+        val usuariosRef = FirebaseFirestore.getInstance().collection("users").document(usermail)
+        usuariosRef.get().addOnSuccessListener { documentSnapshot ->
+            val usuarioLogado = documentSnapshot.toObject(Usuario::class.java)
+
+            // Actualiza los spinners con los valores almacenados en Firestore
+            binding.genderSpinner.setSelection(getGenderPosition(usuarioLogado?.genero))
+            binding.natioSpinner.setSelection(getNationalityPosition(usuarioLogado?.nacionalidad))
+        }
     }
 
     /**
@@ -341,6 +388,27 @@ class DatosPersonalesActivity : ActividadMadre() {
         // Expresión regular para el formato válido de DNI (8 dígitos y una letra al final)
         val dniPattern = Regex("^\\d{8}[a-zA-Z]$")
         return dniPattern.matches(dni)
+    }
+
+    /**
+     * Función para actualizar el campo de fecha de nacimiento en base a los datos almacenados en Firestore
+     *
+     * Obtiene la fecha de nacimiento del usuario almacenada en Firestore y la asigna al campo correspondiente
+     * en la actividad. Si no hay una fecha de nacimiento almacenada, se asigna el valor predeterminado (hint).
+     */
+    private fun updateFechaNacimiento() {
+        val usermail = LoginActivity.usermail
+        val usuariosRef = FirebaseFirestore.getInstance().collection("users").document(usermail)
+        usuariosRef.get().addOnSuccessListener { documentSnapshot ->
+            val usuarioLogado = documentSnapshot.toObject(Usuario::class.java)
+
+            // Actualiza el campo de fecha de nacimiento con el valor almacenado en Firestore
+            val fecha = usuarioLogado?.fecha_nacimiento?.toDate()
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            binding.txtFecha.text =
+                getString(R.string.fecha_nacimiento) + "\n" + fecha?.let { sdf.format(it) }
+                    ?: getString(R.string.fecha_nacimiento)
+        }
     }
 
 }

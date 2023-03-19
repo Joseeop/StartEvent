@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
  */
 class EventDetailsActivity : ActividadMadre() {
     lateinit var binding: LayoutEventDetailsBinding
-    lateinit var itemDetail : ItemListIntents
+    lateinit var itemDetail: ItemListIntents
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,18 +30,18 @@ class EventDetailsActivity : ActividadMadre() {
         binding = LayoutEventDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         this.intent.extras
-        val bundleRecibido:Bundle?=this.intent.extras
+        val bundleRecibido: Bundle? = this.intent.extras
 
 
         val usuarioLogado = bundleRecibido?.getParcelable<Usuario>("usuarioLogado")
 
-        binding.vacanciesEditText.text=""+bundleRecibido?.getString("vacantes")
-        binding.locationEditText.text=""+bundleRecibido?.getString("ubicacion")
-        binding.tvFecha.text=""+bundleRecibido?.getString("fecha")
-        binding.tvTitulo.text=""+bundleRecibido?.getString("tipoEmpleado")
-        binding.descriptionEditText.text=""+bundleRecibido?.getString("descripcion")
-        binding.requirementsEditText.text=""+bundleRecibido?.getString("requisitos")
-        binding.etNombreEmpresa.text=""+bundleRecibido?.getString("empresa")
+        binding.vacanciesEditText.text = "" + bundleRecibido?.getString("vacantes")
+        binding.locationEditText.text = "" + bundleRecibido?.getString("ubicacion")
+        binding.tvFecha.text = "" + bundleRecibido?.getString("fecha")
+        binding.tvTitulo.text = "" + bundleRecibido?.getString("tipoEmpleado")
+        binding.descriptionEditText.text = "" + bundleRecibido?.getString("descripcion")
+        binding.requirementsEditText.text = "" + bundleRecibido?.getString("requisitos")
+        binding.etNombreEmpresa.text = "" + bundleRecibido?.getString("empresa")
 
 
         /**
@@ -51,16 +51,23 @@ class EventDetailsActivity : ActividadMadre() {
          */
         binding.btnInscripcion.setOnClickListener {
             // Comprobamos si el usuario está logueado
-            if(usuarioLogado?.nombre == null) {
-                Toast.makeText(this,getString(R.string.inscripcion_faltan_campos),Toast.LENGTH_SHORT).show()
+            if (usuarioLogado?.nombre == null) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.inscripcion_faltan_campos),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 // Creamos una referencia a la colección de asistentes del evento en Firestore
                 val db = FirebaseFirestore.getInstance()
                 val eventoId = bundleRecibido?.getString("id")
 
-                val asistentesRef = eventoId?.let { it1 -> db.collection("Eventos").document(it1).collection("asistentes") }
+                val asistentesRef = eventoId?.let { it1 ->
+                    db.collection("Eventos").document(it1).collection("asistentes")
+                }
                 if (eventoId != null) {
-                    val asistentesRef = db.collection("Eventos").document(eventoId).collection("asistentes")
+                    val asistentesRef =
+                        db.collection("Eventos").document(eventoId).collection("asistentes")
 
                 } else {
                     //Toast.makeText(this, "Error al obtener el ID del evento", Toast.LENGTH_SHORT).show()
@@ -78,13 +85,21 @@ class EventDetailsActivity : ActividadMadre() {
                     asistentesRef.add(datosUsuario)
                         .addOnSuccessListener {
                             // Mostramos un mensaje de éxito y actualizamos el botón de inscripción
-                            Toast.makeText(this,getString(R.string.inscripcion_exitosa),Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                getString(R.string.inscripcion_exitosa),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             binding.btnInscripcion.text = "Inscrito"
                             binding.btnInscripcion.isEnabled = false
                         }
                         .addOnFailureListener {
                             // Mostramos un mensaje de error en caso de que no se haya podido realizar la inscripción
-                            Toast.makeText(this,getString(R.string.inscripcion_error),Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                getString(R.string.inscripcion_error),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                 }
             }

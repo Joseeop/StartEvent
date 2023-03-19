@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 object Utility {
 
     // Función para establecer la altura de un LinearLayout
-    fun setHeightLinearLayout(ly: LinearLayout, value: Int){
+    fun setHeightLinearLayout(ly: LinearLayout, value: Int) {
         // Obtener los parámetros de diseño actuales del LinearLayout
         val params: LinearLayout.LayoutParams = ly.layoutParams as LinearLayout.LayoutParams
         // Establecer el valor de altura pasado como argumento

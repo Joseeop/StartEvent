@@ -23,7 +23,7 @@ class EventCreatedByUsermail : ActividadMadre() {
     private lateinit var recyclerView: RecyclerView
 
 
-    private lateinit var empleosArrayList : ArrayList<Evento>
+    private lateinit var empleosArrayList: ArrayList<Evento>
     private lateinit var binding: LayoutEventCreatedByUsermailBinding
     private lateinit var myAdapter: EventosCreadosAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ class EventCreatedByUsermail : ActividadMadre() {
          * Aquí hacemos la consulta a la BBDD y filtramos por creador y el currentuser, así sólo verá los eventos que el mismo ha creado.
          */
         val db = FirebaseFirestore.getInstance()
-        db.collection("Eventos").whereEqualTo("creador",usermail)
+        db.collection("Eventos").whereEqualTo("creador", usermail)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

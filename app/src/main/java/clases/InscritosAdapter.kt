@@ -10,10 +10,12 @@ import com.bumptech.glide.Glide
 import com.example.startevent.LoginActivity.Companion.usermail
 import com.example.startevent.R
 
-class InscritosAdapter(private val listaInscritos: ArrayList<Usuario>): RecyclerView.Adapter<InscritosViewHolder>() {
+class InscritosAdapter(private val listaInscritos: ArrayList<Usuario>) :
+    RecyclerView.Adapter<InscritosViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InscritosViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_inscritos, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.card_inscritos, parent, false)
         return InscritosViewHolder(itemView)
     }
 
@@ -34,5 +36,5 @@ public class InscritosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
     val txtNombre: TextView = itemView.findViewById(R.id.txtNombre)
     val txtApellidos: TextView = itemView.findViewById(R.id.txtApellidos)
     val txtCorreo: TextView = itemView.findViewById(R.id.txtCorreo)
-    val imgUsuario: ImageView=itemView.findViewById(R.id.fotoInscrito)
+    val imgUsuario: ImageView = itemView.findViewById(R.id.fotoInscrito)
 }

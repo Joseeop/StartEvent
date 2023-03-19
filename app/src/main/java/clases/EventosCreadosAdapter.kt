@@ -22,13 +22,23 @@ import kotlin.collections.ArrayList
  * Clase destinada a crear un adapter para que el usuario pueda ver los eventos que ha creado desde su cuenta.
  */
 
-class EventosCreadosAdapter(val actividadMadre:ActividadMadre,val eventList: ArrayList<Evento>) :RecyclerView.Adapter<EventosCreadosAdapter.MyViewHolder>() {
+class EventosCreadosAdapter(val actividadMadre: ActividadMadre, val eventList: ArrayList<Evento>) :
+    RecyclerView.Adapter<EventosCreadosAdapter.MyViewHolder>() {
 
-    private lateinit var context : android.content.Context
+    private lateinit var context: android.content.Context
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventosCreadosAdapter.MyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): EventosCreadosAdapter.MyViewHolder {
         context = parent.context
-        return MyViewHolder(actividadMadre.layoutInflater.inflate(R.layout.card_event_created,parent,false))
+        return MyViewHolder(
+            actividadMadre.layoutInflater.inflate(
+                R.layout.card_event_created,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: EventosCreadosAdapter.MyViewHolder, position: Int) {
@@ -40,7 +50,8 @@ class EventosCreadosAdapter(val actividadMadre:ActividadMadre,val eventList: Arr
             holder.txtFecha.text = "Fecha del evento: ${evento.fecha_evento?.toDate()}"
 
             holder.btnVerInscritos.setOnClickListener {
-                FirebaseFirestore.getInstance().collection("Eventos").whereEqualTo("id_evento", evento.id)
+                FirebaseFirestore.getInstance().collection("Eventos")
+                    .whereEqualTo("id_evento", evento.id)
                     .get()
                     .addOnSuccessListener { result ->
                         if (!result.isEmpty) {
@@ -55,8 +66,14 @@ class EventosCreadosAdapter(val actividadMadre:ActividadMadre,val eventList: Arr
                                         val usuario = inscritoDoc.toObject(Usuario::class.java)
                                         inscritosList.add(usuario)
                                     }
-                                    val intent = Intent(holder.itemView.context, InscritosActivity::class.java)
-                                    intent.putExtra("inscritosList", inscritosList) // Pasa la lista de inscritos a la actividad InscritosActivity
+                                    val intent = Intent(
+                                        holder.itemView.context,
+                                        InscritosActivity::class.java
+                                    )
+                                    intent.putExtra(
+                                        "inscritosList",
+                                        inscritosList
+                                    ) // Pasa la lista de inscritos a la actividad InscritosActivity
                                     holder.itemView.context.startActivity(intent)
                                 }
                                 .addOnFailureListener { exception ->
@@ -81,23 +98,20 @@ class EventosCreadosAdapter(val actividadMadre:ActividadMadre,val eventList: Arr
         return eventList.size
     }
 
-    public class MyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
+    public class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
         val lyContenedor: LinearLayout = itemView.findViewById(R.id.lyContenedor)
         val imgEmpresa: ImageView = itemView.findViewById(R.id.imgEmpresa)
         val txtTitulo: TextView = itemView.findViewById(R.id.txtTitulo)
-        val txtUbicacion: TextView= itemView.findViewById(R.id.txtUbicacion)
-        val txtVacantes: TextView= itemView.findViewById(R.id.txtVacantes)
-        val txtFecha: TextView= itemView.findViewById(R.id.txtFecha)
-        val btnVerInscritos:Button=itemView.findViewById(R.id.btnVerInscritos)
+        val txtUbicacion: TextView = itemView.findViewById(R.id.txtUbicacion)
+        val txtVacantes: TextView = itemView.findViewById(R.id.txtVacantes)
+        val txtFecha: TextView = itemView.findViewById(R.id.txtFecha)
+        val btnVerInscritos: Button = itemView.findViewById(R.id.btnVerInscritos)
         // val txtDescripcion: TextView=itemView.findViewById(R.id.description_edit_text)
 
 
-
     }
-
-
 
 
 }

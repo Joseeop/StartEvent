@@ -118,7 +118,7 @@
     <string name="ajustes">Ajustes</string>
     <!--String para Datos Personales -->
     <string name="actualizar_datos">Actualizar datos</string>
-    <string name="btnFoto">Actualizado tu foto o establece una</string>
+    <string name="btnFoto">Actualiza tu foto o establece una</string>
     <string name="cambiar_fecha">Establecer</string>
     <string name="mayorEdad">Tienes que ser mayor de edad</string>
     <string name="apellidos">Apellidos</string>
@@ -130,6 +130,8 @@
     <string name="datosActualizados">!Datos actualizados con éxito!</string>
     <string name="datosNoActualizados">Ha ocurrido un error al actualizar los datos. Por favor, inténtelo de nuevo más tarde.</string>
     <string name="rellenaTodos">Por favor, rellene todos los campos.</string>
+    <string name="fechaFutura">La fecha de nacimiento no puede ser en el futuro.</string>
+    <string name="fechaPasada">No se pueden crear eventos antes del día de hoy.</string>
     <!--String para datos de contacto -->
     <string name="datos_contactoCAPS">DATOS DE CONTACTO</string>
     <string name="pais">País</string>

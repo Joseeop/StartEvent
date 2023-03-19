@@ -21,7 +21,6 @@ import java.time.*
 import java.util.*
 
 
-
 class CreateEventActivity : ActividadMadre() {
     private lateinit var locationEditText: EditText
 
@@ -35,7 +34,7 @@ class CreateEventActivity : ActividadMadre() {
     private lateinit var database: DatabaseReference
     private lateinit var btnFecha: Button
 
-lateinit var binding : ActivityCreateEventBinding
+    lateinit var binding: ActivityCreateEventBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
@@ -58,10 +57,11 @@ lateinit var binding : ActivityCreateEventBinding
         val dateSetListener: DatePickerDialog.OnDateSetListener =
             DatePickerDialog.OnDateSetListener() { datePicker: DatePicker, year: Int, month: Int, day: Int ->
                 val hoy: LocalDate = LocalDate.now()
-                val fechaElegida: LocalDate = LocalDate.of(year, month,day )
-                if (!fechaElegida.minusYears(18).isBefore(hoy)) {
-                    Toast.makeText(this, R.string.mayorEdad, Toast.LENGTH_LONG).show()
-                } else {
+                val fechaElegida: LocalDate = LocalDate.of(year, month + 1, day)
+
+                if (fechaElegida.isBefore(hoy)) {
+                    Toast.makeText(this, R.string.fechaPasada, Toast.LENGTH_LONG).show()
+                }  else {
                     tvFecha.text = fechaElegida.toString()
                 }
             }
@@ -79,45 +79,53 @@ lateinit var binding : ActivityCreateEventBinding
             datePicker.show()
         }
 
-        createEventButton.setOnClickListener{
-          FirebaseFirestore.getInstance().collection("Eventos").get().addOnCompleteListener(this) { task ->
-            // Obtener la fecha del TextView
-              // Obtener la fecha del TextView
-              val fechaString = tvFecha.text.toString()
+        createEventButton.setOnClickListener {
+            FirebaseFirestore.getInstance().collection("Eventos").get()
+                .addOnCompleteListener(this) { task ->
+                    // Obtener la fecha del TextView
+                    // Obtener la fecha del TextView
+                    val fechaString = tvFecha.text.toString()
 
-              val fecha = LocalDate.parse(fechaString) // Convertir fechaString a LocalDate
-              val timestamp = Timestamp(fecha.atStartOfDay(ZoneOffset.UTC).toEpochSecond() * 1000) // Convertir LocalDate a Timestamp
-
-
-             //TODO Hacer función que compruebe que el evento no ha sido creado con anterioridad, tomando como referencia
-              //la clave primaria (el título), ingresar como document el usermail y la fecha de creacion .now
-              if(task.isSuccessful){
-                  FirebaseFirestore.getInstance().collection("Eventos").add(
-                      hashMapOf(
-                          "creador" to usermail,
-                          "empresa" to nombreEmpresaEditText.text.toString(),
-                          "ubicacion" to locationEditText.text.toString(),
-                          "fecha_evento" to timestamp,
-                          "tipo_empleado" to binding.employeeSpinner.selectedItem.toString(),
-                          "vacantes" to vacanciesEditText.text.toString(),
-                          "requisitos" to requirementsEditText.text.toString(),
-                          "descripcion" to descriptionEditText.text.toString(),
-                      )
-                  ).addOnSuccessListener { documentReference ->
-                      val eventoId = documentReference.id
-                      FirebaseFirestore.getInstance().collection("Eventos").document(eventoId).update("id_evento", eventoId)
-                      val intent = Intent (this,MainActivity::class.java)
-                      startActivity(intent)
-                      Toast.makeText(this,"Evento creado con éxito¡",Toast.LENGTH_SHORT).show()
-
-                  }.addOnFailureListener {
-                      Toast.makeText(this,"No se ha podido crear el evento",Toast.LENGTH_SHORT).show()
-                  }
+                    val fecha = LocalDate.parse(fechaString) // Convertir fechaString a LocalDate
+                    val timestamp = Timestamp(
+                        fecha.atStartOfDay(ZoneOffset.UTC).toEpochSecond() * 1000
+                    ) // Convertir LocalDate a Timestamp
 
 
+                    //TODO Hacer función que compruebe que el evento no ha sido creado con anterioridad, tomando como referencia
+                    //la clave primaria (el título), ingresar como document el usermail y la fecha de creacion .now
+                    if (task.isSuccessful) {
+                        FirebaseFirestore.getInstance().collection("Eventos").add(
+                            hashMapOf(
+                                "creador" to usermail,
+                                "empresa" to nombreEmpresaEditText.text.toString(),
+                                "ubicacion" to locationEditText.text.toString(),
+                                "fecha_evento" to timestamp,
+                                "tipo_empleado" to binding.employeeSpinner.selectedItem.toString(),
+                                "vacantes" to vacanciesEditText.text.toString(),
+                                "requisitos" to requirementsEditText.text.toString(),
+                                "descripcion" to descriptionEditText.text.toString(),
+                            )
+                        ).addOnSuccessListener { documentReference ->
+                            val eventoId = documentReference.id
+                            FirebaseFirestore.getInstance().collection("Eventos").document(eventoId)
+                                .update("id_evento", eventoId)
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            Toast.makeText(this, "Evento creado con éxito¡", Toast.LENGTH_SHORT)
+                                .show()
+
+                        }.addOnFailureListener {
+                            Toast.makeText(
+                                this,
+                                "No se ha podido crear el evento",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
 
-
-          }
+                    }
+                }
         }
-}}}
+    }
+}

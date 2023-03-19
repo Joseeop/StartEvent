@@ -53,11 +53,16 @@ class InscritosActivity : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     // En caso de error, imprimir el mensaje de error y mostrar un toast en la pantalla
                     Log.d(TAG, "Error al obtener la lista de inscritos", exception)
-                    Toast.makeText(this, getString(R.string.error_obtener_inscritos), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.error_obtener_inscritos),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         } else {
             // Si el ID del evento es nulo, mostrar un toast en la pantalla
-            Toast.makeText(this, getString(R.string.error_obtener_id_evento), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_obtener_id_evento), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }

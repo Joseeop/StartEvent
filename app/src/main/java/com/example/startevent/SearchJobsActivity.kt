@@ -28,7 +28,7 @@ class SearchJobsActivity : ActividadMadre() {
 
     // Declaración de variables
     private lateinit var recyclerView: RecyclerView
-    private lateinit var empleosArrayList : ArrayList<Evento>
+    private lateinit var empleosArrayList: ArrayList<Evento>
     private lateinit var myAdapter: EmpleosAdapter
 
     /**
@@ -65,9 +65,6 @@ class SearchJobsActivity : ActividadMadre() {
     }
 
 
-
-
-
-    }
+}
 
 

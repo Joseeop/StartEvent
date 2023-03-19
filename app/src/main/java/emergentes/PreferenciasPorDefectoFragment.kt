@@ -14,7 +14,7 @@ import java.util.*
 
 /**
  * Clase que representa el fragmento de preferencias de idioma y modo oscuro
-  */
+ */
 
 class PreferenciasPorDefectoFragment : PreferenceFragmentCompat() {
 
@@ -47,7 +47,8 @@ class PreferenciasPorDefectoFragment : PreferenceFragmentCompat() {
 
             // Obtener el idioma seleccionado y guardarlo en las preferencias compartidas
             val idiomaSeleccionado = newValue as String
-            activity?.getSharedPreferences("preferenciasPersonalizadas", Context.MODE_PRIVATE)?.edit()?.apply {
+            activity?.getSharedPreferences("preferenciasPersonalizadas", Context.MODE_PRIVATE)
+                ?.edit()?.apply {
                 putString("idiomaElegido", idiomaSeleccionado)
                 apply()
             }
@@ -78,7 +79,8 @@ class PreferenciasPorDefectoFragment : PreferenceFragmentCompat() {
         context?.resources?.updateConfiguration(configuration, context.resources.displayMetrics)
 
         // Guardar el idioma seleccionado en las preferencias compartidas
-        val sharedPreferences = context?.getSharedPreferences("preferenciasPersonalizadas", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            context?.getSharedPreferences("preferenciasPersonalizadas", Context.MODE_PRIVATE)
         sharedPreferences?.edit()?.putString("idiomaElegido", idioma)?.apply()
 
         // Registrar el idioma seleccionado en los logs

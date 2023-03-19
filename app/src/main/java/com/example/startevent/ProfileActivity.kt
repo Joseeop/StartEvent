@@ -21,8 +21,8 @@ cambiar ajustes. Además, permite tomar una foto y envía la fecha de realizaci�
  */
 class ProfileActivity : ActividadMadre() {
 
-    companion object{
-        var upImage : String= ""
+    companion object {
+        var upImage: String = ""
     }
 
     private lateinit var binding: ActivityProfileBinding
@@ -43,11 +43,16 @@ class ProfileActivity : ActividadMadre() {
                     val foto_perfil = documentSnapshot.getString("foto_perfil")
                     Glide.with(this).load(foto_perfil).into(binding.fotoPerfil)
                 } else {
-                    Toast.makeText(this, getString(R.string.usuario_no_existe), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.usuario_no_existe), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "Error al obtener datos del usuario: ${exception.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Error al obtener datos del usuario: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         // Muestra los datos personales del usuario logueado
@@ -59,7 +64,7 @@ class ProfileActivity : ActividadMadre() {
         binding.tvEmail.text = usermail
 
         // Botones para acceder a las actividades de datos personales, datos de contacto y ajustes
-        binding.btnDatosPersonales.setOnClickListener{
+        binding.btnDatosPersonales.setOnClickListener {
             this.cambiarAPantalla("DatosPersonalesActivity")
         }
 
@@ -75,7 +80,7 @@ class ProfileActivity : ActividadMadre() {
     /**
      * Función que nos llevará a la pantalla de la cámara y se llevará mediante un intent la fecha de cuando se realizó la foto y el usuario
      */
-    fun takePicture(v: View){
+    fun takePicture(v: View) {
         var dateRun = SimpleDateFormat("dd/MM/yyyy").format(Date())
         val intent = Intent(this, CameraActivity::class.java)
 

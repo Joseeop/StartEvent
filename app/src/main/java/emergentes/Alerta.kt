@@ -88,9 +88,9 @@ class Alerta(
         return emergente
     }
 
-    fun mostrar():Unit{
-        val fManager: FragmentManager =contexto.supportFragmentManager
-        this.show(fManager,"alerta"+titulo)
+    fun mostrar(): Unit {
+        val fManager: FragmentManager = contexto.supportFragmentManager
+        this.show(fManager, "alerta" + titulo)
     }
 
 

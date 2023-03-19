@@ -1,5 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,41 +16,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue_dark"
-            android:text="@string/create_event"
             android:layout_gravity="center"
-            android:textSize="18sp"
             android:layout_marginBottom="20dp"
-            android:textStyle="bold"/>
+            android:text="@string/create_event"
+            android:textColor="@color/blue_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/etNombreEmpresa"
             style="@style/viewCustom_eventDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/NombreEmpresa"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="text" />
-
+            android:inputType="text"
+            android:textColorHint="@color/blue_dark" />
+<!--
         <TextView
             android:id="@+id/etTipoEvento"
             style="@style/viewCustom_eventDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title_event"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColorHint="@color/blue_dark" />
+-->
         <TextView
             android:id="@+id/location_edit_text"
             style="@style/viewCustom_eventDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/ubicacion"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColorHint="@color/blue_dark" />
 
 
         <TextView
@@ -60,22 +62,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/fecha"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="date" />
+            android:inputType="date"
+            android:textColorHint="@color/blue_dark" />
 
-
-
-
-
-        <TextView
-            android:id="@+id/employee_type_edit_text"
-            style="@style/viewCustom_eventDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tipo de empleado"
-            android:textColorHint="@color/blue_dark"
-            android:prompt="@string/profile" />
-        <!-- android:entries="@array/employee_types"-->
+        <!--
+               <TextView
+                   android:id="@+id/employee_type_edit_text"
+                   style="@style/viewCustom_eventDetails"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Tipo de empleado"
+                   android:prompt="@string/profile"
+                   android:textColorHint="@color/blue_dark" />
+                android:entries="@array/employee_types"-->
 
 
         <TextView
@@ -84,8 +83,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/vacantes"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColorHint="@color/blue_dark" />
 
         <TextView
             android:id="@+id/requirements_edit_text"
@@ -93,18 +92,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/requisitos"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/blue_dark" />
 
         <TextView
             android:id="@+id/description_edit_text"
             style="@style/viewCustom_eventDetails"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:textColorHint="@color/blue_dark"
             android:hint="@string/descripcion"
             android:inputType="textMultiLine"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:textColorHint="@color/blue_dark" />
 
         <Button
             android:id="@+id/btnInscripcion"

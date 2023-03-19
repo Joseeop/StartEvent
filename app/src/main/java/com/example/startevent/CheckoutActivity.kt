@@ -1,7 +1,6 @@
 package com.example.startevent
 
 
-
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.Log
@@ -18,6 +17,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
+
 /**
 
 Actividad para procesar pagos a través de Stripe utilizando el Payment Sheet.
@@ -46,11 +46,6 @@ class CheckoutActivity : AppCompatActivity() {
     private lateinit var payButton: Button
 
 
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
@@ -64,6 +59,7 @@ class CheckoutActivity : AppCompatActivity() {
 
 
     }
+
     /**
 
     Realiza una solicitud HTTP POST al backend para obtener el secreto del cliente necesario para procesar el pago.
@@ -91,7 +87,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         OkHttpClient()
             .newCall(request)
-            .enqueue(object: Callback {
+            .enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     showAlert("Failed to load data", "Error: $e")
                 }
@@ -109,6 +105,7 @@ class CheckoutActivity : AppCompatActivity() {
                 }
             })
     }
+
     /**
 
     Muestra una alerta al usuario con el título y el mensaje proporcionados.
@@ -126,6 +123,7 @@ class CheckoutActivity : AppCompatActivity() {
             }
         }
     }
+
     /**
 
     Displays a toast message with the provided message string.
@@ -133,7 +131,7 @@ class CheckoutActivity : AppCompatActivity() {
      */
     private fun showToast(message: String) {
         runOnUiThread {
-            Toast.makeText(this,  message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -143,6 +141,7 @@ class CheckoutActivity : AppCompatActivity() {
         // Present Payment Sheet
         paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration)
     }
+
     /**
      *
 

@@ -48,6 +48,8 @@
     <string name="contacta">For more information, contact us via email: appstartevent@gmail.com</string>
     <string name="dniInvalido">Invalid DNI </string>
     <string name="conexion_google_exitosa">Successful connection with Google</string>
+    <string name="fechaFutura">The date of birth cannot be in the future.</string>
+    <string name="fechaPasada">Events cannot be created before today\'s date.</string>
 
 
     <string name="error_obtener_inscritos">Error getting the list of attendees</string>

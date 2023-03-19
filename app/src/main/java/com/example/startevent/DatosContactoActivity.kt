@@ -26,9 +26,12 @@ class DatosContactoActivity : AppCompatActivity() {
             binding.editTextProvincia.setText(documentSnapshot.getString("provincia") ?: "")
             binding.editTextCP.setText(documentSnapshot.getLong("cp")?.toString() ?: "")
             binding.editTextMovil.setText(documentSnapshot.getString("movil") ?: "")
-            binding.checkBoxCarnetConducir.isChecked = documentSnapshot.getBoolean("carnet_conducir") ?: false
-            binding.checkBoxTransportePropio.isChecked = documentSnapshot.getBoolean("transporte_propio") ?: false
-            binding.checkBoxMovilidadGeografica.isChecked = documentSnapshot.getBoolean("movilidad_geografica") ?: false
+            binding.checkBoxCarnetConducir.isChecked =
+                documentSnapshot.getBoolean("carnet_conducir") ?: false
+            binding.checkBoxTransportePropio.isChecked =
+                documentSnapshot.getBoolean("transporte_propio") ?: false
+            binding.checkBoxMovilidadGeografica.isChecked =
+                documentSnapshot.getBoolean("movilidad_geografica") ?: false
         }
 
         // Configurar el botón para actualizar los datos en la base de datos
@@ -44,7 +47,7 @@ class DatosContactoActivity : AppCompatActivity() {
 
             if (pais.isBlank() || provincia.isBlank() || cp == null || movil.isBlank()) {
                 // Mostrar un mensaje de error si alguno de los campos obligatorios está vacío
-                Toast.makeText(this,getString(R.string.rellenaTodos) , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.rellenaTodos), Toast.LENGTH_SHORT).show()
             } else {
                 // Crear un mapa con los datos actualizados
                 val newData = hashMapOf(
@@ -60,9 +63,17 @@ class DatosContactoActivity : AppCompatActivity() {
                 // Actualizar los datos en la base de datos
                 usuariosRef.update(newData as Map<String, Any>).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, getString(R.string.datosActualizados), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.datosActualizados),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
-                        Toast.makeText(this, getString(R.string.datosNoActualizados), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.datosNoActualizados),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

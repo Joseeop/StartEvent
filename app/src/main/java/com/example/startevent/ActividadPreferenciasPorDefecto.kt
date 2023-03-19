@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import clases.ActividadMadre
 import emergentes.PreferenciasPorDefectoFragment
+
 /**
 
 Actividad encargada de mostrar la pantalla de preferencias por defecto, la cual utiliza un fragmento

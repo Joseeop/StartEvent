@@ -35,47 +35,48 @@
             android:hint="@string/NombreEmpresa"
             android:textColorHint="@color/blue_dark"
             android:inputType="text" />
-
-        <TextView
-            android:id="@+id/etTipoEvento"
-            style="@style/viewCustom_datosPersonalesL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/title_event"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="text" />
-        <TextView
-            android:id="@+id/location_edit_text"
-            style="@style/viewCustom_datosPersonalesL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/ubicacion"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="text" />
-
-
-        <TextView
-            android:id="@+id/tvFecha"
-            style="@style/viewCustom_datosPersonalesL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/fecha"
-            android:textColorHint="@color/blue_dark"
-            android:inputType="date" />
+        <!--
+               <TextView
+                   android:id="@+id/etTipoEvento"
+                   style="@style/viewCustom_datosPersonalesL"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/title_event"
+                   android:textColorHint="@color/blue_dark"
+                   android:inputType="text" />
+                   -->
+               <TextView
+                   android:id="@+id/location_edit_text"
+                   style="@style/viewCustom_datosPersonalesL"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/ubicacion"
+                   android:textColorHint="@color/blue_dark"
+                   android:inputType="text" />
 
 
+               <TextView
+                   android:id="@+id/tvFecha"
+                   style="@style/viewCustom_datosPersonalesL"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="@string/fecha"
+                   android:textColorHint="@color/blue_dark"
+                   android:inputType="date" />
 
 
 
-        <TextView
-            android:id="@+id/employee_type_edit_text"
-            style="@style/viewCustom_datosPersonalesL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tipo de empleado"
-            android:textColorHint="@color/blue_dark"
-            android:prompt="@string/profile" />
-        <!-- android:entries="@array/employee_types"-->
+
+               <!--
+                      <TextView
+                          android:id="@+id/employee_type_edit_text"
+                          style="@style/viewCustom_datosPersonalesL"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:hint="Tipo de empleado"
+                          android:textColorHint="@color/blue_dark"
+                          android:prompt="@string/profile" />
+                      android:entries="@array/employee_types"-->
 
 
         <TextView

@@ -19,7 +19,8 @@ class ValidateEmail {
          */
         fun isEmail(email: String): Boolean {
             // Patrón para validar direcciones de correo electrónico
-            pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$")
+            pat =
+                Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$")
             // Matcher para verificar si la cadena de texto coincide con el patrón
             mat = pat!!.matcher(email)
             // Retorna true si la cadena de texto coincide con el patrón, false en caso contrario.
