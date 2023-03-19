@@ -44,7 +44,7 @@ class DatosContactoActivity : AppCompatActivity() {
 
             if (pais.isBlank() || provincia.isBlank() || cp == null || movil.isBlank()) {
                 // Mostrar un mensaje de error si alguno de los campos obligatorios está vacío
-                Toast.makeText(this, "Por favor, rellene todos los campos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.rellenaTodos) , Toast.LENGTH_SHORT).show()
             } else {
                 // Crear un mapa con los datos actualizados
                 val newData = hashMapOf(
@@ -60,9 +60,9 @@ class DatosContactoActivity : AppCompatActivity() {
                 // Actualizar los datos en la base de datos
                 usuariosRef.update(newData as Map<String, Any>).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Datos actualizados correctamente.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.datosActualizados), Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Ha ocurrido un error al actualizar los datos. Por favor, inténtelo de nuevo más tarde.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.datosNoActualizados), Toast.LENGTH_SHORT).show()
                     }
                 }
             }

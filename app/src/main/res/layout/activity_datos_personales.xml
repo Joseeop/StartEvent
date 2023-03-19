@@ -12,7 +12,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".DatosPersonalesActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -34,7 +33,7 @@
             android:textSize="20sp"
             android:textColor="@color/blue_dark"
             android:textAlignment="center"
-            style="@style/viewCustom_createEvent"/>
+            style="@style/viewCustom_datosPersonales"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fotoPerfil"
@@ -48,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            style="@style/viewCustom_botones"
             android:textSize="12sp"
             android:backgroundTint="@color/blue_dark"
             android:text="@string/btnFoto" />
@@ -61,7 +61,7 @@
             android:text="@string/nombre"/>
         <EditText
             android:id="@+id/etNombre"
-            style="@style/viewCustom_createEvent"
+            style="@style/viewCustom_datosPersonales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nombre"
@@ -75,7 +75,7 @@
             android:text="@string/apellidos"/>
         <EditText
             android:id="@+id/etApellidos"
-            style="@style/viewCustom_createEvent"
+            style="@style/viewCustom_datosPersonales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/apellidos"
@@ -89,7 +89,7 @@
             android:text="@string/DNI"/>
         <EditText
             android:id="@+id/etDNI"
-            style="@style/viewCustom_createEvent"
+            style="@style/viewCustom_datosPersonales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/DNI"
@@ -104,6 +104,7 @@
 
             <TextView
                 android:id="@+id/txtFecha"
+                style="@style/viewCustom_datosPersonales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -117,6 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/viewCustom_botones"
                 android:textSize="12sp"
                 android:backgroundTint="@color/blue_dark"
                 android:text="@string/cambiar_fecha" />
@@ -132,6 +134,7 @@
             android:id="@+id/tvGenero"
             android:textSize="15dp"
             android:paddingLeft="10dp"
+            style="@style/viewCustom_datosPersonales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/genero"
@@ -140,6 +143,7 @@
         <Spinner
             android:layout_weight="1"
             android:id="@+id/gender_spinner"
+            style="@style/viewCustom_datosPersonales"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -155,6 +159,7 @@
         <TextView
             android:id="@+id/tvNacionalidad"
             android:paddingLeft="10dp"
+            style="@style/viewCustom_datosPersonales"
             android:textSize="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,6 +171,7 @@
             android:id="@+id/natio_spinner"
             android:layout_width="wrap_content"
             android:gravity="center"
+            style="@style/viewCustom_datosPersonales"
             android:layout_height="wrap_content"
             android:entries="@array/nationality_options" />
 
@@ -178,6 +184,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            style="@style/viewCustom_botones"
             android:text="@string/actualizar_datos" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

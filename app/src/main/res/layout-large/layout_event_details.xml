@@ -24,12 +24,12 @@
             android:textColor="@color/blue_dark"
             android:text="@string/create_event"
             android:layout_gravity="center"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:layout_marginBottom="20dp"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/etNombreEmpresa"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/NombreEmpresa"
@@ -38,7 +38,7 @@
 
         <TextView
             android:id="@+id/etTipoEvento"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title_event"
@@ -46,7 +46,7 @@
             android:inputType="text" />
         <TextView
             android:id="@+id/location_edit_text"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/ubicacion"
@@ -56,7 +56,7 @@
 
         <TextView
             android:id="@+id/tvFecha"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/fecha"
@@ -69,7 +69,7 @@
 
         <TextView
             android:id="@+id/employee_type_edit_text"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tipo de empleado"
@@ -80,7 +80,7 @@
 
         <TextView
             android:id="@+id/vacancies_edit_text"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/vacantes"
@@ -89,7 +89,7 @@
 
         <TextView
             android:id="@+id/requirements_edit_text"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/requisitos"
@@ -98,7 +98,7 @@
 
         <TextView
             android:id="@+id/description_edit_text"
-            style="@style/viewCustom_eventDetails"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:textColorHint="@color/blue_dark"
@@ -109,6 +109,7 @@
         <Button
             android:id="@+id/btnInscripcion"
             style="@style/viewCustom"
+            android:textSize="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"

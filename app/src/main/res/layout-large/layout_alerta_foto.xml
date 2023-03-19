@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:rotationY="0"
+    android:rotationX="0"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titleAlerta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="SOY PLACE HOLDER TITULO"
+        />
+    <Button
+        android:id="@+id/btnHacerFoto"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SOY PLACER HOLDER BOTON" />
+
+    <Button
+        android:id="@+id/btnCargarFoto"
+        android:textSize="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SOY PLACER HOLDER BOTON" />
+</LinearLayout>

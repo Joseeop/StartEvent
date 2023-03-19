@@ -318,20 +318,23 @@ class LoginActivity : ActividadMadre() {
      * Función para restablecer contraseña. No será necesario que el usuario vuelva a escribir su correo al que se le enviará la contraseña.
      * Pues lo capturaremos y se lo enviaremos directamente, tratando así de hacer menos tedioso el proceso.
      */
-    private fun resetPassword(){
-        var e = etEmail.text.toString()
-        //COMPROBAMOS QUE EL CAMPO EMAIL NO ESTÁ VACÍO PARA: Enviar un correo de reseteo de pass y comprobar si el correo existe.
-        if(!TextUtils.isEmpty(e)){
-            mAuth.sendPasswordResetEmail(e)
-                .addOnCompleteListener{
-                    //SI QUEREMOS HACER ESTO EN OTRA VENTANA, DEBEREMOS MANDARLE EN UN INTENT A LA PANTALLA DE LOGIN
-                    if(it.isSuccessful)Toast.makeText(this, "Email enviado a "+e,Toast.LENGTH_SHORT).show()
-                    else Toast.makeText(this, "No se encontró usuario con el correo: "+e,Toast.LENGTH_SHORT).show()
-
+    private fun resetPassword() {
+        val email = etEmail.text.toString()
+        if (!TextUtils.isEmpty(email)) {
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val mensaje = getString(R.string.email_enviado, email)
+                    Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                } else {
+                    val mensaje = getString(R.string.usuario_no_encontrado, email)
+                    Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
                 }
-        }else Toast.makeText(this, "Indica un email.",Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            val mensaje = getString(R.string.email_vacio)
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+        }
     }
-
 
 
      /** LOGIN CON GOOGLE.
@@ -354,11 +357,18 @@ class LoginActivity : ActividadMadre() {
                 email = account.email!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 mAuth.signInWithCredential(credential).addOnCompleteListener{
-                    if (it.isSuccessful) goHome(email, "Google")
-                    else Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT).show()
+                    if (it.isSuccessful) {
+                        val mensaje = getString(R.string.conexion_google_exitosa)
+                        goHome(email, "Google")
+                        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                    } else {
+                        val mensaje = getString(R.string.error_conexion_google)
+                        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                    }
                 }
             } catch (e: ApiException) {
-                Toast.makeText(this, "Error en la conexión con Google", Toast.LENGTH_SHORT).show()
+                val mensaje = getString(R.string.error_conexion_google)
+                Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
             }
         }
     }

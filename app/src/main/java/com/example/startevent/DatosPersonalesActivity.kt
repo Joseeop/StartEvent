@@ -23,8 +23,13 @@ import emergentes.Alerta
 import java.text.SimpleDateFormat
 import java.time.DateTimeException
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.Date.from
+import java.sql.Timestamp as SqlTimestamp
+
 
 class DatosPersonalesActivity : ActividadMadre() {
 
@@ -58,11 +63,11 @@ class DatosPersonalesActivity : ActividadMadre() {
                     val foto_perfil = documentSnapshot.getString("foto_perfil")
                     Glide.with(this).load(foto_perfil).into(binding.fotoPerfil)
                 } else {
-                    Toast.makeText(this, "El usuario no existe en la base de datos.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, this.resources.getString(R.string.usuario_no_existe), Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "Error al obtener datos del usuario: ${exception.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, this.resources.getString(R.string.error_datos), Toast.LENGTH_SHORT).show()
             }
         Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
         /**
@@ -73,17 +78,18 @@ class DatosPersonalesActivity : ActividadMadre() {
 
 
         // Asignamos los hints a los campos de texto con los datos del usuario, si están disponibles
-        binding.tvNacionalidad.text= getString(R.string.nacionalidad)+" "+usuarioLogado?.nacionalidad ?: getString(R.string.nacionalidad)
-        binding.tvGenero.text=getString(R.string.genero)+" "+usuarioLogado?.genero ?: getString(R.string.genero)
-        binding.etNombre.hint = usuarioLogado?.nombre ?: getString(R.string.nombre)
-        binding.etApellidos.hint = usuarioLogado?.apellidos ?: getString(R.string.apellidos)
-        binding.etDNI.hint = usuarioLogado?.dni ?: getString(R.string.DNI)
+        binding.genderSpinner.setSelection(getGenderPosition(usuarioLogado?.genero))
+        binding.natioSpinner.setSelection(getNationalityPosition(usuarioLogado?.nacionalidad))
+        binding.etNombre.setText(usuarioLogado?.nombre)
+        binding.etApellidos.setText(usuarioLogado?.apellidos)
+        binding.etDNI.setText(usuarioLogado?.dni)
 
 
         // Mostramos la fecha de nacimiento del usuario, si está disponible
-        val fechaNacimiento = usuarioLogado?.fecha_nacimiento
+        val fecha = usuarioLogado?.fecha_nacimiento?.toDate()
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        binding.txtFecha.hint = fechaNacimiento?.let { sdf.format(it.toDate()) } ?: getString(R.string.fecha_nacimiento)
+        binding.txtFecha.hint = fecha?.let { sdf.format(it) } ?: getString(R.string.fecha_nacimiento)
+
 
 
 
@@ -216,34 +222,38 @@ class DatosPersonalesActivity : ActividadMadre() {
 
         /**
          * Cuando pulsamos el botón actualizar datos comprobamos que los campos no están vacíos y lanzamos un mensaje de error.
+         * También comprobamos el campo DNI, tanto que no esté vacío, como que el formato sea correcto.
          */
         binding.actualizarDatosButton.setOnClickListener {
 
 
-            if (binding.etNombre.text.toString().isEmpty() || binding.etDNI.text.toString()
-                    .isEmpty()
-            ) {
+            if (binding.etNombre.text.toString().isEmpty() || binding.etDNI.text.toString().isEmpty() || !isValidDNI(binding.etDNI.text.toString())) {
                 if (binding.etNombre.text.toString().isEmpty()) {
-                    binding.etNombre.error = "Nombre es un campo obligatorio"
+                    binding.etNombre.error = getString(R.string.nombreObligatorio)
                 }
                 if (binding.etDNI.text.toString().isEmpty()) {
-                    binding.etDNI.error = "DNI es un campo obligatorio"
+                    binding.etDNI.error = getString(R.string.dniObligatorio)
+                }
+                if (!isValidDNI(binding.etDNI.text.toString())) {
+                    binding.etDNI.error = getString(R.string.dniInvalido)
                 }
             } else {
                 val fechaString = binding.txtFecha.text.toString()
 
                 try {
-                    val fecha = LocalDate.parse(fechaString) // Convertir fechaString a LocalDate
 
-                    val timestamp = java.sql.Timestamp(
-                        fecha.atStartOfDay(ZoneOffset.UTC).toEpochSecond() * 1000
-                    ) // Convertir LocalDate a Timestamp
+
+                    val fecha = LocalDate.parse(fechaString) // Convertir fechaString a LocalDate
+                    val timestamp = java.sql.Timestamp(fecha.atStartOfDay(ZoneOffset.UTC).toEpochSecond() * 1000) // Convertir LocalDate a Timestamp
+                    // Convertir LocalDate a Timestamp
 
                     FirebaseFirestore.getInstance().collection("users").get().addOnCompleteListener(this) { task ->
                         if(task.isSuccessful){
                             val usuariosRef = FirebaseFirestore.getInstance().collection("users").document(usermail)
                             usuariosRef.get().addOnSuccessListener { documentSnapshot ->
                                 val data = documentSnapshot.data
+                                val previousFotoPerfil = usuarioLogado?.foto_perfil
+                                val previousFechaNacimiento = usuarioLogado?.fecha_nacimiento
                                 // Crear un mapa con los campos y valores a actualizar
                                 val newData = HashMap<String, Any>()
                                 if (binding.etNombre.text.toString().isNotBlank()) {
@@ -257,28 +267,31 @@ class DatosPersonalesActivity : ActividadMadre() {
                                 }
                                 if (timestamp != null) {
                                     newData["fecha_nacimiento"] = timestamp
+                                } else if (previousFechaNacimiento != null) {
+                                    newData["fecha_nacimiento"] = previousFechaNacimiento
                                 }
                                 if (binding.genderSpinner.selectedItem.toString().isNotBlank()) {
                                     newData["genero"] = binding.genderSpinner.selectedItem.toString()
                                 }
                                 if (binding.natioSpinner.selectedItem.toString().isNotBlank()) {
-                                    newData["nacionalidad"] =
-                                        binding.natioSpinner.selectedItem.toString()
+                                    newData["nacionalidad"] = binding.natioSpinner.selectedItem.toString()
                                 }
                                 if (upImage != null) {
                                     newData["foto_perfil"] = upImage
+                                } else if (previousFotoPerfil != null) {
+                                    newData["foto_perfil"] = previousFotoPerfil
                                 }
                                 // Actualizar los campos en Firestore sin sobrescribir los valores existentes en los campos restantes
                                 usuariosRef.update(newData)
                                 this.cambiarAPantalla("MainActivity")
-                                Toast.makeText(this, "!Datos actualizados¡", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, getText(R.string.datosActualizados), Toast.LENGTH_SHORT).show()
                             }
                         }else {
-                            Toast.makeText(this,"No se han podido actualizar los datos",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,R.string.noSePuedeActualizar,Toast.LENGTH_SHORT).show()
                         }
                     }
                 } catch(e: DateTimeException) {
-                    Toast.makeText(this,"Rellena el campo fecha", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,R.string.rellenaFecha, Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -310,4 +323,24 @@ class DatosPersonalesActivity : ActividadMadre() {
             }
         }
     }
+    private fun getGenderPosition(gender: String?): Int {
+        val genderOptions = resources.getStringArray(R.array.gender_options)
+        return gender?.let { genderOptions.indexOf(it) } ?: 0
+    }
+
+    private fun getNationalityPosition(nationality: String?): Int {
+        val nationalityOptions = resources.getStringArray(R.array.nationality_options)
+        return nationality?.let { nationalityOptions.indexOf(it) } ?: 0
+    }
+
+    /**
+     * Función para comprobar que el DNI tenga un formato válido
+     * (Recomiendo desactivar para hacer comprobaciones en la actividad, resulta bastante engorroso)
+     */
+    fun isValidDNI(dni: String): Boolean {
+        // Expresión regular para el formato válido de DNI (8 dígitos y una letra al final)
+        val dniPattern = Regex("^\\d{8}[a-zA-Z]$")
+        return dniPattern.matches(dni)
+    }
+
 }

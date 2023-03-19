@@ -43,7 +43,7 @@ class ProfileActivity : ActividadMadre() {
                     val foto_perfil = documentSnapshot.getString("foto_perfil")
                     Glide.with(this).load(foto_perfil).into(binding.fotoPerfil)
                 } else {
-                    Toast.makeText(this, "El usuario no existe en la base de datos.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.usuario_no_existe), Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
@@ -52,9 +52,11 @@ class ProfileActivity : ActividadMadre() {
 
         // Muestra los datos personales del usuario logueado
         Glide.with(this).load(usuarioLogado?.foto_perfil).into(binding.fotoPerfil)
-        binding.tvUser.text=  usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
-        binding.tvCiudad.text= usuarioLogado?.provincia
-        binding.tvEmail.text= usermail
+        //Comprobamos antes de establecer los valores si los campos son nulos,
+        //En caso de ser nulos dejamos espacio en blanco, si tenemos datos los asignamos a los campos.
+        binding.tvUser.text = (usuarioLogado?.nombre ?: "") + " " + (usuarioLogado?.apellidos ?: "")
+        binding.tvCiudad.text = usuarioLogado?.provincia ?: ""
+        binding.tvEmail.text = usermail
 
         // Botones para acceder a las actividades de datos personales, datos de contacto y ajustes
         binding.btnDatosPersonales.setOnClickListener{

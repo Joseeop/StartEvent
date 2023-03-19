@@ -88,7 +88,7 @@
                     android:textAlignment="textEnd"
                     android:background="@color/blue_pastel"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
+                    android:textSize="22sp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
                     android:paddingRight="10dp"
@@ -99,7 +99,7 @@
                 <ImageView
                     android:id="@+id/ivMyAplycations"
                     android:layout_width="match_parent"
-                    android:layout_height="76dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="15dp"
 
                     android:background="@color/blue_pastel_soft"
@@ -124,7 +124,7 @@
                         />
                 </androidx.cardview.widget.CardView>
                 -->
- />
+                />
 
             </RelativeLayout>
 
@@ -156,7 +156,7 @@
                     android:textAlignment="textEnd"
                     android:background="@color/blue_pastel"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
+                    android:textSize="22sp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
                     android:paddingRight="10dp"
@@ -167,7 +167,7 @@
                 <ImageView
                     android:id="@+id/ivEventsCreated"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="120dp"
                     android:onClick="callEventsCreated"
                     android:background="@color/blue_pastel_soft"
                     android:src="@drawable/eventos_creados"
@@ -185,18 +185,20 @@
 
     <TextView
         android:id="@+id/tvHello"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="32dp"
         android:text="@string/inicio"
-         />
+        />
+
     <TextView
         android:id="@+id/AVISO"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="32dp"
-        android:text="ESTAS DOS FUNCIONALIDADES DE ARRIBA ESTARÁN IMPLEMENTADAS EN SU TOTALIDAD DE CARA AL TRABAJO FINAL."
+        android:text="ESTAS DOS FUNCIONALIDADES DE ARRIBA ESTARÁN IMPLEMENTADAS EN SU TOTALIDAD DE CARA AL TRABAJO FINAL"
         />
 
 </LinearLayout>

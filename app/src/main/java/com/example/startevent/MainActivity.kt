@@ -99,9 +99,15 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
                 // del usuario
                 usuarioLogado = usuario
                 val tvUser: TextView = findViewById(R.id.tvUser)
-                tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
+                val tvUserVacio: TextView = findViewById(R.id.tvUserVacio)
+                if ((usuarioLogado?.nombre?.isNotEmpty() ?: false) || (usuarioLogado?.apellidos?.isNotEmpty() ?: false)) {
+                    tvUser.text = resources.getString(R.string.welcome) + usuarioLogado?.nombre+" "+usuarioLogado?.apellidos
+                } else {
+                    tvUser.text = resources.getString(R.string.welcome) + usermail
+                    tvUserVacio.text=getString(R.string.ve_zona_personal)
+                }
                 if(usuarioLogado?.nombre==null || usuarioLogado?.dni ==null){
-                    Toast.makeText(this,"Hola "+ usermail+"Ve a la zona personal para rellenar tu información.",
+                    Toast.makeText(this,getString(R.string.welcome)+ usermail+getString(R.string.ve_zona_personal),
                         Toast.LENGTH_LONG).show()
 
                 }
@@ -109,10 +115,10 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
 
                 initNavigationView()
             }else {
-                Toast.makeText(this, "El usuario no existe en la base de datos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString( R.string.usuario_no_existe), Toast.LENGTH_SHORT).show()
             }
         }.addOnFailureListener { exception ->
-            Toast.makeText(this, "Error al obtener datos del usuario: ${exception.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString( R.string.error_datos ), Toast.LENGTH_SHORT).show()
         }
 
         initToolBar()
@@ -250,12 +256,27 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
         navigationView.addHeaderView(headerView)
 
 
-        val tvUser2:TextView=headerView.findViewById(R.id.tvUserWelcome)
-        tvUser2.text=getString(R.string.welcome)+usuarioLogado?.nombre
-        val fotoPerfilHeader: ImageView=headerView.findViewById(R.id.fotoPerfilHeader)
-        Glide.with(this).load(usuarioLogado?.foto_perfil).into(fotoPerfilHeader)
+        val tvUser2: TextView = headerView.findViewById(R.id.tvUserWelcome)
+        val fotoPerfilHeader: ImageView = headerView.findViewById(R.id.fotoPerfilHeader)
 
+        val nombreUsuario = usuarioLogado?.nombre
+        val fotoPerfilUsuario = usuarioLogado?.foto_perfil
 
+        if (nombreUsuario.isNullOrEmpty()) {
+            tvUser2.text =getString(R.string.welcome) + " Haz click en la imagen superior y actualiza tus datos"
+        } else {
+            tvUser2.text = getString(R.string.welcome) + " " + nombreUsuario
+        }
+
+        if (fotoPerfilUsuario.isNullOrEmpty()) {
+            fotoPerfilHeader.setImageResource(R.drawable.fotocv)
+        } else {
+            Glide.with(this).load(fotoPerfilUsuario).into(fotoPerfilHeader)
+        }
+
+        fotoPerfilHeader.setOnClickListener {
+            this.cambiarAPantalla("DatosPersonalesActivity")
+        }
 
 
 
@@ -274,6 +295,7 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
             R.id.nav_item_signout -> logout()
             R.id.nav_item_job -> searchJobsActivity()
             R.id.nav_item_premium -> premiumActivity()
+            R.id.nav_item_ad -> Toast.makeText(this,getString(R.string.contacta),Toast.LENGTH_LONG).show()
         }
         /**
          * Una vez seleccionamos una opción cerramos el menú, para ello los gestionamos con el drawer, y le ponemos de posición del inicio, de donde salió. Se ocultará en el inicio.
@@ -284,7 +306,7 @@ class MainActivity : ActividadMadre(), NavigationView.OnNavigationItemSelectedLi
     }
 
 
-    //TODO IMPLEMENTAR LLAMADAS DE CREAR EVENTO Y CREAR EVENTO VIRTUAL
+
     fun callSearchJobsActivity(v: View) {
         searchJobsActivity()
     }

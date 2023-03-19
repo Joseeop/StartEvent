@@ -19,49 +19,54 @@
             android:textColor="@color/blue_dark"
             android:text="@string/datos_contactoCAPS"
             android:layout_gravity="center"
-            android:textSize="18sp"
-
+            android:textSize="30sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvPais"
-            style="@style/viewCustom_datosPersonales"
+            android:textSize="30sp"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pais"/>
 
         <EditText
+            android:textSize="30sp"
             android:id="@+id/editTextPais"
-            style="@style/viewCustom_datosPersonales"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/blue_dark"
             android:hint="@string/introduce_pais"/>
 
         <TextView
+            android:textSize="30sp"
             android:id="@+id/tvProvincia"
-            style="@style/viewCustom_datosPersonales"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/provincia"/>
 
         <EditText
+            android:textSize="30sp"
             android:id="@+id/editTextProvincia"
-            style="@style/viewCustom_datosPersonales"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/blue_dark"
             android:hint="@string/introduce_provincia"/>
         <TextView
+            android:textSize="30sp"
             android:id="@+id/tvCP"
-            style="@style/viewCustom_datosPersonales"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/codigo_postal"/>
 
         <EditText
+            android:textSize="30sp"
             android:id="@+id/editTextCP"
-            style="@style/viewCustom_datosPersonales"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -69,13 +74,15 @@
             android:hint="@string/introduce_cp"/>
 
         <TextView
+            android:textSize="30sp"
             android:id="@+id/tvMovil"
-            style="@style/viewCustom_datosPersonales"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/movil"/>
         <EditText
-            style="@style/viewCustom_datosPersonales"
+            android:textSize="30sp"
+            style="@style/viewCustom_datosPersonalesL"
             android:id="@+id/editTextMovil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,38 +92,44 @@
 
 
         <TextView
+            android:textSize="30sp"
             android:id="@+id/tvMovilidad"
-            style="@style/viewCustom_datosPersonales"
+            style="@style/viewCustom_datosPersonalesL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/movilidad"/>
         <CheckBox
-            style="@style/viewCustom_datosPersonales"
+            android:textSize="30sp"
+            style="@style/viewCustom_datosPersonalesL"
             android:id="@+id/checkBoxCarnetConducir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/carne_conducir" />
 
         <CheckBox
-            style="@style/viewCustom_datosPersonales"
+            android:textSize="30sp"
+            style="@style/viewCustom_datosPersonalesL"
             android:id="@+id/checkBoxTransportePropio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/transporte_propio" />
 
         <CheckBox
-            style="@style/viewCustom_datosPersonales"
+            android:textSize="30sp"
+            style="@style/viewCustom_datosPersonalesL"
             android:id="@+id/checkBoxMovilidadGeografica"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:text="@string/movilidad_geografica" />
         <Button
+            android:textSize="30sp"
             android:id="@+id/actualizar_datos_button"
             android:backgroundTint="@color/blue_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             style="@style/viewCustom_botones"
             android:text="@string/actualizar_datos" />
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

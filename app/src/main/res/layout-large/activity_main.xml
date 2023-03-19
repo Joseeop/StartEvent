@@ -20,7 +20,7 @@
         android:focusable="true"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:gravity="bottom"
-        android:padding="16dp"
+        android:padding="24dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <LinearLayout
@@ -38,6 +38,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rlBuscarTrabajo"
+                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top">
@@ -66,34 +67,8 @@
                         android:onClick="callSearchJobsActivity"
                         android:background="@color/blue_pastel_soft"
                         android:src="@drawable/employees" />
-                    <!--
-                                   <androidx.cardview.widget.CardView
-                                       android:id="@+id/cviLevelBike"
-                                       android:layout_width="65dp"
-                                       android:layout_height="65dp"
-                                       android:layout_marginLeft="5dp"
-                                       android:translationZ="10dp"
-                                       app:cardBackgroundColor="@color/blue_pastel"
-                                       app:cardCornerRadius="32.5dp">
 
-                                       <ImageView
-                                           android:id="@+id/ivLevelBike"
-                                           android:layout_width="60dp"
-                                           android:layout_height="60dp"
-                                           android:layout_gravity="center"
-                                           android:layout_marginLeft="0dp"
-                                           android:layout_marginTop="0dp"
-                                           android:src="@drawable/employees" />
-                                   </androidx.cardview.widget.CardView>
-                   -->
-                    <TextView
-                        android:id="@+id/tvUltimaOfertaTrabajo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="85dp"
-                        android:paddingTop="4dp"
-                        android:text="Última oferta: Hoy 16:30" />
+
                 </RelativeLayout>
 
 
@@ -109,6 +84,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rlCreateEvent"
+                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top">
@@ -137,34 +113,8 @@
                         android:background="@color/blue_pastel_soft"
                         android:onClick="callCreateEventActivity"
                         android:src="@drawable/talent_search" />
-                    <!--
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cviLevelRollerSkate"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:translationZ="10dp"
-                        app:cardCornerRadius="32.5dp"
-                        app:cardBackgroundColor="@color/blue_pastel"
-                        android:layout_marginLeft="5dp">
-                        <ImageView
-                            android:id="@+id/ivLevelRollerSkate"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginLeft="0dp"
-                            android:src="@drawable/talent_search"
-                            />
-                    </androidx.cardview.widget.CardView>
-                    -->
-                    <TextView
-                        android:id="@+id/tvUltimaOfertaCrear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="85dp"
-                        android:paddingTop="4dp"
-                        android:text="Última oferta: Hoy 16:30" />
+
+
 
                 </RelativeLayout>
 
@@ -184,6 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="bottom"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -210,36 +161,8 @@
                         android:onClick="callCreateEventActivity"
                         android:background="@color/blue_pastel_soft"
                         android:src="@drawable/video_conferencia" />
-                    <!--android:src="@drawable/video_conferencia"
-                    android:onClick="callCreateVirtualActivity"-->
-                    <!--
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cviLevelRunning"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        app:cardCornerRadius="32.5dp"
-                        android:translationZ="10dp"
-                        app:cardBackgroundColor="@color/blue_pastel"
-                        android:layout_marginLeft="5dp">
-                        <ImageView
-                            android:id="@+id/ivLevelRunning"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginLeft="0dp"
-                            android:src="@drawable/promotion"/>
-                    </androidx.cardview.widget.CardView>
-                    -->
-                    <TextView
-                        android:id="@+id/tvUltimoEventoParaPromocionar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="85dp"
-                        android:paddingTop="4dp"
 
-                        android:text="Próximo evento: Hoy 12:30" />
+
                 </RelativeLayout>
 
 
@@ -253,13 +176,7 @@
             android:paddingTop="16dp"
             android:text="@string/welcome"
             android:textColor="@color/blanco_azul" />
-        <TextView
-            android:id="@+id/tvUserVacio"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:paddingTop="16dp"
-            android:text=""
-            android:textColor="@color/blanco_azul" />
+
         <TextView
             android:id="@+id/tvHello"
             android:layout_width="match_parent"
@@ -279,15 +196,7 @@
             android:background="@color/blue_dark"
             android:visibility="visible"
             android:orientation="horizontal">
-            <!--
-            <TextView
-                android:id="@+id/tvHMsgPremium"
-                android:layout_width="match_parent"
-                android:layout_height="156dp"
-                android:paddingTop="16dp"
-                android:textAlignment="center"
-                android:text="@string/mensaje_premium" />
-                -->
+
         </LinearLayout>
 
 
@@ -309,7 +218,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         app:menu="@menu/activy_main_drawer"
-         />
+        />
 
 
 

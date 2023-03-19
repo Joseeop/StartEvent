@@ -13,8 +13,9 @@
     <string name="vacio">" "</string>
     <string name="permiso_camera">You must provide permission to take photos!</string>
     <string name="primer_login">If it\'s your first time, enter your username and email to register!</string>
-
-
+    <string name="email_vacio">Please enter an email.</string>
+    <string name="usuario_no_encontrado">User not found with email: %1$s</string>
+    <string name="email_enviado">Email sent to %1$s</string>
     <string name="inicio">Excellence in events defines us. Are you ready?</string>
     <string name="recordarContraseña">Remember password</string>
     <string name="login">Log in</string>
@@ -41,6 +42,19 @@
     <string name="menu_anuncio">Advertisement</string>
     <string name="eventos_creados">Events Created</string>
     <string name="mis_inscripciones">My Applications</string>
+    <string name="inscripcion_faltan_campos">You must fill in your personal information to register!</string>
+    <string name="inscripcion_error">Error registering for the event, please try again later!</string>
+    <string name="inscripcion_exitosa">You have successfully registered for the event!</string>
+    <string name="contacta">For more information, contact us via email: appstartevent@gmail.com</string>
+    <string name="dniInvalido">Invalid DNI </string>
+    <string name="conexion_google_exitosa">Successful connection with Google</string>
+
+
+    <string name="error_obtener_inscritos">Error getting the list of attendees</string>
+
+
+    <string name="error_obtener_id_evento">Error getting event ID</string>
+    <string name="error_conexion_google">Error connecting with Google</string>
 
     <string name="menu_datos">Personal area</string>
     <string name="menu_about_us">About us</string>
@@ -77,7 +91,11 @@
     <string name="create_event">CREATE EVENT</string>
     <string name="eventos_creados_by_me">Events Created By Me</string>
     <string name="register">If you\'re new, enter your email and password to automatically register</string>
-
+    <string name="usuario_no_existe">The user does not exist in the database.</string>
+    <string name="error_datos">Error retrieving user data:</string>
+    <string name="ve_zona_personal">Go to the personal area to fill in your information.</string>
+    <string name="datosNoActualizados">An error occurred while updating the data. Please try again later.</string>
+    <string name="rellenaTodos">Please fill in all fields.</string>
     <!-- Strings for the Personal Zone -->
     <string name="nombre">Name</string>
     <string name="correo">Email</string>
@@ -89,7 +107,8 @@
     <string name="idiomas">Languages</string>
     <string name="salir">Log out</string>
     <string name="ajustes">Settings</string>
-
+    <string name="nombreObligatorio">Name is a required field</string>
+    <string name="dniObligatorio">DNI is a required field</string>
     <!-- Strings for Personal Information -->
     <string name="actualizar_datos">Update Information</string>
     <string name="cambiar_fecha">Set</string>
@@ -101,7 +120,7 @@
     <string name="select_gender">Select a gender: </string>
     <string name="genero">Gender: </string>
     <string name="btnFoto">Update your photo or set one</string>
-
+    <string name="datosActualizados">Data updated successfully!</string>
     <!-- Strings for Contact Information -->
     <string name="datos_contactoCAPS">CONTACT INFORMATION</string>
     <string name="pais">Country</string>
@@ -175,4 +194,6 @@
     <string name="pagoOK">Payment successful!</string>
     <string name="pagoNO">Error making payment!</string>
     <string name="inscripcion">SIGN ME UP!</string>
+    <string name="noSePuedeActualizar">No data could be updated</string>
+    <string name="rellenaFecha">Fill in the date field</string>
 </resources>

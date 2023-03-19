@@ -65,7 +65,7 @@
 
             <TextView
                 android:id="@+id/tvFecha"
-                style="@style/viewCustom_createEvent"
+                style="@style/viewCustom_datosPersonales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fecha"
@@ -77,6 +77,7 @@
 
             <Button
                 android:id="@+id/btnFecha"
+                style="@style/viewCustom_botones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

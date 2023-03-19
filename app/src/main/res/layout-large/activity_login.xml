@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+    tools:context=".LoginActivity">
+    <!--Esta pantalla de login está pensada para simplificar al máximo la experiencia de usuario.
+    Por ello no vamos a tener la opción de crear usuario, en pos de mejorar la experiencia y simplificar
+     Si un usuario entra por primera vez; Pondrá su usuario, su contraseña y cuando de a iniciar sesión
+     haremos visible el layout de "terminos y condiciones de uso", solamente si el usuario no existe.
+     y cuando le demos a iniciar sesión el usuario se crea e inicia la sesión. El botón inicio de sesión
+     lo hará todo.
+     Si el usuario ya existe inicia sesión y no mostraremos el layout de "terminos y condiciones de uso".
+     Así pretendemos reducir los elementos que el usuario tiene a la vista.
+     -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:srcCompat="@drawable/starteventp"/>
+
+    <TextView
+        android:id="@+id/txtInicio"
+        style="@style/viewCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/inicio"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textColor="@color/blanco_azul" />
+
+    <EditText
+        style="@style/viewCustom"
+        android:id="@+id/etEmail"
+        android:hint="@string/email"
+        android:textColor="@color/blanco_azul"
+        android:inputType="textEmailAddress"
+        android:paddingTop="30dp"
+        android:textSize="25sp"
+        android:textColorHint="@color/blanco_azul"
+        android:backgroundTint="@color/blanco_azul"
+        />
+
+    <EditText
+        style="@style/viewCustom"
+        android:id="@+id/etPass"
+        android:hint="@string/password"
+        android:textSize="25sp"
+        android:textColor="@color/blanco_azul"
+        android:inputType="textPassword"
+        android:paddingTop="30dp"
+        android:textColorHint="@color/blanco_azul"
+        android:backgroundTint="@color/blanco_azul"
+        />
+
+    <TextView
+        android:id="@+id/tvLogin"
+        style="@style/viewCustom"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:onClick="login"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:text="@string/login"
+        android:textAlignment="center"
+        android:textColor="@color/blanco_azul"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+    <Switch
+        android:id="@+id/swRecordarContraseña"
+        android:layout_marginTop="20dp"
+        style="@style/viewCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blanco_azul"
+        android:textSize="25sp"
+        android:text="@string/recordarContraseña" />
+    <TextView
+        style="@style/viewCustom"
+        android:id="@+id/txtForgotPassword"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/gray"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/tvLogin"
+        android:onClick="forgotPassword"
+        android:textSize="25sp"
+        android:text="@string/forgotPassword" />
+
+    <TextView
+        android:id="@+id/txtRegister"
+        style="@style/viewCustom"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/gray"
+
+        android:gravity="center_horizontal"
+        android:layout_below="@id/txtForgotPassword"
+        android:onClick="register"
+        android:textSize="25sp"
+        android:text="@string/register" />
+
+    <!--Los terminos y condiciones por defecto estarán ocultos.
+     Se mostrará para nuevos usuarios que inicien sesión-->
+    <LinearLayout
+        android:id="@+id/lyTerms"
+        style="@style/viewCustom"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbAcept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/acept"
+            android:textColor="@color/blanco_azul"
+            android:layout_marginTop="20dp"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/txtTerms"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:onClick="goTerms"
+            android:text="@string/terms"
+            android:textColor="@color/rojo_claro"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/google_icon"
+        android:onClick="callSignInGoogle"
+        android:paddingLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/google"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+    <!-- <Button
+         android:id="@+id/btnFacebook"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+         android:backgroundTint="@color/white"
+         android:drawableLeft="@drawable/facebook_icon"
+         android:textAlignment="textStart"
+         android:textSize="20sp"
+         android:paddingLeft="30dp"
+         android:textColor="@color/black"
+         android:text="@string/facebook" />
+ -->
+
+</LinearLayout>

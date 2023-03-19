@@ -12,7 +12,16 @@
     <string name="primer_login">¡Si es tu primera vez, introduce usuario y correo para registrarte!</string>
     <string name="vacio">" "</string>
     <string name="permiso_camera">¡Debes proporcionar permisos si quieres tomar fotos!</string>
+    <string name="usuario_no_existe">El usuario no existe en la base de datos.</string>
+    <string name="error_datos">Error al obtener datos del usuario:</string>
+    <string name="ve_zona_personal">Ve a la zona personal para rellenar tu información.</string>
+    <string name="contacta">Para más información contacta con nosotros vía email: appstartevent@gmail.com</string>
 
+    <string name="dniInvalido">DNI inválido</string>
+    <string name="noSePuedeActualizar">No se han podido actualizar los datos</string>
+    <string name="rellenaFecha">Rellena el campo fecha</string>
+    <string name="nombreObligatorio">Nombre es un campo obligatorio</string>
+    <string name="dniObligatorio">DNI es un campo obligatorio</string>
 
 
     <string name="inicio">La excelencia en eventos nos define.¿Estás preparado?</string>
@@ -52,10 +61,24 @@
     <string name="create">Crea un evento </string>
     <string name="crea_virtual">Crea un evento virtual </string>
 
+
+
+    <string name="error_obtener_inscritos">Error al obtener la lista de inscritos</string>
+
+
+    <string name="error_obtener_id_evento">Error al obtener el ID del evento</string>
+    <string name="conexion_google_exitosa">Conexión con Google exitosa</string>
+
+
+    <string name="error_conexion_google">Error en la conexión con Google</string>
+
     <string name="close">Cerrar </string>
     <string name="menu">Menú </string>
     <string name="filter">Filtra tu búsqueda </string>
 
+    <string name="usuario_no_encontrado">No se encontró usuario con el correo: %1$s</string>
+    <string name="email_enviado">Email enviado a %1$s</string>
+    <string name="email_vacio">Indica un email.</string>
     <!--Strings de filtros de búsqueda -->
     <string name="Restablecer">Restablecer</string>
     <string name="eventosDisponibles">Eventos disponibles</string>
@@ -104,6 +127,9 @@
     <string name="nacionalidad">Nacionalidad:  </string>
     <string name="select_gender">Selecciona un género: </string>
     <string name="genero">Genero: </string>
+    <string name="datosActualizados">!Datos actualizados con éxito!</string>
+    <string name="datosNoActualizados">Ha ocurrido un error al actualizar los datos. Por favor, inténtelo de nuevo más tarde.</string>
+    <string name="rellenaTodos">Por favor, rellene todos los campos.</string>
     <!--String para datos de contacto -->
     <string name="datos_contactoCAPS">DATOS DE CONTACTO</string>
     <string name="pais">País</string>
@@ -116,7 +142,7 @@
     <string name="linkedin">Linkdin</string>
     <string name="instagram">Instagram</string>
     <string name="movilidad">Movilidad</string>
-    <string name="carne_conducir">Carne de conducir</string>
+    <string name="carne_conducir">Carnet de conducir</string>
     <string name="transporte_propio">Transporte propio</string>
     <string name="movilidad_geografica">Movilidad geográfica</string>
     <string name="introduce_pais">Introduce tu país</string>
@@ -184,7 +210,12 @@
     <string name="notificaciones_on">Se el primero en enterarte de un empleo, ¡Te envíamos notificaciones! </string>
     <string name="pagoOK">¡Pago realizado con éxito!</string>
     <string name="pagoNO">¡Error al realizar el pago!</string>
+
+    <!-- Strings detalles de evento-->
     <string name="inscripcion">¡INSCRIBIRME!</string>
+    <string name="inscripcion_error">¡Error al inscribirse en el evento, inténtalo más tarde!</string>
+    <string name="inscripcion_exitosa">¡Te has inscrito en el evento!</string>
+    <string name="inscripcion_faltan_campos">¡Debes rellenar tus datos personales para inscribirte!</string>
 
     <!-- Strings de tipos de empleado posibles -->
     <string-array name="job_options">
@@ -217,6 +248,7 @@
     <string name="frances">Francés</string>
     <string name="modoOscuro">Modo oscuro</string>
     <string name="otrasOpciones">Otras opciones</string>
+
 
 
     <array name="arrayIdioma">
